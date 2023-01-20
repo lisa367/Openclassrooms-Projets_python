@@ -25,14 +25,12 @@ def request_and_parse(url):
 
 def get_book_info(book_url):
     soup = request_and_parse(book_url)
-    table_data = soup.select("td")
-    upc = table_data[0]
-    
+    table_data = [bs(str(td), "html.parser").get_text() for td in soup.select("td")]
 
     ''' 
     upc = table_data[0]
-    title = soup.select("h1")
-    category = soup.select(".breadcrums > li:nth-of-type(3)")
+    title = soup.select("h1").get_text()
+    category = soup.select(".breadcrums > li:nth-of-type(3)").get_text()
     price_including_tax = table_data[1].strip("Â£")
     price_excluding_tax = table_data[2].strip("Â£")
     available_stock = table_data[4][0]
@@ -56,7 +54,7 @@ def get_book_info(book_url):
 
     return book_info
     '''
-    return upc
+    return table_data
 
 
 # print(extraction_date)
