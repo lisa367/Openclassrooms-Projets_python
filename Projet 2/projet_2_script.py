@@ -29,14 +29,14 @@ def get_book_info(book_url):
 
     upc = table_data[0]
     title = bs(str(soup.select("h1")[0]), "html.parser").get_text()
-    category = bs(str(soup.select(".breadcrums > li:nth-of-type(3)")), "html.parser").get_text()
+    category = bs(str(soup.select(".breadcrumb li:nth-of-type(3) a")[0]), "html.parser").get_text()
     price_including_tax = table_data[2].strip("Â£")
     price_excluding_tax = table_data[3].strip("Â£")
     available_stock = table_data[5].strip("In stock (").strip(" available)")
     star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
     product_page_url = book_url
-    image_url = bs(str(soup.select(".active > img")), "html.parser").get_text()
-    product_description = soup.select("#product_description > p")
+    image_url = bs(str(soup.select(".active img")), "html.parser").get_text()
+    product_description = soup.select("#product_description p")
 
     '''
     if "One" in star_rating:
