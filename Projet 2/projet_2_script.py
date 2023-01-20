@@ -55,8 +55,6 @@ def get_book_info(book_url):
 
     return book_info
 
-    return table_data
-
 
 # print(extraction_date)
 print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
