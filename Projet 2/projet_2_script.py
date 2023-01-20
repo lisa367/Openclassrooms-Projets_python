@@ -28,14 +28,14 @@ def get_book_info(book_url):
     table_data = [bs(str(td), "html.parser").get_text() for td in soup.select("td")]
 
     upc = table_data[0]
-    title = soup.select("h1")
-    category = soup.select(".breadcrums > li:nth-of-type(3)")
-    price_including_tax = table_data[1].strip("Â£")
-    price_excluding_tax = table_data[2].strip("Â£")
-    available_stock = table_data[4][0]
-    star_rating = soup.select(".star-rating")
+    title = bs(str(soup.select("h1")[0]), "html.parser").get_text()
+    category = bs(str(soup.select(".breadcrums > li:nth-of-type(3)")), "html.parser").get_text()
+    price_including_tax = table_data[2].strip("Â£")
+    price_excluding_tax = table_data[3].strip("Â£")
+    available_stock = table_data[5].strip("In stock (").strip(" available)")
+    star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
     product_page_url = book_url
-    image_url = soup.select(".item, .active > img")
+    image_url = bs(str(soup.select(".active > img")), "html.parser").get_text()
     product_description = soup.select("#product_description > p")
 
     '''
