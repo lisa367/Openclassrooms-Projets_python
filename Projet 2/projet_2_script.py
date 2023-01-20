@@ -25,13 +25,16 @@ def request_and_parse(url):
 
 def get_book_info(book_url):
     soup = request_and_parse(book_url)
-    table_data = soup.select("tr")
+    table_data = soup.select("td")
+    upc = table_data[0]
+    
 
+    ''' 
     upc = table_data[0]
     title = soup.select("h1")
     category = soup.select(".breadcrums > li:nth-of-type(3)")
-    price_including_tax = table_data[1].strip("£")
-    price_excluding_tax = table_data[2].strip("£")
+    price_including_tax = table_data[1].strip("Â£")
+    price_excluding_tax = table_data[2].strip("Â£")
     available_stock = table_data[4][0]
     star_rating = soup.select(".star-rating")["class"]
     product_page_url = book_url
@@ -52,7 +55,9 @@ def get_book_info(book_url):
     book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
     return book_info
+    '''
+    return upc
 
 
-print(extraction_date)
+# print(extraction_date)
 print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
