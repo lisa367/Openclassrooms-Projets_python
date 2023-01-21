@@ -25,18 +25,19 @@ def request_and_parse(url):
 
 def get_book_info(book_url):
     soup = request_and_parse(book_url)
-    table_data = [bs(str(td), "html.parser").get_text() for td in soup.select("td")]
+    # table_data = [bs(str(td), "html.parser").get_text() for td in soup.select("td")]
+    table_data = [td.contents[0] for td in soup.select("td")]
 
     upc = table_data[0]
-    title = bs(str(soup.select("h1")[0]), "html.parser").get_text()
-    category = bs(str(soup.select(".breadcrumb li:nth-of-type(3) a")[0]), "html.parser").get_text()
+    title = soup.select("h1")[0].contents[0]
+    category = soup.select(".breadcrumb li:nth-of-type(3) a")[0].contents[0]
     price_including_tax = table_data[2].strip("Â£")
     price_excluding_tax = table_data[3].strip("Â£")
     available_stock = table_data[5].strip("In stock (").strip(" available)")
     star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
     product_page_url = book_url
     image_url = bs(str(soup.select(".active img")), "html.parser").get_text()
-    product_description = soup.select("#product_description p")
+    product_description = soup.select("#product_description ~ p")[0].contents[0]
 
     '''
     if "One" in star_rating:
@@ -54,6 +55,7 @@ def get_book_info(book_url):
     book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": 'review_rating', "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
     return book_info
+    #return table_data
 
 
 # print(extraction_date)
