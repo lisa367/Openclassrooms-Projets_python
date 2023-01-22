@@ -13,6 +13,8 @@ images_directory = data_directory / "images"
 #data_directory.mkdir(exist_ok=True)
 #images_directory.mkdir(exist_ok=True)
 
+landing_page_url = "https://books.toscrape.com/"
+
 
 ###          PHASE 1            ###
 
@@ -36,7 +38,7 @@ def get_book_info(book_url):
     available_stock = table_data[5].strip("In stock (").strip(" available)")
     star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
     product_page_url = book_url
-    image_url = soup.select(".carousel-inner > div > img")[0]['src']
+    image_url = f"{landing_page_url}{soup.select('.carousel-inner > div > img')[0]['src'].strip('../..')}"
     product_description = soup.select("#product_description ~ p")[0].contents[0]
 
     '''
