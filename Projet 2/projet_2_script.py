@@ -36,7 +36,7 @@ def get_book_info(book_url):
     available_stock = table_data[5].strip("In stock (").strip(" available)")
     star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
     product_page_url = book_url
-    image_url = bs(str(soup.select(".active img")), "html.parser").get_text()
+    image_url = soup.select(".carousel-inner > div > img")[0]['src']
     product_description = soup.select("#product_description ~ p")[0].contents[0]
 
     '''
