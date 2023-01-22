@@ -36,12 +36,12 @@ def get_book_info(book_url):
     price_including_tax = table_data[2].strip("Â£")
     price_excluding_tax = table_data[3].strip("Â£")
     available_stock = table_data[5].strip("In stock (").strip(" available)")
-    star_rating = bs(str(soup.select(".star-rating")), "html.parser").get_text()
+    star_rating = soup.select(".star-rating")[0]['class']
     product_page_url = book_url
     image_url = f"{landing_page_url}{soup.select('.carousel-inner > div > img')[0]['src'].strip('../..')}"
     product_description = soup.select("#product_description ~ p")[0].contents[0]
 
-    '''
+
     if "One" in star_rating:
         review_rating = 1
     elif "Two" in star_rating:
@@ -52,9 +52,8 @@ def get_book_info(book_url):
         review_rating = 4
     elif "Five" in star_rating:
         review_rating = 5
-    '''
 
-    book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": 'review_rating', "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
+    book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
     return book_info
     #return table_data
