@@ -81,7 +81,10 @@ def create_book_file(book_url):
 
     mode = 'w' if not book_file_path.exists() else 'a'
 
-    with open(book_file_path, mode, newline='', delimiter=',\t') as file:
-        outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
-        outputfile.writeheader()
+    with open(book_file_path, mode=mode, newline='', delimiter=',\t') as file:
+        if mode == 'w':
+            outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+            outputfile.writeheader()
         outputfile.writerow(book_info)
+
+    
