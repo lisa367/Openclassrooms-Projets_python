@@ -2,6 +2,7 @@ import requests as rq
 from bs4 import BeautifulSoup as bs
 from datetime import datetime as dt
 from pathlib import Path
+import csv
 
 
 todays_date = dt.today()
@@ -71,3 +72,16 @@ def create_image_file(image_url, book_title):
             r = rq.get(image_url, stream=True)
             if r.ok:
                 image_file.write(r.content)
+
+def create_book_file(book_url):
+    book_info = get_book_info(book_url)
+    book_info["extraction_date"] = extraction_date
+    book_title = '_'.join(book_info["title"].lower().split(' '))
+    book_file_path = f"{data_directory} / {book_title}.csv"
+
+    mode = 'w' if not book_file_path.exists() else 'a'
+
+    with open(book_file_path, mode, newline='', delimiter=',\t') as file:
+        outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+        outputfile.writeheader()
+        outputfile.writerow(book_info)
