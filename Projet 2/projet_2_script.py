@@ -52,6 +52,7 @@ def get_book_info(book_url):
         review_rating = 4
     elif "Five" in star_rating:
         review_rating = 5
+        
 
     book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
