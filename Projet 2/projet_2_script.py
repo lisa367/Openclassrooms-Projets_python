@@ -87,4 +87,15 @@ def create_book_file(book_url):
             outputfile.writeheader()
         outputfile.writerow(book_info)
 
-    
+
+
+###          PHASE 2            ###
+###          PHASE 3            ###
+
+landing_page_soup = request_and_parse(landing_page_url)
+all_categories = ["_".join(category.lower().strip("\n                            \n").split(" ")) for category in landing_page_soup.select("aside a").contents]
+
+for category in all_categories:
+    csv_file = data_directory / f"{category}_{extraction_date}.csv"
+    csv_file.touch(exist_ok=True)
+###          PHASE 4            ###
