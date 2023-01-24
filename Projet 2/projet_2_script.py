@@ -90,6 +90,20 @@ def create_book_file(book_url):
 
 
 ###          PHASE 2            ###
+
+def parse_category(category_name):
+    category_url = f"{landing_page_url}/catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
+    category_page = request_and_parse(category_url)
+    total_pages = int(category_page.select("")[0].contents)
+    books_urls = []
+
+    for i in range(1, total_pages+1):
+        url = f"{category_url.strip('index.html')}page_{i}.html"
+        soup = request_and_parse(url)
+        books_on_page = soup.select(".product-pod a")
+        books_urls.append(books_on_page)
+
+
 ###          PHASE 3            ###
 
 landing_page_soup = request_and_parse(landing_page_url)
