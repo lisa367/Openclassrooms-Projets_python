@@ -100,8 +100,11 @@ def parse_category(category_name):
     for i in range(1, total_pages+1):
         url = f"{category_url.strip('index.html')}page_{i}.html"
         soup = request_and_parse(url)
-        books_on_page = soup.select(".product-pod a")
+        books_on_page = [link['src'] for link in soup.select(".product-pod a")]
         books_urls.append(books_on_page)
+
+    for url in books_urls:
+        get_book_info(url)
 
 
 ###          PHASE 3            ###
@@ -112,4 +115,5 @@ all_categories = ["_".join(category.lower().strip("\n                           
 for category in all_categories:
     csv_file = data_directory / f"{category}_{extraction_date}.csv"
     csv_file.touch(exist_ok=True)
+
 ###          PHASE 4            ###
