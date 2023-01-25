@@ -91,6 +91,14 @@ def create_book_file(book_url):
 
 ###          PHASE 2            ###
 
+def create_category_file(category_name, book_info):
+    category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
+
+    with open(category_file_path, 'w', newline='', delimiter=',\t') as file:
+        outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+        outputfile.writeheader()
+        outputfile.writerow(book_info)
+
 def parse_category(category_name):
     category_url = f"{landing_page_url}/catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
@@ -104,7 +112,7 @@ def parse_category(category_name):
         books_urls.append(books_on_page)
 
     for url in books_urls:
-        get_book_info(url)
+        book_info = get_book_info(url)
 
 
 ###          PHASE 3            ###
@@ -113,7 +121,7 @@ landing_page_soup = request_and_parse(landing_page_url)
 all_categories = ["_".join(category.lower().strip("\n                            \n").split(" ")) for category in landing_page_soup.select("aside a").contents]
 
 for category in all_categories:
-    csv_file = data_directory / f"{category}_{extraction_date}.csv"
+    csv_file = data_directory / f"{category}" / f"{category}_{extraction_date}.csv"
     csv_file.touch(exist_ok=True)
 
 ###          PHASE 4            ###
