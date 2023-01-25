@@ -99,7 +99,13 @@ def create_category_file(category_name, book_info):
         outputfile.writeheader()
         outputfile.writerow(book_info)
 
+def extract_data(category_file, data):
+    with open(category_file, 'a', newline='', delimiter=',\t') as file:
+        outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+        outputfile.writerow(data)
+
 def parse_category(category_name):
+    category_file = data_directory / f"{category_name}_{extraction_date}.csv"
     category_url = f"{landing_page_url}/catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
     total_pages = int(category_page.select("")[0].contents)
@@ -111,8 +117,12 @@ def parse_category(category_name):
         books_on_page = [link['src'] for link in soup.select(".product-pod a")]
         books_urls.append(books_on_page)
 
-    for url in books_urls:
-        book_info = get_book_info(url)
+    with open(category_file, 'a', newline='', delimiter=',\t') as file:
+        outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+        for url in books_urls:
+            book_info = get_book_info(url)
+            outputfile.writerow(book_info)
+
 
 
 ###          PHASE 3            ###
