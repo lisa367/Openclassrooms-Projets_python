@@ -21,7 +21,8 @@ landing_page_url = "https://books.toscrape.com/"
 
 def request_and_parse(url):
     response = rq.get(url).text
-    soup = bs(response, "html.parser") if response.ok else 'error'
+    soup = bs(response, "html.parser")
+    # soup = bs(response, "html.parser") if response.ok else 'error'
 
     return soup
 
@@ -61,7 +62,7 @@ def get_book_info(book_url):
         return "La requête n'a pu aboutir."
 
 # print(extraction_date)
-print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
+# print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
 
 def create_image_file(image_url, book_title):
     image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
@@ -102,30 +103,36 @@ def parse_category(category_name):
     category_file = data_directory / f"{category_name}_{extraction_date}.csv"
     category_url = f"{landing_page_url}/catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
-    total_pages = int(category_page.select("")[0].contents)
+    # total_pages = int(category_page.select(".current")[0].contents.splits(" ")[-1])
+    total_pages = int(category_page.select(".current")[0].contents[0].strip("\n            \n                ").split(" ")[-1])
     books_urls = []
 
-    for i in range(1, total_pages+1):
+    '''for i in range(1, total_pages+1):
         url = f"{category_url.strip('index.html')}page_{i}.html"
         soup = request_and_parse(url)
         books_on_page = [link['src'] for link in soup.select(".product-pod a")]
         books_urls.append(books_on_page)
 
-        with open(category_file, 'a', newline='', delimiter=',\t') as file:
+        with open(category_file, "a", newline=" ", delimiter=",\t") as file:
             outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             for url in books_urls:
                 book_info = get_book_info(url)
-                outputfile.writerow(book_info)
-
-
+                outputfile.writerow(book_info)'''
+    print(total_pages)
+    # return books_urls
 
 ###          PHASE 3            ###
 
-landing_page_soup = request_and_parse(landing_page_url)
-all_categories = ["_".join(category.lower().strip("\n                            \n").split(" ")) for category in landing_page_soup.select("aside a").contents]
+landing_page_soup = request_and_parse(landing_page_url).select("aside a")
+# all_categories = ["-".join(category.lower().strip("\n                            \n").split(" ")) for category in landing_page_soup.select("aside a").text]
+all_categories = ["-".join(category.contents[0].lower().strip("\n                            \n").split(" ")) for category in landing_page_soup]
 
-for category in all_categories:
+'''for category in all_categories:
     csv_file = data_directory / f"{category}" / f"{category}_{extraction_date}.csv"
-    csv_file.touch(exist_ok=True)
+    csv_file.touch(exist_ok=True)'''
+
+# print(landing_page_soup)
+print(all_categories)
+parse_category("historical-fiction")
 
 ###          PHASE 4            ###
