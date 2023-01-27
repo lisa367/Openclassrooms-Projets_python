@@ -2,4 +2,5 @@
 Ressources/
 BooksToScrapePages/
 ._projet_2_script.py
+__pycache__
 test_projet2.py
