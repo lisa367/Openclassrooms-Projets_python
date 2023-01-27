@@ -101,24 +101,28 @@ def create_csv_file(category_name, book_info):
 
 def parse_category(category_name):
     category_file = data_directory / f"{category_name}_{extraction_date}.csv"
-    category_url = f"{landing_page_url}/catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
+    category_url = f"{landing_page_url}catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
-    # total_pages = int(category_page.select(".current")[0].contents.splits(" ")[-1])
-    total_pages = int(category_page.select(".current")[0].contents[0].strip("\n            \n                ").split(" ")[-1])
+
+    max_page = category_page.select(".current")
+    total_pages = int(max_page[0].contents.strip("\n            \n                ").split(" ")[-1]) if max_page else 1
     books_urls = []
 
-    '''for i in range(1, total_pages+1):
-        url = f"{category_url.strip('index.html')}page_{i}.html"
-        soup = request_and_parse(url)
-        books_on_page = [link['src'] for link in soup.select(".product-pod a")]
-        books_urls.append(books_on_page)
+    for i in range(1, total_pages+1):
+        url = category_url.replace('index', f'page_{i}') if total_pages > 1 else category_url
+        print(url)
+        # soup = request_and_parse(url)
+        # books_on_page = [link['src'] for link in soup.select(".product-pod a")]
+        # books_on_page = [link for link in soup.select(".product-pod a")]
+        # books_urls.append(books_on_page)
 
-        with open(category_file, "a", newline=" ", delimiter=",\t") as file:
+        '''with open(category_file, "a", newline=" ", delimiter=",\t") as file:
             outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             for url in books_urls:
                 book_info = get_book_info(url)
                 outputfile.writerow(book_info)'''
-    print(total_pages)
+    print(max_page)
+    print(books_urls)
     # return books_urls
 
 ###          PHASE 3            ###
@@ -133,6 +137,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 print(all_categories)
-parse_category("historical-fiction")
+parse_category("novels")
 
 ###          PHASE 4            ###
