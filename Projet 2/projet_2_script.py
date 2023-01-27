@@ -109,20 +109,22 @@ def parse_category(category_name):
     books_urls = []
 
     for i in range(1, total_pages+1):
-        url = category_url.replace('index', f'page_{i}') if total_pages > 1 else category_url
+        url = category_url.replace('index', f'page-{i}') if total_pages > 1 else category_url
         print(url)
         soup = request_and_parse(url)
-        books_on_page = [link['src'] for link in soup.select(".product-pod a")]
-        # books_on_page = [link for link in soup.select(".product-pod a")]
-        # books_urls.append(books_on_page)
+        hyperlinks = [link['href'].strip("../../../") for link in soup.select(".image_container a")]
+        books_on_page = [f"{landing_page_url}catalogue/{link}" for link in hyperlinks]
+        # print(books_on_page)
+        books_urls += books_on_page
 
         '''with open(category_file, "a", newline=" ", delimiter=",") as file:
             outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             for url in books_urls:
                 book_info = get_book_info(url)
                 outputfile.writerow(book_info)'''
-    print(total_pages)
-    print(books_on_page)
+    
+    # print(total_pages)
+    # print(books_on_page)
     print(books_urls)
     # return books_urls
 
@@ -138,6 +140,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 print(all_categories)
-parse_category("add-a-comment")
+parse_category("sequential-art")
 
 ###          PHASE 4            ###
