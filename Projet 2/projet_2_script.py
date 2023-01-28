@@ -11,8 +11,8 @@ extraction_date = todays_date.strftime("%Y-%m-%d_%H%M%S")
 data_directory = Path.cwd() / "data"
 images_directory = data_directory / "images"
 
-#data_directory.mkdir(exist_ok=True)
-#images_directory.mkdir(exist_ok=True)
+# data_directory.mkdir(exist_ok=True)
+# images_directory.mkdir(exist_ok=True)
 
 landing_page_url = "https://books.toscrape.com/"
 
@@ -86,8 +86,6 @@ def create_book_file(book_url):
         if mode == 'w':
             outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             outputfile.writeheader()
-        outputfile.writerow(book_info)
-
 
 
 ###          PHASE 2            ###
@@ -98,6 +96,8 @@ def create_csv_file(category_name, book_info):
     with open(category_file_path, 'w', newline='', delimiter=',\t') as file:
         outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
         outputfile.writeheader()
+        for data in book_info:
+            outputfile.writerows(data)
 
 def parse_category(category_name):
     category_file = data_directory / f"{category_name}_{extraction_date}.csv"
@@ -121,21 +121,20 @@ def parse_category(category_name):
             outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             for url in books_urls:
                 book_info = get_book_info(url)
-                outputfile.writerow(book_info)'''
+                outputfile.writerow(category_file, book_info)'''
     
     # print(total_pages)
     # print(books_on_page)
-    print(books_urls)
-    # return books_urls
+    # print(books_urls)
+    return books_urls
 
 ###          PHASE 3            ###
 
 landing_page_soup = request_and_parse(landing_page_url).select("aside a")
-# all_categories = ["-".join(category.lower().strip("\n                            \n").split(" ")) for category in landing_page_soup.select("aside a").text]
 all_categories = ["-".join(category.contents[0].lower().strip("\n                            \n").split(" ")) for category in landing_page_soup]
 
 '''for category in all_categories:
-    csv_file = data_directory / f"{category}" / f"{category}_{extraction_date}.csv"
+    parse_category(category)
     csv_file.touch(exist_ok=True)'''
 
 # print(landing_page_soup)
