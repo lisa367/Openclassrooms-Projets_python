@@ -26,6 +26,15 @@ def request_and_parse(url):
 
     return soup
 
+def create_image_file(image_url, book_title):
+    image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
+    #print(image_file_name)
+    image_file_path = f"{images_directory} / {image_file_name}"
+    if not image_file_path.exists():
+        with open(image_file_path, 'wb') as image_file:
+            r = rq.get(image_url, stream=True)
+            if r.ok:
+                image_file.write(r.content)
 
 def get_book_info(book_url):
     soup = request_and_parse(book_url)
@@ -64,15 +73,6 @@ def get_book_info(book_url):
 # print(extraction_date)
 # print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
 
-def create_image_file(image_url, book_title):
-    image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
-    #print(image_file_name)
-    image_file_path = f"{images_directory} / {image_file_name}"
-    if not image_file_path.exists():
-        with open(image_file_path, 'wb') as image_file:
-            r = rq.get(image_url, stream=True)
-            if r.ok:
-                image_file.write(r.content)
 
 def create_book_file(book_url):
     book_info = get_book_info(book_url)
