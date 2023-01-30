@@ -63,6 +63,8 @@ def get_book_info(book_url):
         elif "Five" in star_rating:
             review_rating = 5
 
+        create_image_file(image_url)
+
         book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
         return book_info
@@ -87,6 +89,7 @@ def create_book_file(book_url):
             outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
             outputfile.writeheader()
 
+# create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
 
 ###          PHASE 2            ###
 
