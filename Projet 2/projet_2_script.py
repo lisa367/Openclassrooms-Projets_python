@@ -126,10 +126,12 @@ def parse_category(category_name):
             for url in books_urls:
                 book_info = get_book_info(url)
                 outputfile.writerow(category_file, book_info)'''
+        
+        # create_csv_file(category_name, books_urls)
     
     # print(total_pages)
     # print(books_on_page)
-    # print(books_urls)
+    print(books_urls)
     return books_urls
 
 ###          PHASE 3            ###
