@@ -90,17 +90,18 @@ def create_book_file(book_url):
 
 ###          PHASE 2            ###
 
-def create_csv_file(category_name, book_info):
+def create_csv_file(category_name, urls):
     category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
 
     with open(category_file_path, 'w', newline='', delimiter=',\t') as file:
         outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
         outputfile.writeheader()
-        for data in book_info:
+        for url in urls:
+            data = get_book_info(url)
             outputfile.writerows(data)
 
 def parse_category(category_name):
-    category_file = data_directory / f"{category_name}_{extraction_date}.csv"
+    # category_file = data_directory / f"{category_name}_{extraction_date}.csv"
     category_url = f"{landing_page_url}catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
 
