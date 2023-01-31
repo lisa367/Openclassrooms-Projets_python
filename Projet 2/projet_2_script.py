@@ -28,7 +28,7 @@ def request_and_parse(url):
 
 def create_image_file(image_url, book_title):
     image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
-    print(image_file_name)
+    # print(image_file_name)
     image_file_path = images_directory / f"{image_file_name}"
     if not image_file_path.exists():
         with open(image_file_path, 'wb') as image_file:
@@ -40,6 +40,7 @@ def get_book_info(book_url):
     soup = request_and_parse(book_url)
     if soup != 'error':
         table_data = [td.contents[0] for td in soup.select("td")]
+        summary = soup.select("#product_description ~ p")
 
         upc = table_data[0]
         title = soup.select("h1")[0].contents[0]
@@ -50,7 +51,7 @@ def get_book_info(book_url):
         star_rating = soup.select(".star-rating")[0]['class']
         product_page_url = book_url
         image_url = f"{landing_page_url}{soup.select('.carousel-inner > div > img')[0]['src'].strip('../..')}"
-        product_description = soup.select("#product_description ~ p")[0].contents[0].strip("...more")
+        product_description = summary[0].contents[0].strip("...more") if summary else ''
 
         if "One" in star_rating:
             review_rating = 1
@@ -148,6 +149,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 # print(all_categories)
-parse_category("sequential-art")
+parse_category("classics")
 
 ###          PHASE 4            ###
