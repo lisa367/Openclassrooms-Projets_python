@@ -50,7 +50,7 @@ def get_book_info(book_url):
         star_rating = soup.select(".star-rating")[0]['class']
         product_page_url = book_url
         image_url = f"{landing_page_url}{soup.select('.carousel-inner > div > img')[0]['src'].strip('../..')}"
-        product_description = soup.select("#product_description ~ p")[0].contents[0].strip(" ...more")
+        product_description = soup.select("#product_description ~ p")[0].contents[0].strip("...more")
 
         if "One" in star_rating:
             review_rating = 1
@@ -85,9 +85,9 @@ def create_book_file(book_url):
     mode = 'w' if not book_file_path.exists() else 'a'
 
     with open(book_file_path, mode=mode, newline='') as file:
+        fieldnames = ["extraction_date", "upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
+        outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
         if mode == 'w':
-            fieldnames = ["extraction_date", "upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
-            outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
             outputfile.writeheader()
         outputfile.writerow(book_info)
 
