@@ -65,7 +65,7 @@ def get_book_info(book_url):
 
         # create_image_file(image_url)
 
-        book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
+        book_info = {"upc": upc, "title": title, "category": category, "price-incl-tax": price_including_tax, "price-excl-tax": price_excluding_tax, "in-stock": available_stock, "rating": review_rating, "product-url": product_page_url, "image-url": image_url, "description": product_description}
 
         return book_info
 
@@ -86,10 +86,10 @@ def create_book_file(book_url):
 
     with open(book_file_path, mode=mode, newline='') as file:
         if mode == 'w':
-            fieldnames = ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"]
+            fieldnames = ["extraction_date", "upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
             outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
             outputfile.writeheader()
-            outputfile.writerow(book_info)
+        outputfile.writerow(book_info)
 
 create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
 
