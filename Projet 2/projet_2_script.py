@@ -150,6 +150,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 # print(all_categories)
-parse_category("sequential-art")
+parse_category("classics")
 
 ###          PHASE 4            ###
