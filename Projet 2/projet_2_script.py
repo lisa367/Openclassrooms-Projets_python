@@ -65,7 +65,7 @@ def get_book_info(book_url):
         elif "Five" in star_rating:
             review_rating = 5
 
-        create_image_file(image_url, image_url)
+        create_image_file(image_url, book_url)
 
         book_info = {"upc": upc, "title": title, "category": category, "price-incl-tax": price_including_tax, "price-excl-tax": price_excluding_tax, "in-stock": available_stock, "rating": review_rating, "product-url": product_page_url, "image-url": image_url, "description": product_description}
 
@@ -150,6 +150,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 # print(all_categories)
-parse_category("classics")
+parse_category("poetry")
 
 ###          PHASE 4            ###
