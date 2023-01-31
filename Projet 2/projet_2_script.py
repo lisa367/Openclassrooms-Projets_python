@@ -50,7 +50,7 @@ def get_book_info(book_url):
         star_rating = soup.select(".star-rating")[0]['class']
         product_page_url = book_url
         image_url = f"{landing_page_url}{soup.select('.carousel-inner > div > img')[0]['src'].strip('../..')}"
-        product_description = soup.select("#product_description ~ p")[0].contents[0]
+        product_description = soup.select("#product_description ~ p")[0].contents[0].strip(" ...more")
 
         if "One" in star_rating:
             review_rating = 1
