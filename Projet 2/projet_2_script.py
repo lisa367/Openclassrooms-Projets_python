@@ -97,16 +97,12 @@ def create_book_file(book_url):
 ###          PHASE 2            ###
 
 def create_csv_file(category_name, urls):
-    # category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
-    catalogue_file_path = data_directory / f"catalogue_{extraction_date}.csv"
+    category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
 
-    mode = 'w' if not catalogue_file_path.exists() else 'a'
-
-    with open(catalogue_file_path, mode=mode, newline='') as file:
+    with open(category_file_path, 'w', newline='') as file:
         fieldnames = ["upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
         outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
-        if mode == 'a':
-            outputfile.writeheader()
+        outputfile.writeheader()
         for url in urls:
             data = get_book_info(url)
             outputfile.writerow(data)
@@ -153,6 +149,6 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
 
 # print(landing_page_soup)
 # print(all_categories)
-parse_category("classics")
+parse_category("sequential-art")
 
 ###          PHASE 4            ###
