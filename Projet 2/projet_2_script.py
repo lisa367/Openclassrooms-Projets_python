@@ -11,7 +11,7 @@ extraction_date = todays_date.strftime("%Y-%m-%d_%H%M%S")
 data_directory = Path.cwd() / "data"
 images_directory = data_directory / "images"
 
-# data_directory.mkdir(exist_ok=True)
+data_directory.mkdir(exist_ok=True)
 # images_directory.mkdir(exist_ok=True)
 
 landing_page_url = "https://books.toscrape.com/"
@@ -63,7 +63,7 @@ def get_book_info(book_url):
         elif "Five" in star_rating:
             review_rating = 5
 
-        create_image_file(image_url)
+        # create_image_file(image_url)
 
         book_info = {"upc": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "available_stock": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
@@ -72,7 +72,7 @@ def get_book_info(book_url):
     else:
         return "La requête n'a pu aboutir."
 
-# print(extraction_date)
+print(extraction_date)
 # print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
 
 
@@ -80,16 +80,18 @@ def create_book_file(book_url):
     book_info = get_book_info(book_url)
     book_info["extraction_date"] = extraction_date
     book_title = '_'.join(book_info["title"].lower().split(' '))
-    book_file_path = f"{data_directory} / {book_title}.csv"
+    book_file_path = data_directory / f"{book_title}.csv"
 
     mode = 'w' if not book_file_path.exists() else 'a'
 
-    with open(book_file_path, mode=mode, newline='', delimiter=',\t') as file:
+    with open(book_file_path, mode=mode, newline='') as file:
         if mode == 'w':
-            outputfile = csv.DictWriter(file, ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+            fieldnames = ["extraction_date", "upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"]
+            outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
             outputfile.writeheader()
+            outputfile.writerow(book_info)
 
-# create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
+create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
 
 ###          PHASE 2            ###
 
@@ -144,7 +146,7 @@ all_categories = ["-".join(category.contents[0].lower().strip("\n               
     csv_file.touch(exist_ok=True)'''
 
 # print(landing_page_soup)
-print(all_categories)
-parse_category("sequential-art")
+# print(all_categories)
+# parse_category("sequential-art")
 
 ###          PHASE 4            ###
