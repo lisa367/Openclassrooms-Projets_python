@@ -91,19 +91,20 @@ def create_book_file(book_url):
             outputfile.writeheader()
         outputfile.writerow(book_info)
 
-create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
+# create_book_file("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html")
 
 ###          PHASE 2            ###
 
 def create_csv_file(category_name, urls):
     category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
 
-    with open(category_file_path, 'w', newline='', delimiter=',\t') as file:
-        outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
+    with open(category_file_path, 'w', newline='') as file:
+        fieldnames = ["upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
+        outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
         outputfile.writeheader()
         for url in urls:
             data = get_book_info(url)
-            outputfile.writerows(data)
+            outputfile.writerow(data)
 
 def parse_category(category_name):
     # category_file = data_directory / f"{category_name}_{extraction_date}.csv"
