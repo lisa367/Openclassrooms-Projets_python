@@ -8,11 +8,11 @@ import csv
 todays_date = dt.today()
 extraction_date = todays_date.strftime("%Y-%m-%d_%H%M%S")
 
-data_directory = Path.cwd() / "data"
-images_directory = data_directory / "images"
+data_directory = Path.cwd() / "Data"
+images_directory = data_directory / "Images"
 
 data_directory.mkdir(exist_ok=True)
-# images_directory.mkdir(exist_ok=True)
+images_directory.mkdir(exist_ok=True)
 
 landing_page_url = "https://books.toscrape.com/"
 
@@ -28,8 +28,8 @@ def request_and_parse(url):
 
 def create_image_file(image_url, book_title):
     image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
-    #print(image_file_name)
-    image_file_path = f"{images_directory} / {image_file_name}"
+    print(image_file_name)
+    image_file_path = images_directory / f"{image_file_name}"
     if not image_file_path.exists():
         with open(image_file_path, 'wb') as image_file:
             r = rq.get(image_url, stream=True)
@@ -63,7 +63,7 @@ def get_book_info(book_url):
         elif "Five" in star_rating:
             review_rating = 5
 
-        # create_image_file(image_url)
+        create_image_file(image_url, title)
 
         book_info = {"upc": upc, "title": title, "category": category, "price-incl-tax": price_including_tax, "price-excl-tax": price_excluding_tax, "in-stock": available_stock, "rating": review_rating, "product-url": product_page_url, "image-url": image_url, "description": product_description}
 
