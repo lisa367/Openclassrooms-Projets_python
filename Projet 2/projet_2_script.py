@@ -119,7 +119,7 @@ def parse_category(category_name):
 
     for i in range(1, total_pages+1):
         url = category_url.replace('index', f'page-{i}') if total_pages > 1 else category_url
-        print(url)
+        # print(url)
         soup = request_and_parse(url)
         hyperlinks = [link['href'].strip("../../../") for link in soup.select(".image_container a")]
         books_on_page = [f"{landing_page_url}catalogue/{link}" for link in hyperlinks]
@@ -144,12 +144,11 @@ def parse_category(category_name):
 landing_page_soup = request_and_parse(landing_page_url).select("aside a")
 all_categories = ["-".join(category.contents[0].lower().strip("\n                            \n").split(" ")) for category in landing_page_soup]
 
-'''for category in all_categories:
+for category in all_categories:
     parse_category(category)
-    csv_file.touch(exist_ok=True)'''
 
 # print(landing_page_soup)
 # print(all_categories)
-parse_category("poetry")
+# parse_category("poetry")
 
 ###          PHASE 4            ###
