@@ -20,9 +20,8 @@ landing_page_url = "https://books.toscrape.com/"
 ###          PHASE 1            ###
 
 def request_and_parse(url):
-    response = rq.get(url).text
-    soup = bs(response, "html.parser")
-    # soup = bs(response, "html.parser") if response.ok else 'error'
+    response = rq.get(url)
+    soup = bs(response.text, "html.parser") if response.ok else 'error'
 
     return soup
 
@@ -74,6 +73,7 @@ def get_book_info(book_url):
         return "La requête n'a pu aboutir."
 
 print(extraction_date)
+# print(request_and_parse("https://looks.toscrape.com/"))
 # print(get_book_info("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
 
 
