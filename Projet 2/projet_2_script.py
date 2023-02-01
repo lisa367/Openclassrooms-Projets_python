@@ -27,7 +27,6 @@ def request_and_parse(url):
     return soup
 
 def create_image_file(image_url, book_url):
-    # image_file_name = f"{'_'.join(book_title.lower().split(' '))}.jpg"
     image_file_name = f"{book_url.split('/')[-2]}.jpg"
     # print(image_file_name)
     image_file_path = images_directory / f"{image_file_name}"
@@ -109,7 +108,6 @@ def create_csv_file(category_name, urls):
             outputfile.writerow(data)
 
 def parse_category(category_name):
-    # category_file = data_directory / f"{category_name}_{extraction_date}.csv"
     category_url = f"{landing_page_url}catalogue/category/books/{category_name}_{all_categories.index(category_name)+1}/index.html"
     category_page = request_and_parse(category_url)
 
@@ -126,12 +124,6 @@ def parse_category(category_name):
         # print(books_on_page)
         books_urls += books_on_page
 
-        '''with open(category_file, "a", newline=" ", delimiter=",") as file:
-            outputfile = csv.DictWriter(file, ["upc", "title", "category", "price_tax_incl", "price_tax_excl", "in-stock", "rating", "product-url", "image-url", "description"])
-            for url in books_urls:
-                book_info = get_book_info(url)
-                outputfile.writerow(category_file, book_info)'''
-        
         create_csv_file(category_name, books_urls)
     
     # print(total_pages)
@@ -145,10 +137,13 @@ landing_page_soup = request_and_parse(landing_page_url).select("aside a")
 all_categories = ["-".join(category.contents[0].lower().strip("\n                            \n").split(" ")) for category in landing_page_soup]
 
 for category in all_categories:
+    if category == "books":
+        continue
     parse_category(category)
+
+
+###          PHASE 4            ###
 
 # print(landing_page_soup)
 # print(all_categories)
 # parse_category("poetry")
-
-###          PHASE 4            ###
