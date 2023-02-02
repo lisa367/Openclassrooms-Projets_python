@@ -1,24 +1,25 @@
 # Instructions
 
-## 1. Étape 1
+## 1. Initialiser un répertoire git local
 Ouvrir le terminal et aller dans le répertoire local.
-Installer git en utilisant la commande :
-git init
+Installer git en utilisant la commande :  
+_`git init`_
 
- ## 1. Étape 2
-Télécharger le code source depuis le répertoire distant :
-git clone https://github.com/lisa367/Openclassrooms-Projets_python.git    
+ ## 2. Télécharger le répertoire distant
+Télécharger le code source depuis le répertoire distant :  
+_`git clone` [github-url](https://github.com/lisa367/Openclassrooms-Projets_python.git)_    
 
- ## 1. Étape 3
+ ## 3. Activer l'environnement virtuel
 - Changer de répertoire : aller dans le dossier Projet 2
 - Installer l’environnement virtuel
-- Exécuter la commande :
-python3 -m venv env
+- Exécuter la commande :  
+_`python3 -m venv env`_
 
-- Activerl'anvironnement virtuel:
-source env/bin/activate
+- Activerl'anvironnement virtuel:  
+_`source env/bin/activate`_
 
-## 1. Étape 4
-- Installer les requirements :
-pip install -r requirements.txt
+## 4. Installer les requirements
+- Installer les requirements :  
+_`pip install -r requirements.txt`_
+
 - Exécuter le programme, depuis le terminal ou bien dans un éditeur de code.
