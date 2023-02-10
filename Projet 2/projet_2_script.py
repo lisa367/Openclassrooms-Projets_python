@@ -65,7 +65,7 @@ def get_book_info(book_url):
 
         create_image_file(image_url, book_url)
 
-        book_info = {"upc": upc, "title": title, "category": category, "price-incl-tax": price_including_tax, "price-excl-tax": price_excluding_tax, "in-stock": available_stock, "rating": review_rating, "product-url": product_page_url, "image-url": image_url, "description": product_description}
+        book_info = {"universal_ product_code": upc, "title": title, "category": category, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax, "number_available": available_stock, "review_rating": review_rating, "product_page_url": product_page_url, "image_url": image_url, "product_description": product_description}
 
         return book_info
 
@@ -86,7 +86,7 @@ def create_book_file(book_url):
     mode = 'w' if not book_file_path.exists() else 'a'
 
     with open(book_file_path, mode=mode, newline='') as file:
-        fieldnames = ["extraction_date", "upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
+        fieldnames = ["extraction_date", "universal_ product_code", "title", "category", "price_including_tax", "price_excluding_tax", "number_available", "review_rating", "product_page_url", "image_url", "product_description"]
         outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
         if mode == 'w':
             outputfile.writeheader()
@@ -100,7 +100,7 @@ def create_csv_file(category_name, urls):
     category_file_path = data_directory / f"{category_name}_{extraction_date}.csv"
 
     with open(category_file_path, 'w', newline='') as file:
-        fieldnames = ["upc", "title", "category", "price-incl-tax", "price-excl-tax", "in-stock", "rating", "product-url", "image-url", "description"]
+        fieldnames = ["universal_ product_code", "title", "category", "price_including_tax", "price_excluding_tax", "number_available", "review_rating", "product_page_url", "image_url", "product_description"]
         outputfile = csv.DictWriter(file , fieldnames=fieldnames, delimiter="\t")
         outputfile.writeheader()
         for url in urls:
