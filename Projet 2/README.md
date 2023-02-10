@@ -18,8 +18,9 @@ _`python3 -m venv env`_
 - Activerl'anvironnement virtuel:  
 _`source env/bin/activate`_
 
-## 4. Installer les requirements
+## 4. Installer les requirements et lancer le programme
 - Installer les requirements :  
 _`pip install -r requirements.txt`_
 
-- Exécuter le programme, depuis le terminal ou bien dans un éditeur de code.
+- Exécuter le programme, depuis le terminal ou bien dans un éditeur de code
+_`python3 projet_2_script.py`_
