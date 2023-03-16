@@ -66,33 +66,27 @@ class BaseView2:
 
     def __init__(self, labels, menu_choisi) -> None:
         self.object_name = self.__class__.__name__.lower().strip("View")
-        self.labels_list = labels
         self.menu_choisi = menu_choisi
+        self.options = {1: "aouter", 2: "modifier", 3: "Supprimer"}
+        self.labels_list = labels
+
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
         self.formatage = " ".join(formatage_list)
         self.data_dict = {}
 
     def choix_option(self):
         menu = menus[self.menu_choisi]
-        options_str = menu.split("\n")
-        options = {}
 
-        for item in options_str:
-            choix = item.split(": ")
-            options[choix[0]] = choix[1]
-
-        n = len(options)
         print("Choisissez une des options suivantes : ", menu, "*"*15)
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        choix_2 = options.get(reponse, 0)
-        self.option_choisie = choix_2
+        option_choisie = self.options.get(reponse, 0)
 
-        """if choix_2:
+        """if option_choisie:
             self.option_choisie = choix_2
         else:
             print("Veuillez entrer une option valide")"""
 
-        return self.option_choisie
+        return option_choisie
     
     def input_check(self, liste):
         """This method checks if the user input is in the expected data format
