@@ -36,7 +36,7 @@ MENU_STATS = """
 4: Joueurs d'un tournoi
 5: Rounds et matchs d'un tournoi
 """
-
+menus = {"joueur": MENU_JOUEUR, "match": MENU_MATCH, "tournoi": MENU_TOURNOI, "rapport": MENU_STATS, "quitter": "Quitter"}
 
 class View:
     menus = {"A": MENU_JOUEUR, "B": MENU_MATCH, "C": MENU_TOURNOI, "D": MENU_STATS, "E": "Quitter"}
@@ -60,8 +60,23 @@ class View:
 
         return self.menu_choisi
 
+   
+
+class BaseView2:
+
+    def __init__(self, labels) -> None:
+        self.object_name = self.__class__.__name__.lower()
+        # self.labels = labels
+        # self.labels_list = self.labels.split()
+        # self.labels = " ".join(self.labels)
+        self.labels_list = labels
+
+        formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
+        self.formatage = " ".join(formatage_list)
+        self.data_dict = {}
+
     def choix_option(self, menu_choisi):
-        menu = View.menus[menu_choisi]
+        menu = menus[menu_choisi]
         options_str = menu.split("\n")
         options = {}
 
@@ -81,21 +96,6 @@ class View:
             print("Veuillez entrer une option valide")"""
 
         return self.option_choisie
-    
-
-class BaseView2:
-
-    def __init__(self, labels) -> None:
-        self.object_name = self.__class__.__name__.lower()
-        # self.labels = labels
-        # self.labels_list = self.labels.split()
-        # self.labels = " ".join(self.labels)
-        self.labels_list = labels
-
-        formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
-        self.formatage = " ".join(formatage_list)
-        self.data_dict = {}
-
     
     def input_check(self, liste):
         """This method checks if the user input is in the expected data format
