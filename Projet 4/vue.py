@@ -132,15 +132,3 @@ class BaseView2:
         
         return object_id
     
-    def get_object_info(self):
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à supprimer :")
-        if not self.input_check(object_id):
-            object_id = input("Veuillez renseigner un identifiant valide :")
-        
-        return object_id
-    
-    def display_object_info(self, dictionary):
-        for key, value in dictionary:
-            print(f"{key}: {value}")
-
-        return dictionary     
