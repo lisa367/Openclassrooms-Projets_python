@@ -65,10 +65,7 @@ class View:
 class BaseView2:
 
     def __init__(self, labels) -> None:
-        self.object_name = self.__class__.__name__.lower()
-        # self.labels = labels
-        # self.labels_list = self.labels.split()
-        # self.labels = " ".join(self.labels)
+        self.object_name = self.__class__.__name__.lower().strip("View")
         self.labels_list = labels
 
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
