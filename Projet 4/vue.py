@@ -64,16 +64,16 @@ class View:
 
 class BaseView2:
 
-    def __init__(self, labels) -> None:
+    def __init__(self, labels, menu_choisi) -> None:
         self.object_name = self.__class__.__name__.lower().strip("View")
         self.labels_list = labels
-
+        self.menu_choisi = menu_choisi
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
         self.formatage = " ".join(formatage_list)
         self.data_dict = {}
 
-    def choix_option(self, menu_choisi):
-        menu = menus[menu_choisi]
+    def choix_option(self):
+        menu = menus[self.menu_choisi]
         options_str = menu.split("\n")
         options = {}
 
