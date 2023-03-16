@@ -81,3 +81,75 @@ class View:
             print("Veuillez entrer une option valide")"""
 
         return self.option_choisie
+    
+
+class BaseView2:
+
+    def __init__(self, labels) -> None:
+        self.object_name = self.__class__.__name__.lower()
+        # self.labels = labels
+        # self.labels_list = self.labels.split()
+        # self.labels = " ".join(self.labels)
+        self.labels_list = labels
+
+        formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
+        self.formatage = " ".join(formatage_list)
+        self.data_dict = {}
+
+    
+    def input_check(self, liste):
+        """This method checks if the user input is in the expected data format
+
+        Args:
+            liste (dict): Dictionary of the data to check
+
+        Returns:
+            bool: The method returns a boolean value
+        """
+        return True
+    
+    def get_id(self):
+
+        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à modifier : ")
+        # if self.input_check(object_id):
+        self.arguments_dict["identifiant"] = object_id
+        
+        return object_id
+    
+    def get_instruction(self):
+        pass
+    
+    def get_input_data(self, instruction):
+        # arguments_dict = {}
+        inputs_raw = input(f"Veuillez renseigner les éléments à {instruction} de la manière suivante, séparés d'un espace: {self.formatage}\n")
+        inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
+        # print(inputs_list)
+
+        for input_data in inputs_list:
+            # if self.input_check(input_data[1]):
+            self.data_dict[input_data[0]] = input_data[1]
+
+        #print(self.data_dict)
+
+        return instruction, self.data_dict
+
+    
+    def delete_object(self):
+        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à supprimer :")
+        if not self.input_check(object_id):
+            object_id = input("Veuillez renseigner un identifiant valide :")
+        
+        return object_id
+    
+    def get_object_info(self):
+        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à supprimer :")
+        if not self.input_check(object_id):
+            object_id = input("Veuillez renseigner un identifiant valide :")
+        
+        return object_id
+    
+    def display_object_info(self, dictionary):
+        for key, value in dictionary:
+            print(f"{key}: {value}")
+
+        return dictionary     
