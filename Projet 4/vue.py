@@ -67,7 +67,7 @@ class BaseView2:
     def __init__(self, labels, menu_choisi) -> None:
         self.object_name = self.__class__.__name__.lower().strip("View")
         self.menu_choisi = menu_choisi
-        self.options = {1: "aouter", 2: "modifier", 3: "Supprimer"}
+        self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
         self.option_choisie = ""
         self.labels_list = labels
 
@@ -80,7 +80,7 @@ class BaseView2:
 
         print("Choisissez une des options suivantes : ", menu, "*"*15)
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        self.option_choisie = self.options.get(reponse, 0)
+        self.option_choisie = self.options.get(int(reponse), 0)
 
         """if option_choisie:
             self.option_choisie = choix_2
