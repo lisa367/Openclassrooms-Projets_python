@@ -6,6 +6,7 @@ instance_vue = View()
 menu = instance_vue.choix_menu()
 instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 option = instance_joueur.choix_option()
+# print(option)
 
 if option == "ajouter":
     ex = instance_joueur.ajouter()
