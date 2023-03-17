@@ -1,5 +1,5 @@
 ### MENUS ###
-
+from modele import JoueurModel
 
 CHOIX_MENU = """
 A: Menu joueur
@@ -142,3 +142,13 @@ class BaseView2:
     def supprimer(self):
         identifiant = self.get_id("supprimer")
         return identifiant
+    
+
+class JoueurView(BaseView2):
+    def __init__(self, labels, menu_choisi) -> None:
+        super().__init__(labels, menu_choisi)
+
+
+menu = View.choix_menu()
+joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
+option = joueur.choix_option()
