@@ -132,10 +132,13 @@ class BaseView2:
         return object_id
     
     def ajouter(self):
-        self.get_input_data("ajouter")
+        data = self.get_input_data("ajouter")
+        return data
     
     def modifier(self):
         identifiant = self.get_id("modifier")
+        return identifiant
     
     def supprimer(self):
         identifiant = self.get_id("supprimer")
+        return identifiant
