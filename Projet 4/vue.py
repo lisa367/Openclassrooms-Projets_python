@@ -65,7 +65,7 @@ class View:
 class BaseView2:
 
     def __init__(self, labels, menu_choisi) -> None:
-        self.object_name = self.__class__.__name__.lower().strip("View")
+        self.object_name = self.__class__.__name__.strip("View").lower()
         self.menu_choisi = menu_choisi
         self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
         self.option_choisie = ""
@@ -104,7 +104,7 @@ class BaseView2:
 
         object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à {instruction} : ")
         # if self.input_check(object_id):
-        self.arguments_dict["identifiant"] = object_id
+        self.data_dict["identifiant"] = object_id
         
         return object_id
 
@@ -137,11 +137,9 @@ class BaseView2:
     
     def modifier(self):
         new_data = {}
-        identifiant = self.get_id("modifier")
-        data_to_modify = self.get_input_data("modifier")
-        new_data["filter"] = identifiant
-        new_data["data"] = data_to_modify
-        return identifiant
+        new_data["filter"] = self.get_id("modifier")
+        new_data["data"] = self.get_input_data("modifier")
+        return new_data
     
     def supprimer(self):
         identifiant = self.get_id("supprimer")
