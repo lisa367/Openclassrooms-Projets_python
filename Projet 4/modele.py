@@ -15,8 +15,9 @@ class JoueurModel:
     # headers = ["identifiant", "nom", "prenom", "date_naissance", "score_total", "matchs_total", "matchs_gagnes"]
     headers = ["identifiant", "nom", "prenom", "date_naissance"]
 
-    def __init__(self, data_dict):
-        self.data_dict = data_dict
+    def __init__(self):
+        self.data_dict = {}
+        """self.data_dict = data_dict
         self.identifiant = data_dict.get("identifiant", "")
         self.nom = data_dict.get("nom", "")
         self.prenom = data_dict.get("prenom", "")
@@ -26,7 +27,7 @@ class JoueurModel:
         self.score_total = 0
 
     def __repr__(self) -> str:
-        return f"joueur: {self.prenom} {self.nom} - {self.identifiant}"
+        return f"joueur: {self.prenom} {self.nom} - {self.identifiant}" """
     
     def entry_already_exists(self, identifiant):
         db = JoueurModel.database
@@ -34,8 +35,8 @@ class JoueurModel:
 
         return id_check
 
-    def enregistrer(self):
-        new_entry = self.data_dict
+    def enregistrer(self, new_entry):
+        # new_entry = self.data_dict
         JoueurModel.database.insert(new_entry)
 
         return new_entry
