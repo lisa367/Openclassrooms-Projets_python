@@ -121,7 +121,7 @@ class BaseView2:
 
         #print(self.data_dict)
 
-        return instruction, self.data_dict
+        return self.data_dict
 
     
     def delete_object(self):
