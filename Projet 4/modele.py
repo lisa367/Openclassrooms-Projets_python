@@ -3,9 +3,9 @@ import random
 import json
 
 
-db_joueurs = TinyDB("Databases/joueurs.json")
-db_matchs = TinyDB("Databases/matchs.json")
-db_tournois = TinyDB("Databases/tournois.json")
+db_joueurs = TinyDB("Databases/joueurs.json", indent=4)
+db_matchs = TinyDB("Databases/matchs.json", indent=4)
+db_tournois = TinyDB("Databases/tournois.json", indent=4)
 
 query = Query()
 
