@@ -149,6 +149,3 @@ class JoueurView(BaseView2):
         super().__init__(labels, menu_choisi)
 
 
-menu = View.choix_menu()
-joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
-option = joueur.choix_option()
