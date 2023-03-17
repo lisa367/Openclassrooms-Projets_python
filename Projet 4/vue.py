@@ -68,6 +68,7 @@ class BaseView2:
         self.object_name = self.__class__.__name__.lower().strip("View")
         self.menu_choisi = menu_choisi
         self.options = {1: "aouter", 2: "modifier", 3: "Supprimer"}
+        self.option_choisie = ""
         self.labels_list = labels
 
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
@@ -79,14 +80,14 @@ class BaseView2:
 
         print("Choisissez une des options suivantes : ", menu, "*"*15)
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        option_choisie = self.options.get(reponse, 0)
+        self.option_choisie = self.options.get(reponse, 0)
 
         """if option_choisie:
             self.option_choisie = choix_2
         else:
             print("Veuillez entrer une option valide")"""
 
-        return option_choisie
+        return self.option_choisie
     
     def input_check(self, liste):
         """This method checks if the user input is in the expected data format
@@ -99,16 +100,14 @@ class BaseView2:
         """
         return True
     
-    def get_id(self):
+    def get_id(self, instruction):
 
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à modifier : ")
+        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à {instruction} : ")
         # if self.input_check(object_id):
         self.arguments_dict["identifiant"] = object_id
         
         return object_id
-    
-    def get_instruction(self):
-        pass
+
     
     def get_input_data(self, instruction):
         # arguments_dict = {}
@@ -132,3 +131,11 @@ class BaseView2:
         
         return object_id
     
+    def ajouter(self):
+        self.get_input_data("ajouter")
+    
+    def modifier(self):
+        pass
+    
+    def supprimer(self):
+        pass
