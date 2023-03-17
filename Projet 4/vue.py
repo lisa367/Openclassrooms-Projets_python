@@ -136,7 +136,11 @@ class BaseView2:
         return data
     
     def modifier(self):
+        new_data = {}
         identifiant = self.get_id("modifier")
+        data_to_modify = self.get_input_data("modifier")
+        new_data["filter"] = identifiant
+        new_data["data"] = data_to_modify
         return identifiant
     
     def supprimer(self):
