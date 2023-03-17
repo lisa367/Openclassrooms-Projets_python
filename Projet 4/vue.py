@@ -135,7 +135,7 @@ class BaseView2:
         self.get_input_data("ajouter")
     
     def modifier(self):
-        pass
+        identifiant = self.get_id("modifier")
     
     def supprimer(self):
-        pass
+        identifiant = self.get_id("supprimer")
