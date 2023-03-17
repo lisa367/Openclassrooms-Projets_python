@@ -32,9 +32,18 @@ class JoueurMenu:
         return self.option_choisie
     
     def instruction(self):
-        if option == "ajouter":
-            self.instance_joueur.ajouter()
-        elif option == "modifier":
-            self.instance_joueur.modifier()
+        if self.option == "ajouter":
+            self.ajouter_db()
+        elif self.option == "modifier":
+            self.modifier_db()
         elif option == "supprimer":
-            self.instance_joueur.supprimer()
+            self.supprimer_db()
+
+    def ajouter_db(self):
+        new_entry = self.instance_joueur.ajouter()
+
+    def modifier_db(self):
+        new_entry = self.instance_joueur.modifier()
+
+    def supprimer_db(self):
+        new_entry = self.instance_joueur.supprimer()
