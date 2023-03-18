@@ -35,7 +35,7 @@ class JoueurMenu:
         new_entry = self.instance_joueur.ajouter()
         self.instance_modele.enregistrer(new_entry=new_entry)
 
-    def modifier_db(self):
+    def modifier_db(self, filter, data):
         new_entry = self.instance_joueur.modifier()
         self.instance_modele.modifier()
 
