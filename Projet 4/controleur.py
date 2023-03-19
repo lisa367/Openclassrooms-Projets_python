@@ -37,7 +37,8 @@ class JoueurMenu:
 
     def modifier_db(self, filter, data):
         new_entry = self.instance_joueur.modifier()
-        self.instance_modele.modifier()
+        id=new_entry["filter"]
+        self.instance_modele.modifier(value=id)
 
     def supprimer_db(self):
         entry = self.instance_joueur.supprimer()
