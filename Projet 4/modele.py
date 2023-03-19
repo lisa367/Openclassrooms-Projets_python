@@ -43,7 +43,8 @@ class JoueurModel:
 
     def modifier(self, filter, value, new_value):
         db = JoueurModel.database
-        db.update({filter: new_value}, query[filter] == value)
+        # db.update({filter: new_value}, query[filter] == value)
+        db.update({filter: new_value}, query["identifiant"] == value)
 
     def supprimer(self, filter, value):
         db = JoueurModel.database
