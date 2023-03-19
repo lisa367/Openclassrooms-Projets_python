@@ -40,7 +40,8 @@ class JoueurMenu:
         self.instance_modele.modifier()
 
     def supprimer_db(self):
-        new_entry = self.instance_joueur.supprimer()
+        entry = self.instance_joueur.supprimer()
+        self.instance_modele.supprimer(filter="identifiant", value=entry)
 
 
 
