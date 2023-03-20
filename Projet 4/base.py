@@ -17,20 +17,20 @@ class BaseModel:
         else:
             return None
 
-    def enregistrer(self, new_entry):
+    def enregistrer_db(self, new_entry):
         if not self.entry_already_exists(new_entry[self.default_filter]):
             self.database.insert(new_entry)
             return new_entry
         else:
             return "Cette entrée existe déjà dans la base de données"
 
-    def modifier(self, data_dict, id_value):
+    def modifier_db(self, data_dict, id_value):
         self.database.update(data_dict, query[self.default_filter] == id_value)
 
-    def supprimer(self, filter_value):
+    def supprimer_db(self, filter_value):
         self.database.remove(query[self.default_filter] == filter_value)
 
-    def retreive_all(self):
+    def retreive_all_db(self):
         print(self.database.all())
 
 
@@ -78,26 +78,29 @@ class BaseView2:
         return True
     
     def get_id(self, instruction):
+        """Asks for the user to enter an id
+
+        Args:
+            instruction (str): Indicates what action the input will be used for
+
+        Returns:
+            str: The identifier of the data to search in the database
+        """
 
         object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à {instruction} : ")
         # if self.input_check(object_id):
-        self.data_dict["identifiant"] = object_id
+        # self.data_dict["identifiant"] = object_id
         
         return object_id
 
     
     def get_input_data(self, instruction):
-        # arguments_dict = {}
         inputs_raw = input(f"Veuillez renseigner les éléments à {instruction} de la manière suivante, séparés d'un espace: {self.formatage}\n")
         inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
-        # print(inputs_list)
-
+        
         for input_data in inputs_list:
             # if self.input_check(input_data[1]):
             self.data_dict[input_data[0]] = input_data[1]
-
-        #print(self.data_dict)
-
         return self.data_dict
 
     
@@ -121,3 +124,34 @@ class BaseView2:
     def supprimer(self):
         identifiant = self.get_id("supprimer")
         return identifiant
+
+
+
+class BaseMenu:
+    def __init__(self, modele_objet, vue_objet) -> None:
+        self.instance_modele = modele_objet
+        self.instance_vue = vue_objet
+
+    def instruction(self):
+        option_choisie = self.instance_vue.choix_option()
+
+        if option_choisie == "ajouter":
+            self.ajouter()
+        if option_choisie == "modifier":
+            self.modifer()
+        if option_choisie == "supprimer":
+            self.supprimer()
+
+    
+    def ajouter(self):
+        data = self.instance_vue.get_input_data("ajouter")
+        self.instance_modele.ajouter_db(data)
+
+    def modifier(self):
+        id = self.instance_vue.get_id("modifier")
+        new_data = self.instance_vue.get_input_data("modifier")
+        self.instance_modele.modifier_db(id_value=id, data_dict=new_data)
+
+    def supprimer(self):
+        id = self.instance_vue.get_id("supprimer")
+        self.instance_modele.supprimer_db(id_value=id)
