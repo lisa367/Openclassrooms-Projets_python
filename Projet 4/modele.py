@@ -46,7 +46,7 @@ class JoueurModel:
         # db.update({field: new_value}, query[filter] == value)
         db.update(data_dict, query[filter] == id_value)
 
-    def supprimer(self, value, filter="identifiant"):
+    def supprimer(self, id_value, filter="identifiant"):
         db = JoueurModel.database
         db.remove(query[filter] == id_value)
 
