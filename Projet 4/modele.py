@@ -31,9 +31,9 @@ class JoueurModel:
     def __repr__(self) -> str:
         return f"joueur: {self.prenom} {self.nom} - {self.identifiant}" """
     
-    def entry_already_exists(self, identifiant):
+    def entry_already_exists(self, filter_value, filter="identifant"):
         db = JoueurModel.database
-        id_check = db.search(query["identifiant"] == identifiant)
+        id_check = db.search(query[filter] == filter_value)
 
         return id_check
 
