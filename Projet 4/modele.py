@@ -17,6 +17,8 @@ class JoueurModel:
 
     def __init__(self):
         self.data_dict = {}
+        self.filter = "identifiant"
+        
         """self.data_dict = data_dict
         self.identifiant = data_dict.get("identifiant", "")
         self.nom = data_dict.get("nom", "")
