@@ -41,13 +41,18 @@ class JoueurModel:
 
         return new_entry
 
-    def modifier(self, data_dict, id_value):
+    def modifier(self, data_dict, id_value, filter="identifant"):
         db = JoueurModel.database
         # db.update({field: new_value}, query[filter] == value)
-        db.update({filter: data_dict}, query["identifiant"] == id_value)
+        db.update(data_dict, query[filter] == id_value)
 
-    def supprimer(self, filter, value):
+    def supprimer(self, value, filter="identifiant"):
         db = JoueurModel.database
-        db.remove(query[filter] == value)
+        db.remove(query[filter] == id_value)
 
 
+ex = {"identifiant": "CCCC", "nom": "Martin", "prenom": "Jean", "date_naissance": "02/04/2009"}
+to_modify = ["CCCC", {"prenom": "Julie", "date_naissance": "12/04/2011"}]
+instance_modele = JoueurModel()
+# instance_modele.enregistrer(ex)
+instance_modele.supprimer(id_value="CCCC")
