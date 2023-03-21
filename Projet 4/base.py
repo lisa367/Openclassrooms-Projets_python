@@ -137,10 +137,12 @@ class BaseMenu:
 
         if option_choisie == "ajouter":
             self.ajouter()
-        if option_choisie == "modifier":
-            self.modifer()
-        if option_choisie == "supprimer":
+        elif option_choisie == "modifier":
+            self.modifier()
+        elif option_choisie == "supprimer":
             self.supprimer()
+        # elif option_choisie == "afficher-tout":
+            # self.afficher_tout()
 
     
     def ajouter(self):
