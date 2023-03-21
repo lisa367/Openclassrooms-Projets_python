@@ -1,5 +1,6 @@
-from modele import JoueurModel
+from modele import JoueurModel, instance_modele
 from vue import View, JoueurView
+from base import BaseMenu
 
 
 instance_vue = View()
@@ -54,3 +55,10 @@ elif option == "supprimer":
     ex = instance_joueur.supprimer()
 
 print(ex)"""
+
+
+#instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
+
+menu_test = BaseMenu(modele_objet=instance_modele, vue_objet=instance_vue)
+menu_test.instruction()
