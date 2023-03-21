@@ -27,8 +27,8 @@ class BaseModel:
     def modifier_db(self, data_dict, id_value):
         self.database.update(data_dict, query[self.default_filter] == id_value)
 
-    def supprimer_db(self, filter_value):
-        self.database.remove(query[self.default_filter] == filter_value)
+    def supprimer_db(self, id_value):
+        self.database.remove(query[self.default_filter] == id_value)
 
     def retreive_all_db(self):
         print(self.database.all())
