@@ -17,7 +17,7 @@ class JoueurModel(BaseModel):
 # ex1 = {"identifiant": "CCCC", "nom": "Marin", "prenom": "Julie", "date_naissance": "12/08/2007"}
 # ex2 = {"identifiant": "EEEE", "nom": "Renault", "prenom": "Megane", "date_naissance": "07/09/2002"}
 # to_modify = ["CCCC", {"nom": "Marin", "prenom": "Julie", "date_naissance": "12/04/2011"}]
-# instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 
 # instance_modele.enregistrer(ex1)
 # instance_modele.enregistrer(ex2)

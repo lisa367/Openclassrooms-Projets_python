@@ -155,3 +155,11 @@ class BaseMenu:
     def supprimer(self):
         id = self.instance_vue.get_id("supprimer")
         self.instance_modele.supprimer_db(id_value=id)
+
+
+
+# instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+# instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
+
+# menu_test = BaseMenu(modele_objet=instance_modele, vue_objet=instance_vue)
+# menu_test.instruction()

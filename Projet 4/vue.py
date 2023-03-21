@@ -151,3 +151,4 @@ class JoueurView(BaseView2):
         super().__init__(labels, menu_choisi)
 
 
+instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
