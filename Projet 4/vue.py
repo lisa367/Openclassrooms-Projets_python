@@ -1,5 +1,5 @@
 ### MENUS ###
-from modele import JoueurModel
+# from modele import JoueurModel
 
 CHOIX_MENU = """
 A: Menu joueur
@@ -151,4 +151,4 @@ class JoueurView(BaseView2):
         super().__init__(labels, menu_choisi)
 
 
-instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
+# instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")

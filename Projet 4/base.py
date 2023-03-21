@@ -145,7 +145,7 @@ class BaseMenu:
     
     def ajouter(self):
         data = self.instance_vue.get_input_data("ajouter")
-        self.instance_modele.ajouter_db(data)
+        self.instance_modele.enregistrer_db(data)
 
     def modifier(self):
         id = self.instance_vue.get_id("modifier")
