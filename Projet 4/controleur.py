@@ -1,6 +1,8 @@
-from modele import JoueurModel, instance_modele
+from modele import JoueurModel, instance_modele, MatchModel, TournoiModel
 from vue import View, JoueurView
 from base import BaseMenu
+
+import random
 
 
 instance_vue = View()
@@ -47,8 +49,27 @@ class JoueurMenu:
 
 
 class TournoiMenu(BaseMenu):
+    def __init__(self, modele_objet, vue_objet, match_objet) -> None:
+        super().__init__(modele_objet, vue_objet)
+        # self.instance_match = match_objet
+
+
     def nouveau_match(self):
-        pass
+        instance_match = ''
+
+    def resultat_match(self, joueur_1, joueur_2):
+        match = []
+        seq = ["nul", "non_nul"]
+        resultat = random.choice(seq)
+        if resultat == "nul":
+            match.append((joueur_1, 0.5))
+            match.append((joueur_2, 0.5))
+        else:
+            seq2 = [0, 1]
+            match.append((joueur_1, seq2.pop(random.randint(0,1))))
+            match.append((joueur_1, seq2[0]))
+            
+        return match
 
     def nouveau_tour(self):
         pass
