@@ -67,8 +67,8 @@ class TournoiMenu(BaseMenu):
         else:
             seq2 = [0, 1]
             match.append((joueur_1, seq2.pop(random.randint(0,1))))
-            match.append((joueur_1, seq2[0]))
-            
+            match.append((joueur_2, seq2[0]))
+
         return match
 
     def nouveau_tour(self):
