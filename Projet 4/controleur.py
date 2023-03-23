@@ -46,15 +46,12 @@ class JoueurMenu:
         self.instance_modele.supprimer(filter="identifiant", value=entry)
 
 
+class TournoiMenu(BaseMenu):
+    def nouveau_match(self):
+        pass
 
-"""if option == "ajouter":
-    ex = instance_joueur.ajouter()
-elif option == "modifier":
-    ex = instance_joueur.modifier()
-elif option == "supprimer":
-    ex = instance_joueur.supprimer()
-
-print(ex)"""
+    def nouveau_tour(self):
+        pass
 
 
 #instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
