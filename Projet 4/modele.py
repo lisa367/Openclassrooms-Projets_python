@@ -14,15 +14,17 @@ class JoueurModel(BaseModel):
     headers = ["identifiant", "nom", "prenom", "date_naissance"]
 
 
-# ex1 = {"identifiant": "CCCC", "nom": "Marin", "prenom": "Julie", "date_naissance": "12/08/2007"}
-# ex2 = {"identifiant": "EEEE", "nom": "Renault", "prenom": "Megane", "date_naissance": "07/09/2002"}
-# to_modify = ["CCCC", {"nom": "Marin", "prenom": "Julie", "date_naissance": "12/04/2011"}]
-instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+class MatchModel(BaseModel):
+    headers = ["joueur_1", "score_1", "joueur_2", "score_2"]
 
-# instance_modele.enregistrer(ex1)
-# instance_modele.enregistrer(ex2)
-# instance_modele.supprimer(filter_value="EEEE")
-# instance_modele.modifier(data_dict=to_modify[1], id_value=to_modify[0])
-# check = instance_modele.entry_already_exists("AAAA")
-# print(check)
-# print(instance_modele.enregistrer(ex2))
+
+class TournoiModel(BaseModel):
+    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "liste_joueurs"]
+    def __init__(self, filter_name, database_name):
+        super().__init__(filter_name, database_name)
+        self.liste_joueurs = []
+
+    
+
+instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
