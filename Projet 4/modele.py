@@ -23,6 +23,7 @@ class TournoiModel(BaseModel):
     def __init__(self, filter_name, database_name):
         super().__init__(filter_name, database_name)
         self.liste_joueurs = []
+        self.liste_tours = {}
 
     
 
