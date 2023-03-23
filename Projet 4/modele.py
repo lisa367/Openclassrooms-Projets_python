@@ -16,6 +16,14 @@ class JoueurModel(BaseModel):
 
 class MatchModel(BaseModel):
     headers = ["joueur_1", "score_1", "joueur_2", "score_2"]
+    def __init__(self, filter_name, database_name):
+        super().__init__(filter_name, database_name)
+
+
+class Tour:
+    def __init__(self, name, liste_joueurs) -> None:
+        self.name = name
+        self.liste_joueurs = liste_joueurs
 
 
 class TournoiModel(BaseModel):
