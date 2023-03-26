@@ -24,6 +24,8 @@ class Tour:
     def __init__(self, name, liste_joueurs) -> None:
         self.name = name
         self.liste_joueurs = liste_joueurs
+        self.debut = ''
+        self.fin = ''
 
 
 class TournoiModel(BaseModel):
