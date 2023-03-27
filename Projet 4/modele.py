@@ -34,7 +34,7 @@ class TournoiModel(BaseModel):
         self.liste_joueurs = []
         self.num_tours = num_tours
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
-        self.liste_tours = {}
+        self.resultats_tours = {}
         self.paires = {}
 
     def lancement(self):
