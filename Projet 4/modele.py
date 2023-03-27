@@ -33,14 +33,15 @@ class TournoiModel(BaseModel):
         super().__init__(filter_name, database_name)
         self.liste_joueurs = []
         self.num_tours = num_tours
-        self.scores = {}
+        self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.liste_tours = {}
         self.paires = {}
 
-    def nouveau_tour(self):
-        pass
-
     def lancement(self):
+        for num in self.num_tours:
+            self.nouveau_tour(num)
+
+    def nouveau_tour(self, num):
         pass
 
     
