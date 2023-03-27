@@ -26,7 +26,6 @@ class Tour:
         self.liste_joueurs = liste_joueurs
         self.debut = ''
         self.fin = ''
-        self.paires = {}
 
 
 class TournoiModel(BaseModel):
@@ -36,6 +35,7 @@ class TournoiModel(BaseModel):
         self.liste_joueurs = []
         self.scores = {}
         self.liste_tours = {}
+        self.paires = {}
 
     
 
