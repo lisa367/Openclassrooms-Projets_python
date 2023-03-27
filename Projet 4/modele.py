@@ -27,12 +27,12 @@ class Tour:
         self.debut = ''
         self.fin = ''
 
-
 class TournoiModel(BaseModel):
     headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "liste_joueurs"]
-    def __init__(self, filter_name, database_name):
+    def __init__(self, filter_name, database_name, num_tours=4):
         super().__init__(filter_name, database_name)
         self.liste_joueurs = []
+        self.num_tours = num_tours
         self.scores = {}
         self.liste_tours = {}
         self.paires = {}
