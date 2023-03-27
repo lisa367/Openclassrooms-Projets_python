@@ -37,6 +37,12 @@ class TournoiModel(BaseModel):
         self.liste_tours = {}
         self.paires = {}
 
+    def nouveau_tour(self):
+        pass
+
+    def lancement(self):
+        pass
+
     
 
 instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
