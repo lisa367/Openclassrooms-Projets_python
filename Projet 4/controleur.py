@@ -74,6 +74,24 @@ class TournoiMenu(BaseMenu):
     def nouveau_tour(self):
         pass
 
+    def generation_paires(self, round, liste_joueurs):
+        if round == 1:
+            random.shuffle(liste_joueurs)
+            sublists = [liste_joueurs[i:i + 2] for i in range(0, len(liste_joueurs), 2)]
+        else:
+            ordered_players = [player for player in self.ranking().keys()]
+            sublists = []
+            for i in range(len(ordered_players) - 1):
+                for j in range(1, len(ordered_players)):
+                    new_paire = (ordered_players[i], ordered_players[i+j])
+                    if new_paire in self.paires:
+                        continue
+                    else:
+                        self.paires.add(new_paire)
+                        ordered_players.pop(i)
+                        ordered_players.pop(j)
+                        break
+
 
 #instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
