@@ -48,6 +48,21 @@ class JoueurMenu:
         self.instance_modele.supprimer(filter="identifiant", value=entry)
 
 
+class Tour:
+    def __init__(self, num, liste_joueurs):
+        self.nom = f"Round {num}"
+        self.liste_joueurs = liste_joueurs
+        self.debut = ''
+        self.fin = ''
+        self.matchs = []
+        self.paires = {}
+        self.scores = {joueur: 0 for joueur in self.liste_joueurs}
+
+
+    def ranking(self):
+        self.scores = sorted(self.scores, key=self.scores.values())
+        print(self.scores)
+
 class TournoiMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet, match_objet) -> None:
         super().__init__(modele_objet, vue_objet)
