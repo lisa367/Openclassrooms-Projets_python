@@ -57,9 +57,10 @@ class Tour:
         self.matchs = []
         self.paires = {}
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
+        self.ranking = []
 
 
-    def ranking(self):
+    def rank(self):
         self.scores = sorted(self.scores, key=self.scores.values())
         print(self.scores)
 
