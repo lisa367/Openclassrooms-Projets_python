@@ -61,8 +61,9 @@ class Tour:
 
 
     def rank(self):
-        self.ranking = sorted(self.scores, key=self.scores.values())
+        # self.ranking = sorted(self.scores, key=self.scores.values())
         # print(self.scores)
+        self.ranking = sorted(self.scores, key=lambda joueur: self.scores[joueur])
         return self.ranking
 
 class TournoiMenu(BaseMenu):
