@@ -61,8 +61,9 @@ class Tour:
 
 
     def rank(self):
-        self.scores = sorted(self.scores, key=self.scores.values())
-        print(self.scores)
+        self.ranking = sorted(self.scores, key=self.scores.values())
+        # print(self.scores)
+        return self.ranking
 
 class TournoiMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet, match_objet) -> None:
