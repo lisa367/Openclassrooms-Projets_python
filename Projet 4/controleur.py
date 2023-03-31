@@ -101,15 +101,15 @@ class TournoiMenu(BaseMenu):
         else:
             ordered_players = [player for player in self.rank().keys()]
             sublists = []
-            for i in range(len(ordered_players) - 1):
+            while len(ordered_players) > 0:
                 for j in range(1, len(ordered_players)):
-                    new_paire = {ordered_players[i], ordered_players[i+j]}
+                    new_paire = {ordered_players[0], ordered_players[0+j]}
                     if new_paire in self.paires:
                         continue
                     else:
                         sublists.append(new_paire)
                         self.paires.append(new_paire)
-                        ordered_players.pop(i)
+                        ordered_players.pop(0)
                         ordered_players.pop(j)
                         break
 
