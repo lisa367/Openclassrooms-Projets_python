@@ -113,7 +113,7 @@ class TournoiMenu(BaseMenu):
                         ordered_players.pop(0)
                         break
 
-        return sublists
+        # return sublists
         return self.paires
 
 
