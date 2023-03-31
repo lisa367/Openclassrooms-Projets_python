@@ -97,7 +97,7 @@ class TournoiMenu(BaseMenu):
         if round == 1:
             random.shuffle(liste_joueurs)
             sublists = [set(liste_joueurs[i:i + 2]) for i in range(0, len(liste_joueurs), 2)]
-            self.paires += sublists
+            # self.paires += sublists
         else:
             ordered_players = [player for player in self.rank().keys()]
             sublists = []
@@ -108,11 +108,12 @@ class TournoiMenu(BaseMenu):
                         continue
                     else:
                         sublists.append(new_paire)
-                        self.paires.append(new_paire)
+                        # self.paires.append(new_paire)
                         ordered_players.pop(0)
                         ordered_players.pop(0)
                         break
-
+                        
+        self.paires += sublists
         # return sublists
         return self.paires
 
