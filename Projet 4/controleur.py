@@ -109,7 +109,7 @@ class TournoiMenu(BaseMenu):
                     else:
                         sublists.append(new_paire)
                         # self.paires.append(new_paire)
-                        ordered_players.pop(0)
+                        ordered_players.pop(j)
                         ordered_players.pop(0)
                         break
                         
