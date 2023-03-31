@@ -114,6 +114,7 @@ class TournoiMenu(BaseMenu):
                         break
 
         return sublists
+        return self.paires
 
 
 #instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
