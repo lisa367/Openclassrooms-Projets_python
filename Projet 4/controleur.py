@@ -74,6 +74,10 @@ class TournoiMenu(BaseMenu):
 
     def nouveau_match(self):
         instance_match = ''
+        etape_1 = generation_paires(1)
+        for set_paire in etape_1:
+            paire = list(set_paire)
+            resultat_match(paire[0], paire[1])
 
     def resultat_match(self, joueur_1, joueur_2):
         match = []
