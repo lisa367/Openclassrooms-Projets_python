@@ -49,8 +49,9 @@ class JoueurMenu:
 
 
 class Tour:
-    def __init__(self, num, liste_joueurs):
-        self.nom = f"Round {num}"
+    def __init__(self, round_num, liste_joueurs):
+        self.round = round_num
+        self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
         self.debut = ''
         self.fin = ''
