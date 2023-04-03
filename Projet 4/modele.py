@@ -37,14 +37,7 @@ class TournoiModel(BaseModel):
         self.resultats_tours = {}
         self.paires = {}
 
-    def lancement(self):
-        for num in self.num_tours:
-            self.nouveau_tour(num)
 
-    def nouveau_tour(self, num):
-        pass
-
-    
 
 instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
