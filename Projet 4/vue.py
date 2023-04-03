@@ -151,4 +151,15 @@ class JoueurView(BaseView2):
         super().__init__(labels, menu_choisi)
 
 
+class TournoiView(BaseView2):
+    def __init__(self, labels, menu_choisi) -> None:
+        super().__init__(labels, menu_choisi)
+    
+    def get_num_tours(self):
+        nouveau_num_tour = input("Voulez-vous changer le nombre de tours (4 par defaut) ? [oui/non]:")
+        if nouveau_num_tour.lower() == "oui":
+            num_tour = input("Entre le nouveau nombre de tours :")
+            return int(num_tour)
+
+
 # instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
