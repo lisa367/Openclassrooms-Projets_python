@@ -1,8 +1,10 @@
+import random
+from datetime import timedelta, datetime as dt
+
 from modele import JoueurModel, instance_modele, MatchModel, TournoiModel
 from vue import View, JoueurView
 from base import BaseMenu
 
-import random
 
 
 instance_vue = View()
@@ -53,8 +55,8 @@ class Tour:
         self.round = round_num
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
-        self.debut = ''
-        self.fin = ''
+        self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
+        self.fin = (dt.now() + timedelta(hours = 4)).strftime("%d/%m/%Y_%H:%M")
         self.matchs = []
         self.paires = {}
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
@@ -62,8 +64,6 @@ class Tour:
 
 
     def rank(self):
-        # self.ranking = sorted(self.scores, key=self.scores.values())
-        # print(self.scores)
         self.ranking = sorted(self.scores, key=lambda joueur: self.scores[joueur])
         return self.ranking
 
