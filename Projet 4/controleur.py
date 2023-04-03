@@ -57,7 +57,7 @@ class Tour:
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
         self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
-        self.fin = (dt.now() + timedelta(hours = 4)).strftime("%d/%m/%Y_%H:%M")
+        self.fin = (dt.now() + timedelta(hours = 1)).strftime("%d/%m/%Y_%H:%M")
         self.matchs = []
         self.paires = {}
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
@@ -120,8 +120,8 @@ class Tour:
         self.tour_info["nom"] = self.nom
         self.tour_info["debut"] = self.debut
         self.tour_info["fin"] = self.fin
-        self.tour_info["scores"] = self.scores
-        
+        self.tour_info["matchs"] = self.matchs
+
         return self.tour_info
 
 
