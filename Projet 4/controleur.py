@@ -92,7 +92,28 @@ class Tour:
         self.paires.extend(sublists)
         return sublists
     
-    
+    def resultat_match(self, joueur_1, joueur_2):
+        match = []
+        seq = ["nul", "non_nul"]
+        resultat = random.choice(seq)
+        if resultat == "nul":
+            match.append((joueur_1, 0.5))
+            match.append((joueur_2, 0.5))
+            self.scores[joueur_1] += 0.5
+            self.scores[joueur_2] += 0.5
+
+        else:
+            seq2 = [0, 1]
+            score_1 = seq2.pop(random.randint(0,1))
+            score_2 = seq2[0]
+            match.append((joueur_1, score_1))
+            match.append((joueur_2, score_2))
+            self.scores[joueur_1] += score_1
+            self.scores[joueur_2] += score_2
+        
+        self.matchs.append(match)  
+        # print(match)
+        return match
 
 class TournoiMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet, match_objet) -> None:
