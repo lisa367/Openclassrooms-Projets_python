@@ -127,13 +127,17 @@ class Tour:
 
 
 class TournoiMenu(BaseMenu):
-    def __init__(self, modele_objet, vue_objet, match_objet) -> None:
-        self.paires = {}
+    def __init__(self, modele_objet, vue_objet, num_tours=4) -> None:
         super().__init__(modele_objet, vue_objet)
-        # self.instance_match = match_objet
+        self.paires = {}
+        self.instance_modele.num_tours = num_tours
 
-    def nouveau_tour(self):
+    def nouveau_tour(self, num):
         pass
+
+    def lancement(self):
+        for num in self.num_tours:
+            self.nouveau_tour(num)
 
 
 
