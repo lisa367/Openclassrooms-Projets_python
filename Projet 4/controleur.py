@@ -62,6 +62,7 @@ class Tour:
         self.paires = {}
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.ranking = []
+        self.tour_info = {}
 
 
     def rank(self):
@@ -114,9 +115,20 @@ class Tour:
         self.matchs.append(match)  
         # print(match)
         return match
+    
+    def get_tour_info(self):
+        self.tour_info["nom"] = self.nom
+        self.tour_info["debut"] = self.debut
+        self.tour_info["fin"] = self.fin
+        self.tour_info["scores"] = self.scores
+        
+        return self.tour_info
+
+
 
 class TournoiMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet, match_objet) -> None:
+        self.paires = {}
         super().__init__(modele_objet, vue_objet)
         # self.instance_match = match_objet
 
