@@ -136,9 +136,9 @@ class TournoiMenu(BaseMenu):
         tour = Tour(num, liste)
         return tour
 
-    def lancement(self):
-        for num in self.num_tours:
-            self.nouveau_tour(num)
+    def lancement(self, num, liste):
+        for num in range(self.num_tours):
+            self.nouveau_tour(num, liste)
 
 
 
