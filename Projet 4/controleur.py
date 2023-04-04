@@ -134,6 +134,10 @@ class TournoiMenu(BaseMenu):
         super().__init__(modele_objet, vue_objet)
         self.paires = {}
         self.instance_modele.num_tours = num_tours
+        self.liste_joueurs = []
+
+    def get_liste_joueurs(self):
+        self.liste_joueurs = self.instance_vue.get_data()
 
     def nouveau_tour(self, num, liste):
         tour = Tour(num, liste)
