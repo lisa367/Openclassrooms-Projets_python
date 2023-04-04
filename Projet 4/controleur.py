@@ -123,6 +123,9 @@ class Tour:
         self.tour_info["matchs"] = self.matchs
 
         return self.tour_info
+    
+    def resultat(self):
+        pass
 
 
 
