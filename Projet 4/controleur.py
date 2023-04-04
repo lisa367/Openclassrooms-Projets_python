@@ -132,8 +132,9 @@ class TournoiMenu(BaseMenu):
         self.paires = {}
         self.instance_modele.num_tours = num_tours
 
-    def nouveau_tour(self, num):
-        pass
+    def nouveau_tour(self, num, liste):
+        tour = Tour(num, liste)
+        return tour
 
     def lancement(self):
         for num in self.num_tours:
