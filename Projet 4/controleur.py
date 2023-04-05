@@ -80,7 +80,7 @@ class Tour:
             ordered_players = [player for player in self.rank()]
             sublists = []
             while len(ordered_players) > 0 :
-                if (self.paires != [set(paire) for paire in combinations(self.liste_joueurs, 2)]) :
+                if (set(self.paires) != set([paire for paire in combinations(self.liste_joueurs, 2)])) :
                     for j in range(1, len( ordered_players)):
                         new_paire = {ordered_players[0], ordered_players[0+j]}
                         if new_paire in self.paires:
