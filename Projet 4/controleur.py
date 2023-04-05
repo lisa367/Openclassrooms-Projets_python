@@ -127,8 +127,10 @@ class Tour:
 
         return self.tour_info
     
-    def resultat(self):
-        pass
+    def resultat_tour(self):
+        paires = self.generation_paires()
+        for paire in list(paires):
+            self.resultat_match(paire[0], paire[1])
 
 
 
