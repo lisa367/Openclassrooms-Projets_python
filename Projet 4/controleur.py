@@ -145,7 +145,7 @@ class TournoiMenu(BaseMenu):
         self.liste_joueurs = self.instance_vue.get_data()
 
     def nouveau_tour(self, num, liste):
-        tour = Tour(num, liste)
+        tour = Tour(num, liste, self.paires)
         return tour
 
     def lancement(self, num, liste):
