@@ -52,14 +52,14 @@ class JoueurMenu:
 
 
 class Tour:
-    def __init__(self, round_num, liste_joueurs):
+    def __init__(self, round_num, liste_joueurs, paires_dict):
         self.round = round_num
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
         self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
         self.fin = (dt.now() + timedelta(hours = 1)).strftime("%d/%m/%Y_%H:%M")
         self.matchs = []
-        self.paires = {}
+        self.paires = paires_dict
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.ranking = []
         self.tour_info = {}
