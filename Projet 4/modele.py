@@ -12,7 +12,7 @@ class JoueurModel(BaseModel):
     database = db_joueurs
     # headers = ["identifiant", "nom", "prenom", "date_naissance", "score_total", "matchs_total", "matchs_gagnes"]
     headers = ["identifiant", "nom", "prenom", "date_naissance"]
-    verbose = {}
+    verbose = {"identifiant": "l'identifiant", "nom": "le nom", "prenom": "le prénom", "date_naissance": "la date de naissance", }
 
 
 class MatchModel(BaseModel):
