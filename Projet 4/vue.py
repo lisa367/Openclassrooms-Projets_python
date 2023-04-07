@@ -93,11 +93,11 @@ class BaseView2:
 
         return self.option_choisie
     
-    def input_check(self, liste):
+    def input_check(self, data):
         """This method checks if the user input is in the expected data format
 
         Args:
-            liste (dict): Dictionary of the data to check
+            data (dict): Dictionary of the data to check
 
         Returns:
             bool: The method returns a boolean value
@@ -112,17 +112,12 @@ class BaseView2:
 
     
     def get_input_data(self, instruction):
-        # arguments_dict = {}
         inputs_raw = input(f"Veuillez renseigner les éléments à {instruction} de la manière suivante, séparés d'un espace: {self.formatage}\n")
         inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
-        # print(inputs_list)
 
         for item in inputs_list:
             # if self.input_check(input_data[1]):
             self.input_data[item[0]] = item[1]
-
-        #print(self.data_dict)
-
         return self.input_data
     
     """def delete_object(self):
