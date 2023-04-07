@@ -64,7 +64,7 @@ class View:
 
 class BaseView2:
 
-    def __init__(self, labels, verbose, menu_choisi) -> None:
+    def __init__(self, labels, verbose, id_type, menu_choisi) -> None:
         self.object_name = self.__class__.__name__.strip("View").lower()
         self.menu_choisi = menu_choisi
         self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
@@ -73,8 +73,11 @@ class BaseView2:
 
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
         self.formatage = " ".join(formatage_list)
-        self.data_dict = {}
+        self.input_data = {}
+        self.new_entry = {}
+
         self.verbose = verbose
+        self.id_type = id_type
 
     def choix_option(self):
         menu = menus[self.menu_choisi]
@@ -103,9 +106,9 @@ class BaseView2:
     
     def get_id(self, instruction):
 
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à {instruction} : ")
+        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à {instruction} : ")
         # if self.input_check(object_id):
-        self.data_dict["identifiant"] = object_id
+        self.input_data["identifiant"] = object_id
         
         return object_id
 
@@ -116,17 +119,17 @@ class BaseView2:
         inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
         # print(inputs_list)
 
-        for input_data in inputs_list:
+        for item in inputs_list:
             # if self.input_check(input_data[1]):
-            self.data_dict[input_data[0]] = input_data[1]
+            self.input_data[item[0]] = item[1]
 
         #print(self.data_dict)
 
-        return self.data_dict
+        return self.input_data
     
     def get_input_data_2(self):
         for item in self.headers:
-            self.input_data[item] = input(f"Veuillez renseigner {self.verbose[item]} du tournoi: ")
+            self.input_data[item] = input(f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: ")
 
         return self.input_data
 
