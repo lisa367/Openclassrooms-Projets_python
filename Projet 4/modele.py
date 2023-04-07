@@ -12,6 +12,7 @@ class JoueurModel(BaseModel):
     database = db_joueurs
     # headers = ["identifiant", "nom", "prenom", "date_naissance", "score_total", "matchs_total", "matchs_gagnes"]
     headers = ["identifiant", "nom", "prenom", "date_naissance"]
+    verbose = {}
 
 
 class MatchModel(BaseModel):
@@ -29,6 +30,7 @@ class Tour:
 
 class TournoiModel(BaseModel):
     headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "liste_joueurs"]
+    verbose = {"nom": "le nom", "debut": "la date de début", "fin": "la date de fin", "joueurs": "la liste de joueurs"}
     def __init__(self, filter_name, database_name, num_tours=4):
         super().__init__(filter_name, database_name)
         self.liste_joueurs = []
