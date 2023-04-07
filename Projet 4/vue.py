@@ -64,7 +64,7 @@ class View:
 
 class BaseView2:
 
-    def __init__(self, labels, menu_choisi) -> None:
+    def __init__(self, labels, verbose, menu_choisi) -> None:
         self.object_name = self.__class__.__name__.strip("View").lower()
         self.menu_choisi = menu_choisi
         self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
@@ -74,6 +74,7 @@ class BaseView2:
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
         self.formatage = " ".join(formatage_list)
         self.data_dict = {}
+        self.verbose = verbose
 
     def choix_option(self):
         menu = menus[self.menu_choisi]
@@ -122,6 +123,12 @@ class BaseView2:
         #print(self.data_dict)
 
         return self.data_dict
+    
+    def get_input_data_2(self):
+        for item in self.headers:
+            self.input_data[item] = input(f"Veuillez renseigner {self.verbose[item]} du tournoi: ")
+
+        return self.input_data
 
     
     def delete_object(self):
