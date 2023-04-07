@@ -127,23 +127,18 @@ class BaseView2:
 
         return self.input_data
     
-    def get_input_data_2(self):
-        for item in self.headers:
-            self.input_data[item] = input(f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: ")
-
-        return self.input_data
-
-    
     def delete_object(self):
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à supprimer :")
+        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à supprimer :")
         if not self.input_check(object_id):
             object_id = input("Veuillez renseigner un identifiant valide :")
         
         return object_id
     
     def ajouter(self):
-        data = self.get_input_data("ajouter")
-        return data
+        for item in self.headers:
+            self.new_entry[item] = input(f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: ")
+
+        return self.new_entry
     
     def modifier(self):
         new_data = {}
