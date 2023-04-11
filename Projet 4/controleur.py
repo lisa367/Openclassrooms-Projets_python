@@ -2,7 +2,7 @@ from datetime import timedelta, datetime as dt
 from itertools import combinations
 import random
 
-from modele import JoueurModel, instance_modele, MatchModel, TournoiModel
+from modele import JoueurModel, instance_modele, Tour, TournoiModel
 from vue import View, JoueurView
 from base import BaseMenu
 
@@ -154,6 +154,7 @@ class TournoiMenu(BaseMenu):
         return tour_info
 
     def lancement(self, num, liste):
+        self.changer_nb_tours()
         for num in range(self.num_tours):
             new_tour = self.nouveau_tour(num, liste)
             new_tour.resultat()
@@ -161,7 +162,7 @@ class TournoiMenu(BaseMenu):
     def changer_nb_tours(self):
         changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
         if changer_num.lower() == "oui":
-            self.input_data["nb_tours"] = input("Veuillez renseigner le nombre de tours: ")
+            self.input_data["nombre_tours"] = input("Veuillez renseigner le nombre de tours: ")
 
 
 
