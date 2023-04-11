@@ -153,6 +153,11 @@ class TournoiMenu(BaseMenu):
             new_tour = self.nouveau_tour(num, liste)
             new_tour.resultat()
 
+    def changer_nb_tours(self):
+        changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
+        if changer_num.lower() == "oui":
+            self.input_data["nb_tours"] = input("Veuillez renseigner le nombre de tours: ")
+
 
 
 #instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
