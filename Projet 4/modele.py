@@ -29,7 +29,7 @@ class Tour:
         self.fin = ''
 
 class TournoiModel(BaseModel):
-    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "liste_joueurs"]
+    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "joueurs"]
     verbose = {"nom": "le nom", "debut": "la date de début", "fin": "la date de fin", "joueurs": "la liste de joueurs"}
     def __init__(self, filter_name, database_name, num_tours=4):
         super().__init__(filter_name, database_name)
