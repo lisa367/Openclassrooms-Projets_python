@@ -119,5 +119,5 @@ class Tour:
 
 
 
-instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
