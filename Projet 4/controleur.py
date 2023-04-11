@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime as dt
 
-from modele import JoueurModel, instance_modele, Tour, TournoiModel
+from modele import JoueurModel, modele_joueur, Tour, modele_tournoi
 from vue import View, JoueurView
 from base import BaseMenu
 
@@ -85,5 +85,5 @@ class TournoiMenu(BaseMenu):
 #instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
 
-menu_test = BaseMenu(modele_objet=instance_modele, vue_objet=instance_vue)
+menu_test = BaseMenu(modele_objet=modele_joueur, vue_objet=instance_vue)
 menu_test.instruction()
