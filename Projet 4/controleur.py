@@ -141,6 +141,7 @@ class TournoiMenu(BaseMenu):
         self.instance_modele.num_tours = num_tours
         self.liste_joueurs = []
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
+        self.liste_tours = []
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
@@ -149,6 +150,7 @@ class TournoiMenu(BaseMenu):
         tour = Tour(num, liste, self.paires, self.scores)
         tour.resultat_tour()
         tour_info = tour.get_tour_info()
+        self.liste_tours.append(tour_info)
         return tour_info
 
     def lancement(self, num, liste):
