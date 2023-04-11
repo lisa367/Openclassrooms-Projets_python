@@ -52,7 +52,7 @@ class JoueurMenu:
 
 
 class Tour:
-    def __init__(self, round_num, liste_joueurs, paires_dict):
+    def __init__(self, round_num, liste_joueurs, paires_dict, scores_dict):
         self.round = round_num
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
@@ -60,7 +60,7 @@ class Tour:
         self.fin = (dt.now() + timedelta(hours = 1)).strftime("%d/%m/%Y_%H:%M")
         self.matchs = []
         self.paires = paires_dict
-        self.scores = {joueur: 0 for joueur in self.liste_joueurs}
+        self.scores = scores_dict
         self.ranking = []
         self.tour_info = {}
 
@@ -140,13 +140,16 @@ class TournoiMenu(BaseMenu):
         self.paires = {}
         self.instance_modele.num_tours = num_tours
         self.liste_joueurs = []
+        self.scores = {joueur: 0 for joueur in self.liste_joueurs}
 
     def get_liste_joueurs(self):
-        self.liste_joueurs = self.instance_vue.get_data()
+        self.liste_joueurs = self.instance_vue.ajouter().joueurs
 
     def nouveau_tour(self, num, liste):
-        tour = Tour(num, liste, self.paires)
-        return tour
+        tour = Tour(num, liste, self.paires, self.scores)
+        tour.resultat_tour()
+        tour_info = tour.get_tour_info()
+        return tour_info
 
     def lancement(self, num, liste):
         for num in range(self.num_tours):
