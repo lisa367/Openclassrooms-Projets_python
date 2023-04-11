@@ -1,6 +1,4 @@
 from datetime import timedelta, datetime as dt
-from itertools import combinations
-import random
 
 from modele import JoueurModel, instance_modele, Tour, TournoiModel
 from vue import View, JoueurView
@@ -49,88 +47,6 @@ class JoueurMenu:
     def supprimer_db(self):
         entry = self.instance_joueur.supprimer()
         self.instance_modele.supprimer(filter="identifiant", value=entry)
-
-
-class Tour:
-    def __init__(self, round_num, liste_joueurs, paires_dict, scores_dict):
-        self.round = round_num
-        self.nom = f"Round {self.round}"
-        self.liste_joueurs = liste_joueurs
-        self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
-        self.fin = (dt.now() + timedelta(hours = 1)).strftime("%d/%m/%Y_%H:%M")
-        self.matchs = []
-        self.paires = paires_dict
-        self.scores = scores_dict
-        self.ranking = []
-        self.tour_info = {}
-
-
-    def rank(self):
-        self.ranking = sorted(self.scores, key=lambda joueur: self.scores[joueur])
-        return self.ranking
-    
-    def generation_paires(self):
-        liste_joueurs = self.liste_joueurs
-        if self.round == 1:
-            random.shuffle(liste_joueurs)
-            sublists = [set(liste_joueurs[i:i + 2]) for i in range(0, len(liste_joueurs), 2)]
-            # self.paires += sublists
-
-        else:
-            ordered_players = [player for player in self.rank()]
-            sublists = []
-            while len(ordered_players) > 0 :
-                if (set(self.paires) != set([paire for paire in combinations(self.liste_joueurs, 2)])) :
-                    for j in range(1, len( ordered_players)):
-                        new_paire = {ordered_players[0], ordered_players[0+j]}
-                        if new_paire in self.paires:
-                            continue
-                        else:
-                            sublists.append(new_paire)
-                            ordered_players.pop(0+j)
-                            ordered_players.pop(0)
-                            break
-                else:
-                    ordered_players = []
-
-        self.paires.extend(sublists)
-        return sublists
-    
-    def resultat_match(self, joueur_1, joueur_2):
-        match = []
-        seq = ["nul", "non_nul"]
-        resultat = random.choice(seq)
-        if resultat == "nul":
-            match.append((joueur_1, 0.5))
-            match.append((joueur_2, 0.5))
-            self.scores[joueur_1] += 0.5
-            self.scores[joueur_2] += 0.5
-
-        else:
-            seq2 = [0, 1]
-            score_1 = seq2.pop(random.randint(0,1))
-            score_2 = seq2[0]
-            match.append((joueur_1, score_1))
-            match.append((joueur_2, score_2))
-            self.scores[joueur_1] += score_1
-            self.scores[joueur_2] += score_2
-        
-        self.matchs.append(match)  
-        # print(match)
-        return match
-    
-    def get_tour_info(self):
-        self.tour_info["nom"] = self.nom
-        self.tour_info["debut"] = self.debut
-        self.tour_info["fin"] = self.fin
-        self.tour_info["matchs"] = self.matchs
-
-        return self.tour_info
-    
-    def resultat_tour(self):
-        paires = self.generation_paires()
-        for paire in list(paires):
-            self.resultat_match(paire[0], paire[1])
 
 
 
