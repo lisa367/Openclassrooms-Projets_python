@@ -82,30 +82,20 @@ class BaseView2:
         return True
     
     def get_id(self, instruction):
-        """Asks for the user to enter an id
-
-        Args:
-            instruction (str): Indicates what action the input will be used for
-
-        Returns:
-            str: The identifier of the data to search in the database
-        """
-
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à {instruction} : ")
+        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à {instruction} : ")
         # if self.input_check(object_id):
-        # self.data_dict["identifiant"] = object_id
-        
+        self.input_data["identifiant"] = object_id
         return object_id
 
     
     def get_input_data(self, instruction):
         inputs_raw = input(f"Veuillez renseigner les éléments à {instruction} de la manière suivante, séparés d'un espace: {self.formatage}\n")
         inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
-        
-        for input_data in inputs_list:
+
+        for item in inputs_list:
             # if self.input_check(input_data[1]):
-            self.data_dict[input_data[0]] = input_data[1]
-        return self.data_dict
+            self.input_data[item[0]] = item[1]
+        return self.input_data
 
     
     def delete_object(self):
