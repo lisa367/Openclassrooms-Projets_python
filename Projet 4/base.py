@@ -111,9 +111,14 @@ class BaseView2:
         
         return object_id
     
-    def ajouter(self):
+    """def ajouter(self):
         data = self.get_input_data("ajouter")
-        return data
+        return data"""
+    
+    def ajouter(self):
+        for item in self.headers:
+            self.new_entry[item] = input(f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: ")
+        return self.new_entry
     
     def modifier(self):
         new_data = {}
