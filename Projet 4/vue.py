@@ -1,5 +1,6 @@
 ### MENUS ###
 # from modele import JoueurModel
+from base import BaseView2
 
 CHOIX_MENU = """
 A: Menu joueur
@@ -62,84 +63,7 @@ class View:
 
    
 
-class BaseView2:
 
-    def __init__(self, labels, verbose, id_type, menu_choisi) -> None:
-        self.object_name = self.__class__.__name__.strip("View").lower()
-        self.menu_choisi = menu_choisi
-        self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
-        self.option_choisie = ""
-        self.labels_list = labels
-
-        formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
-        self.formatage = " ".join(formatage_list)
-        self.input_data = {}
-        self.new_entry = {}
-
-        self.verbose = verbose
-        self.id_type = id_type
-
-    def choix_option(self):
-        menu = menus[self.menu_choisi]
-
-        print("Choisissez une des options suivantes : ", menu, "*"*15)
-        reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        self.option_choisie = self.options.get(int(reponse), 0)
-
-        """if option_choisie:
-            self.option_choisie = choix_2
-        else:
-            print("Veuillez entrer une option valide")"""
-
-        return self.option_choisie
-    
-    def input_check(self, data):
-        """This method checks if the user input is in the expected data format
-
-        Args:
-            data (dict): Dictionary of the data to check
-
-        Returns:
-            bool: The method returns a boolean value
-        """
-        return True
-    
-    def get_id(self, instruction):
-        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à {instruction} : ")
-        # if self.input_check(object_id):
-        self.input_data["identifiant"] = object_id
-        return object_id
-
-    
-    def get_input_data(self, instruction):
-        inputs_raw = input(f"Veuillez renseigner les éléments à {instruction} de la manière suivante, séparés d'un espace: {self.formatage}\n")
-        inputs_list = [input_data.split(":") for input_data in inputs_raw.split()]
-
-        for item in inputs_list:
-            # if self.input_check(input_data[1]):
-            self.input_data[item[0]] = item[1]
-        return self.input_data
-    
-    """def delete_object(self):
-        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à supprimer :")
-        if not self.input_check(object_id):
-            object_id = input("Veuillez renseigner un identifiant valide :")
-        return object_id"""
-    
-    def ajouter(self):
-        for item in self.headers:
-            self.new_entry[item] = input(f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: ")
-        return self.new_entry
-    
-    def modifier(self):
-        modified_data = {}
-        modified_data["filter"] = self.get_id("modifier")
-        modified_data["data"] = self.get_input_data("modifier")
-        return modified_data
-    
-    def supprimer(self):
-        identifiant = self.get_id("supprimer")
-        return identifiant
     
 
 class JoueurView(BaseView2):
