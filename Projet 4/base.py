@@ -70,11 +70,11 @@ class BaseView2:
 
         return self.option_choisie
     
-    def input_check(self, liste):
+    def input_check(self, data):
         """This method checks if the user input is in the expected data format
 
         Args:
-            liste (dict): Dictionary of the data to check
+            data (dict): Dictionary of the data to check
 
         Returns:
             bool: The method returns a boolean value
@@ -96,18 +96,12 @@ class BaseView2:
             # if self.input_check(input_data[1]):
             self.input_data[item[0]] = item[1]
         return self.input_data
-
     
-    def delete_object(self):
-        object_id = input(f"Veuillez renseigner l'identifiant du {self.object_name} à supprimer :")
+    """def delete_object(self):
+        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à supprimer :")
         if not self.input_check(object_id):
             object_id = input("Veuillez renseigner un identifiant valide :")
-        
-        return object_id
-    
-    """def ajouter(self):
-        data = self.get_input_data("ajouter")
-        return data"""
+        return object_id"""
     
     def ajouter(self):
         for item in self.headers:
@@ -115,10 +109,10 @@ class BaseView2:
         return self.new_entry
     
     def modifier(self):
-        new_data = {}
-        new_data["filter"] = self.get_id("modifier")
-        new_data["data"] = self.get_input_data("modifier")
-        return new_data
+        modified_data = {}
+        modified_data["filter"] = self.get_id("modifier")
+        modified_data["data"] = self.get_input_data("modifier")
+        return modified_data
     
     def supprimer(self):
         identifiant = self.get_id("supprimer")
