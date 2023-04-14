@@ -68,7 +68,7 @@ class TournoiView(BaseView2):
 
     def changer_num_tours(self):
         changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
-        return changer_num.lower()
+        return changer_num.lower().strip()
 
     
     def get_num_tours(self):
