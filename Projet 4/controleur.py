@@ -1,13 +1,13 @@
 from datetime import timedelta, datetime as dt
+from tinydb import Query
 
-from modele import JoueurModel, db_joueurs, TournoiModel,db_tournois, Tour
-from vue import MainView, JoueurView, TournoiView
+from modele import JoueurModel, TournoiModel, db_joueurs, db_tournois, Tour
+from vue import MainView, JoueurView, TournoiView, RapportView
 from base import BaseMenu
 
 
-
-instance_vue = MainView()
-menu = instance_vue.choix_menu()
+instance_vue_principale = MainView()
+menu = instance_vue_principale.choix_menu()
 # instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 # option = instance_joueur.choix_option()
 # print(option)
@@ -15,9 +15,8 @@ menu = instance_vue.choix_menu()
 modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 
-modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
+modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
 vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)
-
 
 
 class JoueurMenu(BaseMenu):
@@ -65,10 +64,60 @@ class TournoiMenu(BaseMenu):
             self.input_data["nombre_tours"] = self.instance_vue.get_num_tours()
 
 
-
-#instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+# instance_modele = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 # instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
 
 # menu_test = BaseMenu(modele_objet=modele_joueur, vue_objet=instance_vue)
 # menu_test.instruction()
 
+
+class RapportMenu:
+    def __init__(self) -> None:
+        self.option_choisie = ""
+
+    def instruction(self):
+        self.option_choisie = RapportView.choix_option(self)
+
+        if self.option_choisie == "liste joueurs":
+            self.display_all_joueurs()
+        elif self.option_choisie == "liste tournois":
+            self.display_all_tournois()
+        elif self.option_choisie == "dates tournoi":
+            self.display_dates_tournoi()
+        elif self.option_choisie == "joueurs tournois":
+            self.display_joueurs_tournoi()
+        elif self.option_choisie == "rounds tournois":
+            self.display_rounds_tournoi()
+
+    def display_all_joueurs(self):
+        query_result = db_joueurs.all()
+        for joueur in query_result:
+            print(
+                f"{joueur['identifiant']}. {joueur['prenom'].title()} {joueur['nom'].upper()}"
+            )
+
+    def display_all_tournois(self):
+        query_result = db_tournois.all()
+        for tournoi in query_result:
+            print(
+                f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
+            )
+
+    def display_dates_tournoi(self, nom_tournoi):
+        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        print(
+            f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
+        )
+
+    def display_joueurs_tournoi(self, nom_tournoi):
+        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        print(
+            f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
+        )
+
+    def display_rounds_tournoi(self, nom_tournoi):
+        query_result = db_tournois.search(Query().nom == nom_tournoi)
+        for tournoi in query_result:
+            print(
+                f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
+            )
