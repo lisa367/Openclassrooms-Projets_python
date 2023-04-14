@@ -66,16 +66,16 @@ class TournoiView(BaseView2):
     def __init__(self, labels, menu_choisi) -> None:
         super().__init__(labels, menu_choisi)
 
-    def changer_nb_tours(self):
+    def changer_num_tours(self):
         changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
         return changer_num.lower()
 
     
     def get_num_tours(self):
-        nouveau_num_tour = input("Voulez-vous changer le nombre de tours (4 par defaut) ? [oui/non]:")
-        if nouveau_num_tour.lower() == "oui":
-            num_tour = input("Entre le nouveau nombre de tours :")
-            return int(num_tour)
+        num_tour = input("Entrez le nouveau nombre de tours :")
+        while not isinstance(num_tour, int):
+            num_tour = input("Veuillez entrer un nombre entier : ")
+        return int(num_tour)
 
 
 # instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
