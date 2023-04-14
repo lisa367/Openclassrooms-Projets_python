@@ -17,12 +17,6 @@ MENU_JOUEUR = """
 3: Supprimer un joueur
 """
 
-MENU_MATCH = """
-1: Nouveau match
-2: Afficher les détails d'un match
-3: Modifier un match
-4: Supprimer un match
-"""
 
 MENU_TOURNOI = """
 1: Nouveau tournoi
@@ -30,18 +24,18 @@ MENU_TOURNOI = """
 3: Supprimer un tournoi
 """
 
-MENU_STATS = """
+MENU_RAPPORT = """
 1: Liste de tous les joueurs
 2: Liste de tous les tournois
 3: Dates d'un tournoi
 4: Joueurs d'un tournoi
 5: Rounds et matchs d'un tournoi
 """
-menus = {"joueur": MENU_JOUEUR, "match": MENU_MATCH, "tournoi": MENU_TOURNOI, "rapport": MENU_STATS, "quitter": "Quitter"}
+menus = {"joueur": MENU_JOUEUR, "tournoi": MENU_TOURNOI, "rapport": MENU_RAPPORT, "quitter": "Quitter"}
 
 class View:
-    menus = {"A": MENU_JOUEUR, "B": MENU_MATCH, "C": MENU_TOURNOI, "D": MENU_STATS, "E": "Quitter"}
-    cles = {"A": "joueur", "B": "match", "C": "tournoi", "D": "stats", "E ": "quitter"}
+    menus = {"A": MENU_JOUEUR, "B": MENU_TOURNOI, "C": MENU_RAPPORT, "D": "Quitter"}
+    cles = {"A": "joueur", "B": "tournoi", "C": "stats", "D": "quitter"}
     # options = {1: "ajouter", 2: "modifier", 3:"supprimer"}
 
     def __init__(self) -> None:
@@ -60,11 +54,7 @@ class View:
             print("Veuillez entrer une option valide")"""
 
         return self.menu_choisi
-
-   
-
-
-    
+ 
 
 class JoueurView(BaseView2):
     def __init__(self, labels, menu_choisi) -> None:
@@ -83,3 +73,6 @@ class TournoiView(BaseView2):
 
 
 # instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
+
+class RapportView:
+    pass
