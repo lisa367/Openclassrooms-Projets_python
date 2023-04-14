@@ -26,17 +26,18 @@ class JoueurMenu(BaseMenu):
 
 
 class TournoiMenu(BaseMenu):
-    def __init__(self, modele_objet, vue_objet, num_tours=4) -> None:
+    def __init__(self, modele_objet, vue_objet, num_tours=4, tour_actuel=1) -> None:
         super().__init__(modele_objet, vue_objet)
         self.paires = {}
         self.num_tours = num_tours
         self.liste_joueurs = []
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.liste_tours = []
+        self.tour_actuel = tour_actuel
 
     def instruction(self):
-        option_choisie = super().instruction()
-        if option_choisie == "lancement":
+        super().instruction()
+        if self.option_choisie == "lancement":
             self.lancement()
 
     def ajouter(self):
@@ -55,6 +56,7 @@ class TournoiMenu(BaseMenu):
     def lancement(self, liste):
         self.set_num_tours()
         for num in range(self.num_tours):
+            self.tour_actuel = num
             new_tour = self.nouveau_tour(num, liste)
             new_tour.resultat()
 
@@ -69,3 +71,4 @@ class TournoiMenu(BaseMenu):
 
 # menu_test = BaseMenu(modele_objet=modele_joueur, vue_objet=instance_vue)
 # menu_test.instruction()
+
