@@ -41,18 +41,11 @@ class MainView:
 
     def __init__(self) -> None:
         self.menu_choisi = ''
-        self.option_choisie = ''
 
     def choix_menu(self):
         print("Choisissez un des menus suivants : ", CHOIX_MENU, "*"*15)
         reponse = input("Entrez A, B, C, D ou E : ").upper().strip()
         self.menu_choisi = MainView.cles.get(reponse, 0)
-        # self.menu_choisi = choix_1
-
-        """if choix_1:
-            self.menu_choisi = choix_1
-        else:
-            print("Veuillez entrer une option valide")"""
 
         return self.menu_choisi
  
@@ -72,9 +65,9 @@ class TournoiView(BaseView2):
 
     
     def get_num_tours(self):
-        num_tour = input("Entrez le nouveau nombre de tours :")
+        num_tour = input("Entrez le nouveau nombre de tours :").strip()
         while not isinstance(num_tour, int):
-            num_tour = input("Veuillez entrer un nombre entier : ")
+            num_tour = input("Veuillez entrer un nombre entier : ").strip()
         return int(num_tour)
 
 
