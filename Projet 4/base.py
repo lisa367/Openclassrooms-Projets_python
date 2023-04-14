@@ -1,5 +1,5 @@
 from tinydb import TinyDB, Query
-from vue import MENU_JOUEUR, MENU_MATCH, MENU_TOURNOI, MENU_STATS
+from vue import MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT
 
 
 query = Query()
@@ -37,7 +37,7 @@ class BaseModel:
 
 
 
-menus = {"joueur": MENU_JOUEUR, "match": MENU_MATCH, "tournoi": MENU_TOURNOI, "rapport": MENU_STATS, "quitter": "Quitter"}
+menus = {"joueur": MENU_JOUEUR, "tournoi": MENU_TOURNOI, "rapport": MENU_RAPPORT, "quitter": "Quitter"}
 
 class BaseView2:
 
