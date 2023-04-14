@@ -53,15 +53,14 @@ class TournoiMenu(BaseMenu):
         return tour_info
 
     def lancement(self, liste):
-        self.get_num_tours()
+        self.set_num_tours()
         for num in range(self.num_tours):
             new_tour = self.nouveau_tour(num, liste)
             new_tour.resultat()
 
-    def get_num_tours(self):
-        changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
+    def set_num_tours(self):
         if self.instance_vue.changer_num_tour() == "oui":
-            self.input_data["nombre_tours"] = input("Veuillez renseigner le nombre de tours: ")
+            self.input_data["nombre_tours"] = self.instance_vue.get_num_tours()
 
 
 
