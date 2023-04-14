@@ -1,12 +1,12 @@
 from datetime import timedelta, datetime as dt
 
 from modele import JoueurModel, db_joueurs, TournoiModel,db_tournois, Tour
-from vue import View, JoueurView, TournoiView
+from vue import MainView, JoueurView, TournoiView
 from base import BaseMenu
 
 
 
-instance_vue = View()
+instance_vue = MainView()
 menu = instance_vue.choix_menu()
 # instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 # option = instance_joueur.choix_option()
@@ -29,10 +29,18 @@ class TournoiMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet, num_tours=4) -> None:
         super().__init__(modele_objet, vue_objet)
         self.paires = {}
-        self.instance_modele.num_tours = num_tours
+        self.num_tours = num_tours
         self.liste_joueurs = []
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.liste_tours = []
+
+    def instruction(self):
+        option_choisie = super().instruction()
+        if option_choisie == "lancement":
+            self.lancement()
+
+    def ajouter(self):
+        self.lancement()
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
@@ -44,15 +52,15 @@ class TournoiMenu(BaseMenu):
         self.liste_tours.append(tour_info)
         return tour_info
 
-    def lancement(self, num, liste):
-        self.changer_nb_tours()
+    def lancement(self, liste):
+        self.get_num_tours()
         for num in range(self.num_tours):
             new_tour = self.nouveau_tour(num, liste)
             new_tour.resultat()
 
-    def changer_nb_tours(self):
+    def get_num_tours(self):
         changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
-        if changer_num.lower() == "oui":
+        if self.instance_vue.changer_num_tour() == "oui":
             self.input_data["nombre_tours"] = input("Veuillez renseigner le nombre de tours: ")
 
 
