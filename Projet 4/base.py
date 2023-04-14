@@ -1,4 +1,4 @@
-from tinydb import TinyDB, Query
+from tinydb import Query
 from vue import MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT
 
 
@@ -136,6 +136,7 @@ class BaseMenu:
             self.supprimer()
         # elif option_choisie == "afficher-tout":
             # self.afficher_tout()
+        return option_choisie
 
     
     def ajouter(self):
