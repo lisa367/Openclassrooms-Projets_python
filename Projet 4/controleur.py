@@ -18,9 +18,11 @@ vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
 vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)
 
-class JoueurMenu(BaseMenu):
-    pass
 
+
+class JoueurMenu(BaseMenu):
+    def __init__(self, modele_objet, vue_objet) -> None:
+        super().__init__(modele_objet, vue_objet)
 
 
 class TournoiMenu(BaseMenu):
