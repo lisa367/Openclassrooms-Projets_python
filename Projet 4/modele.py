@@ -5,7 +5,6 @@ import random
 from base import BaseModel
 
 db_joueurs = TinyDB("Databases/joueurs.json", indent=4)
-# db_matchs = TinyDB("Databases/matchs.json", indent=4)
 db_tournois = TinyDB("Databases/tournois.json", indent=4)
 
 query = Query()
@@ -119,5 +118,5 @@ class Tour:
 
 
 
-modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
-modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
+# modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+# modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
