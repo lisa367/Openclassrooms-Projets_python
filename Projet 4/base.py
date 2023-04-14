@@ -45,7 +45,6 @@ class BaseView2:
         self.object_name = self.__class__.__name__.strip("View").lower()
         self.menu_choisi = menu_choisi
         self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
-        self.option_choisie = ""
         self.labels_list = labels
 
         formatage_list = [f"{element}:nouvelle_valeur" for element in self.labels_list]
@@ -61,24 +60,11 @@ class BaseView2:
 
         print("Choisissez une des options suivantes : ", menu, "*"*15)
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        self.option_choisie = self.options.get(int(reponse), 0)
+        option_choisie = self.options.get(int(reponse), 0)
 
-        """if option_choisie:
-            self.option_choisie = choix_2
-        else:
-            print("Veuillez entrer une option valide")"""
-
-        return self.option_choisie
+        return option_choisie
     
     def input_check(self, data):
-        """This method checks if the user input is in the expected data format
-
-        Args:
-            data (dict): Dictionary of the data to check
-
-        Returns:
-            bool: The method returns a boolean value
-        """
         return True
     
     def get_id(self, instruction):
@@ -96,12 +82,7 @@ class BaseView2:
             # if self.input_check(input_data[1]):
             self.input_data[item[0]] = item[1]
         return self.input_data
-    
-    """def delete_object(self):
-        object_id = input(f"Veuillez renseigner {self.id_type} du {self.object_name} à supprimer :")
-        if not self.input_check(object_id):
-            object_id = input("Veuillez renseigner un identifiant valide :")
-        return object_id"""
+
     
     def ajouter(self):
         for item in self.headers:
@@ -124,19 +105,21 @@ class BaseMenu:
     def __init__(self, modele_objet, vue_objet) -> None:
         self.instance_modele = modele_objet
         self.instance_vue = vue_objet
+        self.option_choisie = ""
+
+    def get_option(self):
+        self.option_choisie = self.instance_vue.choix_option()
+        return self.option_choisie
 
     def instruction(self):
-        option_choisie = self.instance_vue.choix_option()
+        self.get_option()
 
-        if option_choisie == "ajouter":
+        if self.option_choisie == "ajouter":
             self.ajouter()
-        elif option_choisie == "modifier":
+        elif self.option_choisie == "modifier":
             self.modifier()
-        elif option_choisie == "supprimer":
+        elif self.option_choisie == "supprimer":
             self.supprimer()
-        # elif option_choisie == "afficher-tout":
-            # self.afficher_tout()
-        return option_choisie
 
     
     def ajouter(self):
