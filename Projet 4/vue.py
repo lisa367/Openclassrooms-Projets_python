@@ -22,6 +22,7 @@ MENU_TOURNOI = """
 1: Nouveau tournoi
 2: Modifier un tournoi
 3: Supprimer un tournoi
+4: Lancement du tournoi
 """
 
 MENU_RAPPORT = """
@@ -33,7 +34,7 @@ MENU_RAPPORT = """
 """
 menus = {"joueur": MENU_JOUEUR, "tournoi": MENU_TOURNOI, "rapport": MENU_RAPPORT, "quitter": "Quitter"}
 
-class View:
+class MainView:
     menus = {"A": MENU_JOUEUR, "B": MENU_TOURNOI, "C": MENU_RAPPORT, "D": "Quitter"}
     cles = {"A": "joueur", "B": "tournoi", "C": "stats", "D": "quitter"}
     # options = {1: "ajouter", 2: "modifier", 3:"supprimer"}
@@ -45,7 +46,7 @@ class View:
     def choix_menu(self):
         print("Choisissez un des menus suivants : ", CHOIX_MENU, "*"*15)
         reponse = input("Entrez A, B, C, D ou E : ").upper().strip()
-        self.menu_choisi = View.cles.get(reponse, 0)
+        self.menu_choisi = MainView.cles.get(reponse, 0)
         # self.menu_choisi = choix_1
 
         """if choix_1:
@@ -64,6 +65,11 @@ class JoueurView(BaseView2):
 class TournoiView(BaseView2):
     def __init__(self, labels, menu_choisi) -> None:
         super().__init__(labels, menu_choisi)
+
+    def changer_nb_tours(self):
+        changer_num = input("Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : ")
+        return changer_num.lower()
+
     
     def get_num_tours(self):
         nouveau_num_tour = input("Voulez-vous changer le nombre de tours (4 par defaut) ? [oui/non]:")
