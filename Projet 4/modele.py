@@ -16,6 +16,9 @@ class JoueurModel(BaseModel):
     headers = ["identifiant", "nom", "prenom", "date_naissance"]
     verbose = {"identifiant": "l'identifiant", "nom": "le nom", "prenom": "le prénom", "date_naissance": "la date de naissance", }
 
+    def __str__(self, joueur):
+        return f"{joueur['identifiant']}. {joueur['prenom'].title()} {joueur['nom'].upper()}"
+
 
 class MatchModel(BaseModel):
     headers = ["joueur_1", "score_1", "joueur_2", "score_2"]
