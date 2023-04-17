@@ -50,6 +50,9 @@ class TournoiModel(BaseModel):
         self.resultats_tours = {}
         self.paires = {}
 
+    def __repr__(self, tournoi_object) -> str:
+        return f"{tournoi_object['identifiant']} (du {tournoi_object['date_debut']} au {tournoi_object['date_debut']})"
+
 
 class Tour:
     def __init__(self, round_num, liste_joueurs, paires_dict, scores_dict):
