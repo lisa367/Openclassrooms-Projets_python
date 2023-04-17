@@ -21,8 +21,8 @@ class JoueurModel(BaseModel):
         "date_naissance": "la date de naissance",
     }
 
-    def __repr__(self, joueur):
-        return f"{joueur['identifiant']}. {joueur['prenom'].title()} {joueur['nom'].upper()}"
+    def __repr__(self, joueur_object):
+        return f"{joueur_object['identifiant']}. {joueur_object['prenom'].title()} {joueur_object['nom'].upper()}"
 
 
 class MatchModel(BaseModel):
