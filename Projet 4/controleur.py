@@ -111,9 +111,10 @@ class RapportMenu:
 
     def display_joueurs_tournoi(self, nom_tournoi):
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
-        print(
-            f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
-        )
+        id_joueurs_tournoi = tournoi["joueurs"]
+        for id_joueur in id_joueurs_tournoi:
+            joueur = db_joueurs.search(Query().identifiant == id_joueur)
+            print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
 
     def display_rounds_tournoi(self, nom_tournoi):
         query_result = db_tournois.search(Query().nom == nom_tournoi)
@@ -121,3 +122,8 @@ class RapportMenu:
             print(
                 f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
             )
+
+    """def display_all(self, db):
+        all_objects = db.all()
+        for objet in all_objects:
+            print(objet)"""
