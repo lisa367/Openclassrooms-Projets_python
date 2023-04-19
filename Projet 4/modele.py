@@ -102,17 +102,19 @@ class Tour:
         self.paires.extend(sublists)
         return sublists
 
-    def resultat_match(self, joueur_1, joueur_2):
+    def resultat_match(self, paire_joueurs):
         match = []
-        seq = ["nul", "non_nul"]
-        resultat = random.choice(seq)
-        if resultat == "nul":
+        joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
+        match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
+        if match_nul == "oui":
             match.append((joueur_1, 0.5))
             match.append((joueur_2, 0.5))
             self.scores[joueur_1] += 0.5
             self.scores[joueur_2] += 0.5
 
         else:
+            print(f"joueur 1: {joueur_1}, joueur 2: {joueur_2}")
+            gagnant = input("Quel joueur a remporté le match ? Rentrez 1 ou 2 : ")
             seq2 = [0, 1]
             score_1 = seq2.pop(random.randint(0, 1))
             score_2 = seq2[0]
@@ -137,6 +139,29 @@ class Tour:
         paires = self.generation_paires()
         for paire in list(paires):
             self.resultat_match(paire[0], paire[1])
+
+    """def resultat_match_1(self, joueur_1, joueur_2):
+        match = []
+        seq = ["nul", "non_nul"]
+        resultat = random.choice(seq)
+        if resultat == "nul":
+            match.append((joueur_1, 0.5))
+            match.append((joueur_2, 0.5))
+            self.scores[joueur_1] += 0.5
+            self.scores[joueur_2] += 0.5
+
+        else:
+            seq2 = [0, 1]
+            score_1 = seq2.pop(random.randint(0, 1))
+            score_2 = seq2[0]
+            match.append((joueur_1, score_1))
+            match.append((joueur_2, score_2))
+            self.scores[joueur_1] += score_1
+            self.scores[joueur_2] += score_2
+
+        self.matchs.append(match)
+        # print(match)
+        return match"""
 
 
 # modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
