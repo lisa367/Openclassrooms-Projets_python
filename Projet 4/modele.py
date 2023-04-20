@@ -114,7 +114,18 @@ class Tour:
 
         else:
             print(f"joueur 1: {joueur_1}, joueur 2: {joueur_2}")
-            gagnant = input("Quel joueur a remporté le match ? Rentrez 1 ou 2 : ")
+            gagnant = input(
+                "Quel joueur a remporté le match ? Rentrez 1 pour le joueur 1 ou 2 pour le joueur 2 : "
+            ).strip()
+            while not isinstance(gagnant, int):
+                print(
+                    "Ceci n'est pas une entrée valide. Veuillez rentrer un nombre entier."
+                )
+                gagnant = input(
+                    "Quel joueur a remporté le match ? Rentrez 1 ou 2 : "
+                ).strip()
+            if int(gagnant) == 1:
+                pass
             seq2 = [0, 1]
             score_1 = seq2.pop(random.randint(0, 1))
             score_2 = seq2[0]
