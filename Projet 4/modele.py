@@ -78,7 +78,6 @@ class Tour:
             sublists = [
                 set(liste_joueurs[i : i + 2]) for i in range(0, len(liste_joueurs), 2)
             ]
-            # self.paires += sublists
 
         else:
             ordered_players = [player for player in self.rank()]
@@ -100,12 +99,14 @@ class Tour:
                     ordered_players = []
 
         self.paires.extend(sublists)
+        print(f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}")
         return sublists
 
     def resultat_match(self, paire_joueurs):
         match = []
         joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
+        
         if match_nul == "oui":
             match.append((joueur_1, 0.5))
             match.append((joueur_2, 0.5))
@@ -124,11 +125,8 @@ class Tour:
                 gagnant = input(
                     "Quel joueur a remporté le match ? Rentrez 1 ou 2 : "
                 ).strip()
-            if int(gagnant) == 1:
-                pass
-            seq2 = [0, 1]
-            score_1 = seq2.pop(random.randint(0, 1))
-            score_2 = seq2[0]
+            score_1 = 1 if int(gagnant) == 1 else 0
+            score_2 = 1 if int(gagnant) == 2 else 0
             match.append((joueur_1, score_1))
             match.append((joueur_2, score_2))
             self.scores[joueur_1] += score_1
