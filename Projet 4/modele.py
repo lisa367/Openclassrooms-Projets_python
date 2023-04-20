@@ -99,14 +99,16 @@ class Tour:
                     ordered_players = []
 
         self.paires.extend(sublists)
-        print(f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}")
+        print(
+            f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}"
+        )
         return sublists
 
     def resultat_match(self, paire_joueurs):
         match = []
         joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
-        
+
         if match_nul == "oui":
             match.append((joueur_1, 0.5))
             match.append((joueur_2, 0.5))
@@ -145,9 +147,14 @@ class Tour:
         return self.tour_info
 
     def resultat_tour(self):
+        liste_paires = self.generation_paires()
+        for paire in liste_paires:
+            self.resultat_match(paire)
+
+    """def resultat_tour(self):
         paires = self.generation_paires()
         for paire in list(paires):
-            self.resultat_match(paire[0], paire[1])
+            self.resultat_match(paire[0], paire[1])"""
 
     """def resultat_match_1(self, joueur_1, joueur_2):
         match = []
