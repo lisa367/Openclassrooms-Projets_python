@@ -22,8 +22,8 @@ class TournoiMenu(BaseMenu):
         self.liste_tours = []
         self.tour_actuel = tour_actuel
 
-    def instruction(self):
-        super().instruction()
+    def execution(self):
+        super().execution()
         if self.option_choisie == "lancement":
             self.lancement()
 
@@ -60,11 +60,11 @@ class TournoiMenu(BaseMenu):
 
 
 class RapportMenu:
-    def __init__(self) -> None:
-        self.option_choisie = ""
+    def __init__(self, option_choisie) -> None:
+        self.option_choisie = option_choisie
 
-    def instruction(self):
-        self.option_choisie = RapportView.choix_option(self)
+    def execution(self):
+        # self.option_choisie = RapportView.choix_option(self)
 
         if self.option_choisie == "liste joueurs":
             self.display_all_joueurs()
