@@ -34,6 +34,10 @@ class BaseModel:
     def retreive_all_db(self):
         print(self.database.all())
 
+    def retreive_entry_db(self, filter_value):
+        entry = self.database.search(query[self.default_filter] == filter_value)
+        return entry
+
 
 menus = {
     "joueur": MENU_JOUEUR,
@@ -146,5 +150,3 @@ class BaseMenu:
 
 # menu_test = BaseMenu(modele_objet=instance_modele, vue_objet=instance_vue)
 # menu_test.instruction()
-
-
