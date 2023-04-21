@@ -4,8 +4,8 @@ from base import BaseView2, CHOIX_MENU, MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT,
 
 
 class MainView:
-    menus = {"A": MENU_JOUEUR, "B": MENU_TOURNOI, "C": MENU_RAPPORT, "D": "Quitter"}
-    cles = {"A": "joueur", "B": "tournoi", "C": "stats", "D": "quitter"}
+    # menus = {"A": MENU_JOUEUR, "B": MENU_TOURNOI, "C": MENU_RAPPORT, "D": "Quitter"}
+    cles = {"A": "joueur", "B": "tournoi", "C": "rapport", "D": "quitter"}
     # options = {1: "ajouter", 2: "modifier", 3:"supprimer"}
 
     def __init__(self) -> None:
