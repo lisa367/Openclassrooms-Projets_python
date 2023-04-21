@@ -6,19 +6,6 @@ from vue import MainView, JoueurView, TournoiView, RapportView
 from base import BaseMenu
 
 
-instance_vue_principale = MainView()
-menu = instance_vue_principale.choix_menu()
-# instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
-# option = instance_joueur.choix_option()
-# print(option)
-
-modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
-vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
-
-modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
-vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)
-
-
 class JoueurMenu(BaseMenu):
     def __init__(self, modele_objet, vue_objet) -> None:
         super().__init__(modele_objet, vue_objet)
@@ -127,3 +114,16 @@ class RapportMenu:
         all_objects = db.all()
         for objet in all_objects:
             print(objet)"""
+
+
+instance_vue_principale = MainView()
+menu = instance_vue_principale.choix_menu()
+# instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
+# option = instance_joueur.choix_option()
+# print(option)
+
+modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
+vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
+
+modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
+vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)
