@@ -1,5 +1,6 @@
 from datetime import timedelta, datetime as dt
 from tinydb import Query
+import sys
 
 from modele import JoueurModel, TournoiModel, db_joueurs, db_tournois, Tour
 from vue import MainView, JoueurView, TournoiView, RapportView
@@ -116,7 +117,35 @@ class RapportMenu:
             print(objet)"""
 
 
-instance_vue_principale = MainView()
+class Controleur:
+    def __init__(self) -> None:
+        self.menu = ""
+
+    def execution(self):
+        instance_vue_principale = MainView()
+        self.menu = instance_vue_principale.choix_menu()
+        print(self.menu)
+
+        if self.menu == "joueur":
+            modele_joueur = JoueurModel(
+                filter_name="identifiant", database_name=db_joueurs
+            )
+            vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=self.menu)
+        elif self.menu == "tournoi":
+            modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
+            vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=self.menu)
+        elif self.menu == "rapport":
+            vue_rapport = RapportView()
+        elif self.menu == "quitter":
+            sys.exit()
+
+
+main = Controleur()
+main.execution()
+
+
+# Old tests
+"""instance_vue_principale = MainView()
 menu = instance_vue_principale.choix_menu()
 # instance_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 # option = instance_joueur.choix_option()
@@ -126,4 +155,4 @@ modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
 vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=menu)
 
 modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
-vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)
+vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=menu)"""
