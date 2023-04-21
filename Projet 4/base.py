@@ -151,7 +151,7 @@ class BaseMenu:
         self.option_choisie = self.instance_vue.choix_option()
         return self.option_choisie
 
-    def instruction(self):
+    def execution(self):
         self.get_option()
 
         if self.option_choisie == "ajouter":
