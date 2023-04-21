@@ -1,43 +1,6 @@
 ### MENUS ###
 # from modele import JoueurModel
-from base import BaseView2
-
-CHOIX_MENU = """
-A: Menu joueur
-B: Menu match
-C: Menu tournois
-D: Menu statistiques
-E: Quitter
-"""
-
-
-MENU_JOUEUR = """
-1: Ajouter un joueur
-2: Modifier un profil joueur
-3: Supprimer un joueur
-"""
-
-
-MENU_TOURNOI = """
-1: Nouveau tournoi
-2: Modifier un tournoi
-3: Supprimer un tournoi
-4: Lancement du tournoi
-"""
-
-MENU_RAPPORT = """
-1: Liste de tous les joueurs
-2: Liste de tous les tournois
-3: Dates d'un tournoi
-4: Joueurs d'un tournoi
-5: Rounds et matchs d'un tournoi
-"""
-menus = {
-    "joueur": MENU_JOUEUR,
-    "tournoi": MENU_TOURNOI,
-    "rapport": MENU_RAPPORT,
-    "quitter": "Quitter",
-}
+from base import BaseView2, CHOIX_MENU, MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT, menus
 
 
 class MainView:
@@ -50,7 +13,7 @@ class MainView:
 
     def choix_menu(self):
         print("Choisissez un des menus suivants : ", CHOIX_MENU, "*" * 15)
-        reponse = input("Entrez A, B, C, D ou E : ").upper().strip()
+        reponse = input("Entrez A, B, C, ou D : ").upper().strip()
         self.menu_choisi = MainView.cles.get(reponse, 0)
 
         return self.menu_choisi
