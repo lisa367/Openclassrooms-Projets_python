@@ -77,6 +77,9 @@ class TournoiView(BaseView2):
             num_tour = input("Veuillez entrer un nombre entier : ").strip()
         return int(num_tour)
 
+    def resultat_matchs(self, tour):
+        pass
+
 
 # instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
 
