@@ -1,5 +1,6 @@
 from tinydb import Query
-from vue import MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT
+
+# from vue import MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT
 
 
 query = Query()
@@ -39,6 +40,35 @@ class BaseModel:
         return entry
 
 
+CHOIX_MENU = """
+A: Menu joueur
+B: Menu tournoi
+C: Menu rapport
+E: Quitter
+"""
+
+
+MENU_JOUEUR = """
+1: Ajouter un joueur
+2: Modifier un profil joueur
+3: Supprimer un joueur
+"""
+
+
+MENU_TOURNOI = """
+1: Nouveau tournoi
+2: Modifier un tournoi
+3: Supprimer un tournoi
+4: Lancement du tournoi
+"""
+
+MENU_RAPPORT = """
+1: Liste de tous les joueurs
+2: Liste de tous les tournois
+3: Dates d'un tournoi
+4: Joueurs d'un tournoi
+5: Rounds et matchs d'un tournoi
+"""
 menus = {
     "joueur": MENU_JOUEUR,
     "tournoi": MENU_TOURNOI,
