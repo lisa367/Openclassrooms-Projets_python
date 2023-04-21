@@ -60,12 +60,17 @@ class Tour:
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
         self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
-        self.fin = (dt.now() + timedelta(hours=1)).strftime("%d/%m/%Y_%H:%M")
+        self.fin = ""
         self.matchs = []
         self.paires = paires_dict
         self.scores = scores_dict
+        # self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.ranking = []
         self.tour_info = {}
+
+    def set_fin_tour(self):
+        self.fin = (dt.now() + timedelta(hours=1)).strftime("%d/%m/%Y_%H:%M")
+        return self.fin
 
     def rank(self):
         self.ranking = sorted(self.scores, key=lambda joueur: self.scores[joueur])
@@ -107,6 +112,7 @@ class Tour:
     def resultat_match(self, paire_joueurs):
         match = []
         joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
+        print(f"Match: {joueur_1} (joueur 1) vs {joueur_2} (joueur 2)")
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
 
         if match_nul == "oui":
@@ -116,16 +122,13 @@ class Tour:
             self.scores[joueur_2] += 0.5
 
         else:
-            print(f"joueur 1: {joueur_1}, joueur 2: {joueur_2}")
             gagnant = input(
                 "Quel joueur a remporté le match ? Rentrez 1 pour le joueur 1 ou 2 pour le joueur 2 : "
             ).strip()
-            while not isinstance(gagnant, int):
-                print(
-                    "Ceci n'est pas une entrée valide. Veuillez rentrer un nombre entier."
-                )
+            while not gagnant.isdigit() and (gagnant == "1" or gagnant == "2"):
+                print("Ceci n'est pas une entrée valide.")
                 gagnant = input(
-                    "Quel joueur a remporté le match ? Rentrez 1 ou 2 : "
+                    f"Quel joueur a remporté le match ? Rentrez 1 pour {joueur_1} ou 2 pour {joueur_2}: "
                 ).strip()
             score_1 = 1 if int(gagnant) == 1 else 0
             score_2 = 1 if int(gagnant) == 2 else 0
@@ -147,9 +150,11 @@ class Tour:
         return self.tour_info
 
     def resultat_tour(self):
-        liste_paires = self.generation_paires()
-        for paire in liste_paires:
-            self.resultat_match(paire)
+        set_paires = self.generation_paires()
+        for paire in set_paires:
+            self.resultat_match(list(paire))
+
+        self.set_fin_tour()
 
     """def resultat_tour(self):
         paires = self.generation_paires()
