@@ -28,6 +28,10 @@ class TournoiView(BaseView2):
     def __init__(self, labels, menu_choisi) -> None:
         super().__init__(labels, menu_choisi)
 
+    def choix_option(self):
+        self.options[4] = "lancement"
+        return super().choix_option()
+
     def changer_num_tours(self):
         changer_num = input(
             "Voulez-vous changer le nombre de tours (4 par défaut) ? Répondez par oui ou par non : "
