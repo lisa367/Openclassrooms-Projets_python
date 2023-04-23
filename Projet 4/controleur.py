@@ -124,24 +124,41 @@ class Controleur:
     def execution(self):
         instance_vue_principale = MainView()
         self.menu = instance_vue_principale.choix_menu()
-        print(self.menu)
+        # print(f"Menu choisi: {self.menu}")
 
         if self.menu == "joueur":
             modele_joueur = JoueurModel(
                 filter_name="identifiant", database_name=db_joueurs
             )
             vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=self.menu)
+            option_choisie = vue_joueur.choix_option()
+            menu_joueur = JoueurMenu(modele_objet=modele_joueur, vue_objet=vue_joueur)
+            menu_joueur.execution()
+
         elif self.menu == "tournoi":
             modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
             vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=self.menu)
+            option_choisie = vue_tournoi.choix_option()
+            menu_tournoi = TournoiMenu(
+                modele_objet=modele_tournoi, vue_objet=vue_tournoi
+            )
+            menu_tournoi.execution()
+
         elif self.menu == "rapport":
             vue_rapport = RapportView()
+            option_choisie = vue_rapport.choix_option()
+            menu_rapport = RapportMenu(
+                option_choisie=option_choisie,
+            )
+            menu_rapport.execution()
+
         elif self.menu == "quitter":
             sys.exit()
 
 
 main = Controleur()
 main.execution()
+
 
 
 # Old tests
