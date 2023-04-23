@@ -61,7 +61,7 @@ class RapportView:
             5: "rounds tournois",
         }
         self.option_choisie = ""
-        self.menu_choisi = MENU_RAPPORT
+        self.menu_choisi = "rapport"
 
     def choix_option(self):
         return BaseView2.choix_option(self)
