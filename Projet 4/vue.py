@@ -63,7 +63,7 @@ class RapportView:
         self.option_choisie = ""
 
     def choix_option(self):
-        print("Choisissez une des options suivantes : ", self.options, "*" * 15)
+        print("Choisissez une des options suivantes : ", MENU_RAPPORT, "*" * 15)
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
         option_choisie = self.options.get(int(reponse), 0)
 
