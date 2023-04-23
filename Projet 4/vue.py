@@ -61,11 +61,7 @@ class RapportView:
             5: "rounds tournois",
         }
         self.option_choisie = ""
+        self.menu_choisi = MENU_RAPPORT
 
     def choix_option(self):
-        print("Choisissez une des options suivantes : ", MENU_RAPPORT, "*" * 15)
-        reponse = input(f"Entrez le chiffre de l'option choisie : ")
-        option_choisie = self.options.get(int(reponse), 0)
-
-        return option_choisie
-        # return BaseView2.choix_option(self)
+        return BaseView2.choix_option(self)
