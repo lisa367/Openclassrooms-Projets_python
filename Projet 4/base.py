@@ -124,7 +124,7 @@ class BaseView2:
         return self.input_data
 
     def ajouter(self):
-        for item in self.headers:
+        for item in self.verbose:
             self.new_entry[item] = input(
                 f"Veuillez renseigner {self.verbose[item]} du {self.object_name}: "
             )
@@ -162,7 +162,8 @@ class BaseMenu:
             self.supprimer()
 
     def ajouter(self):
-        data = self.instance_vue.get_input_data("ajouter")
+        # data = self.instance_vue.get_input_data("ajouter")
+        data = self.instance_vue.ajouter()
         self.instance_modele.enregistrer_db(data)
 
     def modifier(self):
