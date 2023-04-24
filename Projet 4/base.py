@@ -106,7 +106,7 @@ class BaseView2:
 
     def get_id(self, instruction):
         object_id = input(
-            f"Veuillez renseigner {self.id_type} du {self.object_name} à {instruction} : "
+            f"Veuillez renseigner {self.verbose[self.id_type]} du {self.object_name} à {instruction} : "
         )
         # if self.input_check(object_id):
         self.input_data["identifiant"] = object_id
