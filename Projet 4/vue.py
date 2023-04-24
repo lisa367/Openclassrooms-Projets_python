@@ -20,13 +20,13 @@ class MainView:
 
 
 class JoueurView(BaseView2):
-    def __init__(self, labels, menu_choisi) -> None:
-        super().__init__(labels, menu_choisi)
+    def __init__(self, labels, verbose, id_type, menu_choisi) -> None:
+        super().__init__(labels, verbose, id_type, menu_choisi)
 
 
 class TournoiView(BaseView2):
-    def __init__(self, labels, menu_choisi) -> None:
-        super().__init__(labels, menu_choisi)
+    def __init__(self, labels, menu_choisi, id_type, verbose) -> None:
+        super().__init__(labels, verbose, id_type, menu_choisi)
 
     def choix_option(self):
         self.options[4] = "lancement"
