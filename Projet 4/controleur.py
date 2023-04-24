@@ -130,14 +130,24 @@ class Controleur:
             modele_joueur = JoueurModel(
                 filter_name="identifiant", database_name=db_joueurs
             )
-            vue_joueur = JoueurView(labels=JoueurModel.headers, menu_choisi=self.menu)
-            option_choisie = vue_joueur.choix_option()
+            vue_joueur = JoueurView(
+                labels=JoueurModel.headers,
+                verbose=JoueurModel.verbose,
+                id_type=modele_joueur.default_filter,
+                menu_choisi=self.menu,
+            )
+            # option_choisie = vue_joueur.choix_option()
             menu_joueur = JoueurMenu(modele_objet=modele_joueur, vue_objet=vue_joueur)
             menu_joueur.execution()
 
         elif self.menu == "tournoi":
             modele_tournoi = TournoiModel(filter_name="nom", database_name=db_tournois)
-            vue_tournoi = TournoiView(labels=TournoiModel, menu_choisi=self.menu)
+            vue_tournoi = TournoiView(
+                labels=TournoiModel,
+                verbose=TournoiModel.verbose,
+                id_type=modele_tournoi.default_filter,
+                menu_choisi=self.menu,
+            )
             option_choisie = vue_tournoi.choix_option()
             menu_tournoi = TournoiMenu(
                 modele_objet=modele_tournoi, vue_objet=vue_tournoi
@@ -156,9 +166,8 @@ class Controleur:
             sys.exit()
 
 
-main = Controleur()
-main.execution()
-
+# main = Controleur()
+# main.execution()
 
 
 # Old tests
