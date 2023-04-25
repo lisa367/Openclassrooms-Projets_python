@@ -12,8 +12,10 @@ class MainView:
         self.menu_choisi = ""
 
     def choix_menu(self):
-        print("Choisissez un des menus suivants : ", CHOIX_MENU, "*" * 15)
+        print("*" * 15)
+        print("Choisissez un des menus suivants : ", CHOIX_MENU, "\n")
         reponse = input("Entrez A, B, C, ou D : ").upper().strip()
+        print("*" * 15)
         self.menu_choisi = MainView.cles.get(reponse, 0)
 
         return self.menu_choisi
