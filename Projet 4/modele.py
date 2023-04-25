@@ -33,12 +33,12 @@ class MatchModel(BaseModel):
 
 
 class TournoiModel(BaseModel):
-    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "joueurs"]
+    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "tours", "joueurs", "description"]
     verbose = {
         "nom": "le nom",
         "lieu": "le lieu",
         "debut": "la date de début",
-        "fin": "la date de fin",
+        "nombre_tours": "le nombre de tours",
         "joueurs": "la liste de joueurs",
     }
 
