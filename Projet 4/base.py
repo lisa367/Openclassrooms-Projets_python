@@ -44,7 +44,7 @@ CHOIX_MENU = """
 A: Menu joueur
 B: Menu tournoi
 C: Menu rapport
-E: Quitter
+D: Quitter
 """
 
 
@@ -95,8 +95,9 @@ class BaseView2:
     def choix_option(self):
         menu = menus[self.menu_choisi]
 
-        print("Choisissez une des options suivantes : ", menu, "*" * 15)
+        print("Choisissez une des options suivantes : ", menu, "\n")
         reponse = input(f"Entrez le chiffre de l'option choisie : ")
+        print("*" * 15)
         option_choisie = self.options.get(int(reponse), 0)
 
         return option_choisie
