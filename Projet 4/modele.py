@@ -25,15 +25,17 @@ class JoueurModel(BaseModel):
         return f"{joueur_object['identifiant']}. {joueur_object['prenom'].title()} {joueur_object['nom'].upper()}"
 
 
-class MatchModel(BaseModel):
-    headers = ["joueur_1", "score_1", "joueur_2", "score_2"]
-
-    def __init__(self, filter_name, database_name):
-        super().__init__(filter_name, database_name)
-
-
 class TournoiModel(BaseModel):
-    headers = ["nom", "lieu", "date_debut", "date_fin", "nombre_tours", "tours", "joueurs", "description"]
+    headers = [
+        "nom",
+        "lieu",
+        "date_debut",
+        "date_fin",
+        "nombre_tours",
+        "tours",
+        "joueurs",
+        "description",
+    ]
     verbose = {
         "nom": "le nom",
         "lieu": "le lieu",
