@@ -13,13 +13,14 @@ class JoueurMenu(BaseMenu):
 
 
 class TournoiMenu(BaseMenu):
-    def __init__(self, modele_objet, vue_objet, num_tours=4, tour_actuel=1) -> None:
+    def __init__(self, modele_objet, vue_objet, num_tours=4, tour_actuel=0) -> None:
         super().__init__(modele_objet, vue_objet)
         self.paires = {}
         self.num_tours = num_tours
         self.liste_joueurs = []
         self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.liste_tours = []
+        self.date_fin = ""
         self.tour_actuel = tour_actuel
 
     def execution(self):
@@ -28,7 +29,11 @@ class TournoiMenu(BaseMenu):
             self.lancement()
 
     def ajouter(self):
-        self.lancement()
+        # self.lancement()
+        data = self.instance_vue.ajouter()
+        data["date_fin"] = self.date_fin
+        data["tours"] = self.liste_tours
+        self.instance_modele.enregistrer_db(data)
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
