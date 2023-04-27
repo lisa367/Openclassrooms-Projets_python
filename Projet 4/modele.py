@@ -42,6 +42,7 @@ class TournoiModel(BaseModel):
         "debut": "la date de début",
         "nombre_tours": "le nombre de tours",
         "joueurs": "la liste de joueurs",
+        "description": "une description (optionnel)"
     }
 
     def __init__(self, filter_name, database_name, num_tours=4):
