@@ -79,7 +79,8 @@ menus = {
 
 class BaseView2:
     def __init__(self, labels, verbose, id_type, menu_choisi) -> None:
-        self.object_name = self.__class__.__name__.strip("View").lower()
+        # self.object_name = self.__class__.__name__.strip("View").lower()
+        self.object_name = self.__class__.__name__[:-4].lower()
         self.menu_choisi = menu_choisi
         self.options = {1: "ajouter", 2: "modifier", 3: "supprimer"}
         self.labels_list = labels
