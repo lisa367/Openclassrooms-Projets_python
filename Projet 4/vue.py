@@ -31,7 +31,7 @@ class TournoiView(BaseView2):
         super().__init__(labels, verbose, id_type, menu_choisi)
 
     def choix_option(self):
-        self.options[4] = "lancement"
+        self.options[4] = "ajouter tour"
         return super().choix_option()
 
     def changer_num_tours(self):
@@ -42,7 +42,7 @@ class TournoiView(BaseView2):
 
     def get_num_tours(self):
         num_tour = input("Entrez le nouveau nombre de tours :").strip()
-        while not isinstance(num_tour, int):
+        while not num_tour.isdigit():
             num_tour = input("Veuillez entrer un nombre entier : ").strip()
         return int(num_tour)
 
