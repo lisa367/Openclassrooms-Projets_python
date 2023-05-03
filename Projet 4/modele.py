@@ -33,6 +33,7 @@ class TournoiModel(BaseModel):
         "date_fin",
         "nombre_tours",
         "tours",
+        "tour_actuel",
         "joueurs",
         "description",
     ]
@@ -157,35 +158,3 @@ class Tour:
             self.resultat_match(list(paire))
 
         self.set_fin_tour()
-
-    """def resultat_tour(self):
-        paires = self.generation_paires()
-        for paire in list(paires):
-            self.resultat_match(paire[0], paire[1])"""
-
-    """def resultat_match_1(self, joueur_1, joueur_2):
-        match = []
-        seq = ["nul", "non_nul"]
-        resultat = random.choice(seq)
-        if resultat == "nul":
-            match.append((joueur_1, 0.5))
-            match.append((joueur_2, 0.5))
-            self.scores[joueur_1] += 0.5
-            self.scores[joueur_2] += 0.5
-
-        else:
-            seq2 = [0, 1]
-            score_1 = seq2.pop(random.randint(0, 1))
-            score_2 = seq2[0]
-            match.append((joueur_1, score_1))
-            match.append((joueur_2, score_2))
-            self.scores[joueur_1] += score_1
-            self.scores[joueur_2] += score_2
-
-        self.matchs.append(match)
-        # print(match)
-        return match"""
-
-
-# modele_joueur = JoueurModel(filter_name="identifiant", database_name=db_joueurs)
-# modele_tournoi = TournoiModel(filter_name="name", database_name=db_tournois)
