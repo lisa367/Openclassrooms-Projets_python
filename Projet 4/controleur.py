@@ -26,23 +26,25 @@ class TournoiMenu(BaseMenu):
     def execution(self):
         super().execution()
         if self.option_choisie == "ajouter tour":
-            self.lancement()
+            self.nouveau_tour()
 
     def ajouter(self):
         data = self.instance_vue.ajouter()
         data["nombre_tours"] = self.set_num_tours()
         data["date_fin"] = self.date_fin
         data["tours"] = self.dict_tours
+        data["tour_actuel"] = 0
         self.instance_modele.enregistrer_db(data)
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
 
-    def nouveau_tour(self, num, liste):
+    def nouveau_tour(self, liste):
         # 1. Récupérer les données tournoi à modifier
         id_tournoi = self.instance_vue.get_id("modifier")
         tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)
         tournoi_tours = tournoi_all_data.get("tours")
+        num = tournoi_all_data.get("tour_actuel")
 
         # 2. Récupérer les informations du tour
         tour = Tour(num, liste, self.paires, self.scores)
@@ -56,6 +58,10 @@ class TournoiMenu(BaseMenu):
         self.instance_modele.modifier_db(
             data_dict=tournoi_tours, filter_value=id_tournoi
         )
+
+        # 5. Date de fin du tournoi
+        if num == tournoi_all_data["nombre_tour"]:
+            tournoi_all_data["date_fin"] = tour_info["fin"]
         return tour_info
 
     def set_num_tours(self):
@@ -165,7 +171,7 @@ class Controleur:
                     id_type=modele_tournoi.default_filter,
                     menu_choisi=self.menu,
                 )
-                option_choisie = vue_tournoi.choix_option()
+                # option_choisie = vue_tournoi.choix_option()
                 menu_tournoi = TournoiMenu(
                     modele_objet=modele_tournoi, vue_objet=vue_tournoi
                 )
