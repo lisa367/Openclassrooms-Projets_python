@@ -116,7 +116,8 @@ class RapportMenu:
             f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_fin']})"
         )
 
-    def display_joueurs_tournoi(self, nom_tournoi):
+    def display_joueurs_tournoi(self):
+        nom_tournoi = TournoiView.get_id("rechercher")
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
         id_joueurs_tournoi = tournoi["joueurs"]
         for id_joueur in id_joueurs_tournoi:
