@@ -128,9 +128,7 @@ class RapportMenu:
         nom_tournoi = TournoiView.get_id("rechercher")
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
         for tour in tournoi["tours"]:
-            print(
-                f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
-            )
+            print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
 
     """def display_all(self, db):
         all_objects = db.all()
