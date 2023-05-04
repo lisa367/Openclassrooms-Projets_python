@@ -124,9 +124,10 @@ class RapportMenu:
             joueur = db_joueurs.search(Query().identifiant == id_joueur)
             print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
 
-    def display_rounds_tournoi(self, nom_tournoi):
-        query_result = db_tournois.search(Query().nom == nom_tournoi)
-        for tournoi in query_result:
+    def display_rounds_tournoi(self):
+        nom_tournoi = TournoiView.get_id("rechercher")
+        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        for tour in tournoi["tours"]:
             print(
                 f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_debut']})"
             )
