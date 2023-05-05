@@ -71,13 +71,6 @@ class TournoiMenu(BaseMenu):
             self.nombre_tours = self.instance_vue.get_num_tours()
         return self.nombre_tours
 
-    """def lancement(self, liste):
-        self.set_num_tours()
-        for num in range(self.num_tours):
-            self.tour_actuel = num
-            new_tour = self.nouveau_tour(num, liste)
-            new_tour.resultat()"""
-
 
 class RapportMenu:
     def __init__(self, option_choisie) -> None:
@@ -137,8 +130,11 @@ class RapportMenu:
 
     def display_rounds_tournoi(self):
         tournoi = self.retreive_tournoi()
-        for tour in tournoi["tours"].values():
-            print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
+        if tournoi["tours"]:
+            for tour in tournoi["tours"].values():
+                print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
+        else:
+            print("Il n'y a pas encore de tour enregitré pour ce tournoi.")
 
     """def display_all(self, db):
         all_objects = db.all()
