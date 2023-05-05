@@ -40,7 +40,7 @@ class TournoiModel(BaseModel):
     verbose = {
         "nom": "le nom",
         "lieu": "le lieu",
-        "debut": "la date de début",
+        "date_debut": "la date de début",
         "joueurs": "la liste de joueurs",
         "description": "une description (optionnel)",
     }
