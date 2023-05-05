@@ -67,3 +67,7 @@ class RapportView:
 
     def choix_option(self):
         return BaseView2.choix_option(self)
+
+    def get_id(self):
+        object_id = input(f"Veuillez renseigner le nom du tournoi : ")
+        return object_id
