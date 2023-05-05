@@ -119,23 +119,23 @@ class RapportMenu:
         return tournoi[0]
 
     def display_dates_tournoi(self):
-        # nom_tournoi = TournoiView.get_id("rechercher")
         tournoi = self.retreive_tournoi()
-        # print(tournoi[0])
         print(f"{tournoi['nom']} (du {tournoi['date_debut']} au {tournoi['date_fin']})")
 
     def display_joueurs_tournoi(self):
-        # rapport_vue = RapportView()
-        # nom_tournoi = rapport_vue.get_id()
         tournoi = self.retreive_tournoi()
-        id_joueurs_tournoi = tournoi["joueurs"]
-        for id_joueur in id_joueurs_tournoi:
-            joueur = db_joueurs.search(Query().identifiant == id_joueur)
-            print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
+        joueurs_tournoi = tournoi["joueurs"]
+        for id_joueur in joueurs_tournoi:
+            joueur_data = db_joueurs.search(Query().identifiant == id_joueur)
+            if joueur_data:
+                joueur = joueur_data[0]
+                print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
+            else:
+                print(
+                    f"{id_joueur} : ce joueur n'est pas présent dans la base de données des joueurs. Veuillez créer ce joueur ou modifier l'identifiant renseigné."
+                )
 
     def display_rounds_tournoi(self):
-        # rapport_vue = RapportView()
-        # nom_tournoi = rapport_vue.get_id()
         tournoi = self.retreive_tournoi()
         for tour in tournoi["tours"].values():
             print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
