@@ -117,25 +117,25 @@ class RapportMenu:
         return tournoi
 
     def display_dates_tournoi(self):
-        nom_tournoi = TournoiView.get_id("rechercher")
-        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        # nom_tournoi = TournoiView.get_id("rechercher")
+        tournoi = self.retreive_tournoi()
         print(
             f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_fin']})"
         )
 
     def display_joueurs_tournoi(self):
-        rapport_vue = RapportView()
-        nom_tournoi = rapport_vue.get_id()
-        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        # rapport_vue = RapportView()
+        # nom_tournoi = rapport_vue.get_id()
+        tournoi = self.retreive_tournoi()
         id_joueurs_tournoi = tournoi["joueurs"]
         for id_joueur in id_joueurs_tournoi:
             joueur = db_joueurs.search(Query().identifiant == id_joueur)
             print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
 
     def display_rounds_tournoi(self):
-        rapport_vue = RapportView()
-        nom_tournoi = rapport_vue.get_id()
-        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+        # rapport_vue = RapportView()
+        # nom_tournoi = rapport_vue.get_id()
+        tournoi = self.retreive_tournoi()
         for tour in tournoi["tours"].values():
             print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
 
