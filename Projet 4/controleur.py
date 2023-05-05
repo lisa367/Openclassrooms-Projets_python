@@ -109,6 +109,13 @@ class RapportMenu:
                 f"{tournoi['nom']} (du {tournoi['date_debut']} au {tournoi['date_fin']})"
             )
 
+    def retreive_tournoi(self):
+        rapport_vue = RapportView()
+        nom_tournoi = rapport_vue.get_id()
+        tournoi = db_tournois.search(Query().nom == nom_tournoi)
+
+        return tournoi
+
     def display_dates_tournoi(self):
         nom_tournoi = TournoiView.get_id("rechercher")
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
@@ -117,7 +124,8 @@ class RapportMenu:
         )
 
     def display_joueurs_tournoi(self):
-        nom_tournoi = TournoiView.get_id("rechercher")
+        rapport_vue = RapportView()
+        nom_tournoi = rapport_vue.get_id()
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
         id_joueurs_tournoi = tournoi["joueurs"]
         for id_joueur in id_joueurs_tournoi:
@@ -125,7 +133,8 @@ class RapportMenu:
             print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
 
     def display_rounds_tournoi(self):
-        nom_tournoi = TournoiView.get_id("rechercher")
+        rapport_vue = RapportView()
+        nom_tournoi = rapport_vue.get_id()
         tournoi = db_tournois.search(Query().nom == nom_tournoi)
         for tour in tournoi["tours"].values():
             print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
