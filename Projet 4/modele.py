@@ -36,6 +36,7 @@ class TournoiModel(BaseModel):
         "tour_actuel",
         "joueurs",
         "description",
+        "liste_paires"
     ]
     verbose = {
         "nom": "le nom",
