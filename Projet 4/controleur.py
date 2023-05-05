@@ -30,10 +30,12 @@ class TournoiMenu(BaseMenu):
 
     def ajouter(self):
         data = self.instance_vue.ajouter()
+        data["joueurs"] = data.get("joueurs").strip().split()
         data["nombre_tours"] = self.set_num_tours()
         data["date_fin"] = self.date_fin
         data["tours"] = self.dict_tours
         data["tour_actuel"] = 0
+        data["liste_paires"] = {}
         self.instance_modele.enregistrer_db(data)
 
     def get_liste_joueurs(self):
@@ -119,6 +121,7 @@ class RapportMenu:
     def display_dates_tournoi(self):
         # nom_tournoi = TournoiView.get_id("rechercher")
         tournoi = self.retreive_tournoi()
+        print(tournoi)
         print(
             f"{tournoi['identifiant']} (du {tournoi['date_debut']} au {tournoi['date_fin']})"
         )
