@@ -64,7 +64,13 @@ class TournoiMenu(BaseMenu):
         # 5. Date de fin du tournoi
         if num == tournoi_all_data["nombre_tour"]:
             tournoi_all_data["date_fin"] = tour_info["fin"]
+
+        # 6. Enregistrer le nouveau nombre de tours
+
         return tour_info
+    
+    def ajouter_joueurs(self):
+        pass
 
     def set_num_tours(self):
         if self.instance_vue.changer_num_tours() == "oui":
