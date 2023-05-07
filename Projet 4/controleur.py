@@ -46,7 +46,7 @@ class TournoiMenu(BaseMenu):
         id_tournoi = self.instance_vue.get_id("modifier")
         tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)
         tournoi_tours = tournoi_all_data.get("tours")
-        num = tournoi_all_data.get("tour_actuel")
+        num = tournoi_all_data.get("tour_actuel") + 1
 
         # 2. Récupérer les informations du tour
         tour = Tour(num, liste, self.paires, self.scores)
@@ -135,11 +135,6 @@ class RapportMenu:
                 print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
         else:
             print("Il n'y a pas encore de tour enregitré pour ce tournoi.")
-
-    """def display_all(self, db):
-        all_objects = db.all()
-        for objet in all_objects:
-            print(objet)"""
 
 
 class Controleur:
