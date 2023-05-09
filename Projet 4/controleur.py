@@ -66,7 +66,7 @@ class TournoiMenu(BaseMenu):
 
         # 4. Enregistrer les modifications
         self.instance_modele.modifier_db(
-            data_dict=tournoi_tours, filter_value=id_tournoi
+            data_dict=tournoi_tours,
         )
 
         # 5. Date de fin du tournoi
