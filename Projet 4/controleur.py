@@ -31,12 +31,13 @@ class TournoiMenu(BaseMenu):
     def ajouter(self):
         data = self.instance_vue.ajouter()
         data["joueurs"] = data.get("joueurs").strip().split()
+        self.liste_joueurs = data["joueurs"]
         data["nombre_tours"] = self.set_num_tours()
         data["date_fin"] = self.date_fin
         data["tours"] = self.dict_tours
         data["tour_actuel"] = 0
-        data["liste_paires"] = {}
-        data["scores"] = {}
+        data["liste_paires"] = []
+        data["scores"] = {joueur: 0 for joueur in self.liste_joueurs}
         self.instance_modele.enregistrer_db(data)
 
     def get_liste_joueurs(self):
@@ -50,7 +51,8 @@ class TournoiMenu(BaseMenu):
         # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
         tournoi_joueurs = tournoi_all_data.get("joueurs")
-        tournoi_paires = tournoi_all_data.get("liste_paires")
+        liste_paires = tournoi_all_data.get("liste_paires")
+        tournoi_paires = [set(paire) for paire in liste_paires]
         tournoi_scores = tournoi_all_data.get("scores")
         num = tournoi_all_data.get("tour_actuel") + 1
 
