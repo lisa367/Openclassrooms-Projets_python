@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /*border: 1px solid red;*/
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+}
+
+/* --------------------------------------------- */
+nav {
+    /*border: 1px solid blue;*/
+    position: static;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+h1 {
+    margin-left: 0.5rem;
+}
+
+#nav-right {
+    border: 1px solid purple;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+#nav-right p {
+    border: 1px solid red;
+}
+
+/* --------------------------------------------- */
+main {
+    height: 85%;
+    border: 1px solid red;
+    justify-content: center;
+}
+
+#best_movie {
+    border: 1px solid black;
+    height: 14rem;
+    width: 100%;
+}
+
+.categories {
+    border: 1px solid black;
+    height: 9rem;
+    width: 100%
+}
+
+.nom_categorie {
+    font-size: 1rem;
+    font-weight: 400;
+    color: gray;
+    text-align: center;
+}
