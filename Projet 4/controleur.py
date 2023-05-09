@@ -36,20 +36,26 @@ class TournoiMenu(BaseMenu):
         data["tours"] = self.dict_tours
         data["tour_actuel"] = 0
         data["liste_paires"] = {}
+        data["scores"] = {}
         self.instance_modele.enregistrer_db(data)
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
 
-    def nouveau_tour(self, liste):
+    def nouveau_tour(self):
         # 1. Récupérer les données tournoi à modifier
         id_tournoi = self.instance_vue.get_id("modifier")
-        tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)
+        tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)[0]
+        print(tournoi_all_data)
+        # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
+        tournoi_joueurs = tournoi_all_data.get("joueurs")
+        tournoi_paires = tournoi_all_data.get("liste_paires")
+        tournoi_scores = tournoi_all_data.get("scores")
         num = tournoi_all_data.get("tour_actuel") + 1
 
         # 2. Récupérer les informations du tour
-        tour = Tour(num, liste, self.paires, self.scores)
+        tour = Tour(num, tournoi_joueurs, tournoi_paires, tournoi_scores)
         tour.resultat_tour()
         tour_info = tour.get_tour_info()
 
@@ -68,9 +74,6 @@ class TournoiMenu(BaseMenu):
         # 6. Enregistrer le nouveau nombre de tours
 
         return tour_info
-    
-    def ajouter_joueurs(self):
-        pass
 
     def set_num_tours(self):
         if self.instance_vue.changer_num_tours() == "oui":
@@ -131,7 +134,7 @@ class RapportMenu:
                 print(f"{joueur['prenom'].title()} {joueur['nom'].upper()}")
             else:
                 print(
-                    f"{id_joueur} : ce joueur n'est pas présent dans la base de données des joueurs. Veuillez créer ce joueur ou modifier l'identifiant renseigné."
+                    f"{id_joueur} : ce joueur ne figure dans la base de données des joueurs. Veuillez créer ce joueur ou modifier l'identifiant renseigné."
                 )
 
     def display_rounds_tournoi(self):
