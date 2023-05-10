@@ -47,7 +47,7 @@ class TournoiMenu(BaseMenu):
         # 1. Récupérer les données tournoi à modifier
         id_tournoi = self.instance_vue.get_id("modifier")
         tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)[0]
-        print(tournoi_all_data)
+        # print(tournoi_all_data)
         # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
         tournoi_joueurs = tournoi_all_data.get("joueurs")
@@ -62,16 +62,15 @@ class TournoiMenu(BaseMenu):
         tour_info = tour.get_tour_info()
 
         # 3. Ajouter les info du tour aux données du tournoi
-        tournoi_tours[num] = tour_info
+        tournoi_tours[int(num)] = tour_info
 
-        # 4. Enregistrer les modifications
-        self.instance_modele.modifier_db(
-            data_dict=tournoi_tours,
-        )
-
-        # 5. Date de fin du tournoi
-        if num == tournoi_all_data["nombre_tour"]:
+        # 4. Date de fin du tournoi
+        if num == tournoi_all_data["nombre_tours"]:
             tournoi_all_data["date_fin"] = tour_info["fin"]
+
+        # 5. Enregistrer les modifications
+        self.instance_modele.modifier_db(data_dict=tournoi_tours, id_value=id_tournoi)
+        self.instance_modele.modifier_db(data_dict=tournoi_tours, id_value=id_tournoi)
 
         # 6. Enregistrer le nouveau nombre de tours
 
