@@ -36,13 +36,14 @@ class TournoiModel(BaseModel):
         "tour_actuel",
         "joueurs",
         "description",
-        "liste_paires"
+        "liste_paires",
+        "scores",
     ]
     verbose = {
         "nom": "le nom",
         "lieu": "le lieu",
         "date_debut": "la date de début",
-        "joueurs": "la liste de joueurs",
+        "joueurs": "la liste des joueurs",
         "description": "une description (optionnel)",
     }
 
@@ -59,14 +60,14 @@ class TournoiModel(BaseModel):
 
 
 class Tour:
-    def __init__(self, round_num, liste_joueurs, paires_dict, scores_dict):
+    def __init__(self, round_num, liste_joueurs, paires_list, scores_dict):
         self.round = round_num
         self.nom = f"Round {self.round}"
         self.liste_joueurs = liste_joueurs
         self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
         self.fin = ""
         self.matchs = []
-        self.paires = paires_dict
+        self.paires = paires_list
         self.scores = scores_dict
         # self.scores = {joueur: 0 for joueur in self.liste_joueurs}
         self.ranking = []
