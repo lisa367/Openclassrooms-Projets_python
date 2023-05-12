@@ -149,7 +149,7 @@ class RapportMenu:
         tournoi = self.retreive_tournoi()
         if tournoi["tours"]:
             for tour in tournoi["tours"].values():
-                print(f"{tour['nom']} (du {tournoi['debut']} au {tournoi['fin']})")
+                print(f"{tour['nom']} (du {tour['debut']} au {tour['fin']})")
         else:
             print("Il n'y a pas encore de tour enregitré pour ce tournoi.")
 
