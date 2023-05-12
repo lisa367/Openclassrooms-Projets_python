@@ -82,7 +82,11 @@ class TournoiManager(BaseMenu):
         self.instance_modele.modifier_db(
             data_dict={"scores": tour.scores}, id_value=id_tournoi
         )
-        # self.instance_modele.modifier_db(data_dict={"scores": tour.scores}, id_value=id_tournoi)
+        # print([list(paire) for paire in tour.paires])
+        self.instance_modele.modifier_db(
+            data_dict={"liste_paires": [list(paire) for paire in tour.paires]},
+            id_value=id_tournoi,
+        )
 
         return tour_info
 
