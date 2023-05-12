@@ -7,12 +7,12 @@ from vue import MainView, JoueurView, TournoiView, RapportView
 from base import BaseMenu
 
 
-class JoueurMenu(BaseMenu):
+class JoueurManager(BaseMenu):
     def __init__(self, modele_objet, vue_objet) -> None:
         super().__init__(modele_objet, vue_objet)
 
 
-class TournoiMenu(BaseMenu):
+class TournoiManager(BaseMenu):
     def __init__(self, modele_objet, vue_objet, num_tours=4, tour_actuel=0) -> None:
         super().__init__(modele_objet, vue_objet)
         self.paires = {}
@@ -92,7 +92,7 @@ class TournoiMenu(BaseMenu):
         return self.nombre_tours
 
 
-class RapportMenu:
+class RapportManager:
     def __init__(self, option_choisie) -> None:
         self.option_choisie = option_choisie
 
@@ -178,7 +178,7 @@ class Controleur:
                     menu_choisi=self.menu,
                 )
                 # option_choisie = vue_joueur.choix_option()
-                menu_joueur = JoueurMenu(
+                menu_joueur = JoueurManager(
                     modele_objet=modele_joueur, vue_objet=vue_joueur
                 )
                 menu_joueur.execution()
@@ -194,7 +194,7 @@ class Controleur:
                     menu_choisi=self.menu,
                 )
                 # option_choisie = vue_tournoi.choix_option()
-                menu_tournoi = TournoiMenu(
+                menu_tournoi = TournoiManager(
                     modele_objet=modele_tournoi, vue_objet=vue_tournoi
                 )
                 menu_tournoi.execution()
@@ -202,7 +202,7 @@ class Controleur:
             elif self.menu == "rapport":
                 vue_rapport = RapportView()
                 option_choisie = vue_rapport.choix_option()
-                menu_rapport = RapportMenu(
+                menu_rapport = RapportManager(
                     option_choisie=option_choisie,
                 )
                 menu_rapport.execution()
