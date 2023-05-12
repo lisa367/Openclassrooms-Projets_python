@@ -30,6 +30,7 @@ class TournoiMenu(BaseMenu):
 
     def ajouter(self):
         data = self.instance_vue.ajouter()
+
         data["joueurs"] = data.get("joueurs").strip().split()
         self.liste_joueurs = data["joueurs"]
         data["nombre_tours"] = self.set_num_tours()
@@ -39,6 +40,9 @@ class TournoiMenu(BaseMenu):
         data["liste_paires"] = []
         data["scores"] = {joueur: 0 for joueur in self.liste_joueurs}
         self.instance_modele.enregistrer_db(data)
+
+    def modifier(self):
+        pass
 
     def get_liste_joueurs(self):
         self.liste_joueurs = self.instance_vue.ajouter().joueurs
@@ -50,6 +54,7 @@ class TournoiMenu(BaseMenu):
         # print(tournoi_all_data)
         # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
+        print("tours : ", tournoi_tours)
         tournoi_joueurs = tournoi_all_data.get("joueurs")
         liste_paires = tournoi_all_data.get("liste_paires")
         tournoi_paires = [set(paire) for paire in liste_paires]
@@ -70,11 +75,11 @@ class TournoiMenu(BaseMenu):
 
         # 5. Enregistrer les modifications
         self.instance_modele.modifier_db(
-            data_dict={"nombre_tours": num}, id_value=id_tournoi
+            data_dict={"tour_actuel": num}, id_value=id_tournoi
         )
-        self.instance_modele.modifier_db(data_dict=tournoi_tours, id_value=id_tournoi)
-
-        # 6. Enregistrer le nouveau nombre de tours
+        self.instance_modele.modifier_db(
+            data_dict={"tours": tournoi_tours}, id_value=id_tournoi
+        )
 
         return tour_info
 
