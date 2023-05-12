@@ -51,7 +51,6 @@ class TournoiMenu(BaseMenu):
         # 1. Récupérer les données tournoi à modifier
         id_tournoi = self.instance_vue.get_id("modifier")
         tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)[0]
-        # print(tournoi_all_data)
         # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
         print("tours : ", tournoi_tours)
@@ -80,6 +79,10 @@ class TournoiMenu(BaseMenu):
         self.instance_modele.modifier_db(
             data_dict={"tours": tournoi_tours}, id_value=id_tournoi
         )
+        self.instance_modele.modifier_db(
+            data_dict={"scores": tour.scores}, id_value=id_tournoi
+        )
+        # self.instance_modele.modifier_db(data_dict={"scores": tour.scores}, id_value=id_tournoi)
 
         return tour_info
 
