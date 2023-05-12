@@ -69,7 +69,9 @@ class TournoiMenu(BaseMenu):
             tournoi_all_data["date_fin"] = tour_info["fin"]
 
         # 5. Enregistrer les modifications
-        self.instance_modele.modifier_db(data_dict=tournoi_tours, id_value=id_tournoi)
+        self.instance_modele.modifier_db(
+            data_dict={"nombre_tours": num}, id_value=id_tournoi
+        )
         self.instance_modele.modifier_db(data_dict=tournoi_tours, id_value=id_tournoi)
 
         # 6. Enregistrer le nouveau nombre de tours
