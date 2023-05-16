@@ -78,9 +78,16 @@ main {
 
 .movies-images {
     border: 1px solid blue;
+    width: 320px;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px;
 }
 
 .movies-images img {
     width: 70px;
     height: 70px;
+    margin: 0 5px;
 }
