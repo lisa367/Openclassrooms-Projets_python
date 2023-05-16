@@ -45,20 +45,20 @@ h1 {
 
 /* --------------------------------------------- */
 main {
-    height: 85%;
+    height: 90%;
     border: 1px solid red;
     justify-content: center;
 }
 
 #best_movie {
     border: 1px solid black;
-    height: 14rem;
+    height: 12rem;
     width: 100%;
 }
 
 .categories {
     border: 1px solid black;
-    height: 9rem;
+    height: 8.2rem;
     width: 100%
 }
 
