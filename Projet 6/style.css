@@ -78,8 +78,8 @@ main {
 
 .movies-images {
     border: 1px solid blue;
-    width: 320px;
-    height: 70px;
+    width: 60%;
+    height: 5rem;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
@@ -89,7 +89,7 @@ main {
 .cadre-img {
     border: 1px solid red;
     width: 100%;
-    height: 100;
+    height: 100%;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
@@ -97,7 +97,8 @@ main {
 }
 
 .movies-images img {
-    width: 70px;
-    height: 70px;
+    width: 7rem;
+    height: 100%;
     margin: 0 5px;
+    background-color: blueviolet;
 }
