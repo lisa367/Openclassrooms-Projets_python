@@ -49,20 +49,27 @@ h1 {
 /* --------------------------------------------- */
 main {
     height: 90%;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     justify-content: center;
 }
 
-#best-movie {
+nav {
     border-bottom: 1px solid grey;
-    height: 12rem;
-    width: 100%;
+}
+
+#best-movie {
+    border: 1px solid grey;
+    margin: auto;
+    height: 17rem;
+    width: 75%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 #play-button {
-    margin-left: 0.5rem;
+    margin-left: 1rem;
     padding: 0.2rem 1rem;
     background-color: red;
     border-radius: 5px 5px;
@@ -71,13 +78,19 @@ main {
     font-size: 1.2rem;
 }
 
+#best-movie h2,
+#best-movie p {
+    margin-left: 1rem;
+    color: white;
+}
+
 .categories {
     border: 1px solid black;
     height: 8.5rem;
     width: 100%;
 }
 
-.categories h2 {
+.categories h3 {
     /*border: 1px solid black;*/
     margin: 0;
 }
