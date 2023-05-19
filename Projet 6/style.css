@@ -106,13 +106,13 @@ main {
 
 /* --------------------------------------------- */
 
-.modal-hidden {
+.modal-background {
     visibility: hidden;
     width: 12rem;
     height: 7rem;
 }
 
-.modal-visible {
+.modal-window {
     transition: 2s;
     display: block;
     width: 15rem;
