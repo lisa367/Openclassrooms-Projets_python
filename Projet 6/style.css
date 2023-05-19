@@ -74,6 +74,10 @@ main {
     text-align: center;
 }
 
+.arrow {
+    border: 1px solid blue;
+}
+
 /* --------------------------------------------- */
 .movies {
     display: flex;
