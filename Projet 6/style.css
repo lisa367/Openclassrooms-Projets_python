@@ -14,6 +14,7 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
+    background-color: black;
 
 }
 
@@ -30,6 +31,7 @@ nav {
 
 h1 {
     margin-left: 0.5rem;
+    color: red;
 }
 
 #nav-right {
@@ -41,6 +43,7 @@ h1 {
 
 #nav-right p {
     border: 1px solid red;
+    color: white;
 }
 
 /* --------------------------------------------- */
@@ -50,10 +53,16 @@ main {
     justify-content: center;
 }
 
-#best_movie {
-    border: 1px solid black;
+#best-movie {
+    border-bottom: 1px solid grey;
     height: 12rem;
     width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#play-button {
+    margin-left: 0.5rem;
 }
 
 .categories {
@@ -74,11 +83,14 @@ main {
     text-align: center;
 }
 
-.arrow {
-    border: 1px solid blue;
-}
 
 /* --------------------------------------------- */
+.arrow-left,
+.arrow-right {
+    border: 1px solid blue;
+    color: white;
+}
+
 .movies {
     display: flex;
     justify-content: center;
