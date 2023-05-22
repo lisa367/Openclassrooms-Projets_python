@@ -1,27 +1,33 @@
 // document.getElementById("img1.1").style.backgroundColor = "blue";
 // document.querySelector("h1").innerHTML = "Hello";
 // document.querySelector("h1").style.color = "blue";
-const arrowLeft = document.getElementsByClassName("arrow-left");
-const arrowRight = document.getElementsByClassName("arrow-right");
+const arrowLeft = document.querySelector(".arrow-left");
+const arrowRight = document.querySelector(".arrow-right");
 
-const body = document.getElementsByTagName("body");
+const bdy = document.querySelector("body");
+const btn = document.getElementsByTagName("button");
+// bdy.style.backgroundColor = "blue";
+
 
 const cadreImg = document.getElementsByClassName("cadre-img");
 
 function changeBackgroundColor() {
-    body.style.backgroundColor = "pink";
+    bdy.style.backgroundColor = "pink";
 }
-
-arrowRight.onclick = changeBackgroundColor();
-const btn = document.getElementsByTagName("button");
-
+function revertBackgroundColor() {
+    bdy.style.backgroundColor = "pink";
+}
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
 
+arrowRight.onclick = changeBackgroundColor;
+arrowLeft.onclick = revertBackgroundColor;
+
+
 btn.addEventListener("click", () => {
     const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
-    body.style.backgroundColor = rndCol;
+    bdy.style.backgroundColor = rndCol;
 });
 
 arrowLeft.style.color = "red";
