@@ -1,11 +1,11 @@
 // document.getElementById("img1.1").style.backgroundColor = "blue";
 // document.querySelector("h1").innerHTML = "Hello";
 // document.querySelector("h1").style.color = "blue";
-const arrowLeft = document.getElementsByClassName("arrow-left")[0];
-const arrowRight = document.querySelectorAll(".arrow-right")[0];
+const arrowsLeft = document.querySelectorAll(".arrow-left");
+const arrowsRight = document.querySelectorAll(".arrow-right");
 
 const bdy = document.querySelector("body");
-const btn = document.getElementsByTagName("button");
+const btn = document.getElementsByTagName("button")[0];
 // bdy.style.backgroundColor = "blue";
 // btn.style.backgroundColor = "pink";
 
@@ -22,13 +22,29 @@ function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
 
-arrowRight.onclick = changeBackgroundColor;
-arrowLeft.onclick = revertBackgroundColor;
-arrowLeft.style.color = "red";
-
+arrowsRight[0].onclick = changeBackgroundColor;
+arrowsLeft[0].onclick = revertBackgroundColor;
+// arrowLeft.style.color = "red";
 
 btn.addEventListener("click", () => {
     const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     bdy.style.backgroundColor = rndCol;
+});
+
+/*function left(value, index, array) {
+    arrowsLeft[index].onclick = revertBackgroundColor;
+}
+function right(value, index, array) {
+    array[index].onclick = changeBackgroundColor;
+}
+arrowsLeft.forEach(element => {
+    // element.onclick = revertBackgroundColor;
+    console.log(element.innerHTML)
+});*/
+// arrowsRight.forEach(right);
+const list = [1, 2, 3, 4]
+//console.log(arrowsLeft)
+arrowsLeft.forEach(element => {
+    element.onclick = revertBackgroundColor;
 });
 
