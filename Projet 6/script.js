@@ -42,9 +42,12 @@ arrowsLeft.forEach(element => {
     console.log(element.innerHTML)
 });*/
 // arrowsRight.forEach(right);
-const list = [1, 2, 3, 4]
 //console.log(arrowsLeft)
 arrowsLeft.forEach(element => {
     element.onclick = revertBackgroundColor;
 });
+arrowsRight.forEach(element => {
+    element.onclick = changeBackgroundColor;
+});
+
 
