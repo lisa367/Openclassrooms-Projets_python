@@ -156,7 +156,14 @@ class RapportManager:
         tournoi = self.retreive_tournoi()
         if tournoi["tours"]:
             for tour in tournoi["tours"].values():
-                print(f"{tour['nom']} (du {tour['debut']} au {tour['fin']})")
+                print(f"---------------{tour['nom']}---------------")
+                for match in tour["matchs"]:
+                    joueur_1 = db_joueurs.search(Query().identifiant == match[0][0])[0]
+                    joueur_2 = db_joueurs.search(Query().identifiant == match[1][0])[0]
+                    # print(f"{tour['nom']} : {[match for match in tour['matchs']]}")
+                    print(
+                        f"{joueur_1['prenom'].title()} {joueur_1['nom'].upper()} ({match[0][1]} points) / {joueur_2['prenom'].title()} {joueur_2['nom'].upper()} ({match[1][1]} points)"
+                    )
         else:
             print("Il n'y a pas encore de tour enregitré pour ce tournoi.")
 
