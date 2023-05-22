@@ -116,8 +116,11 @@ class Tour:
 
     def resultat_match(self, paire_joueurs):
         match = []
-        joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
-        print(f"Match: {joueur_1} (joueur 1) vs {joueur_2} (joueur 2)")
+        joueur_1 = db_joueurs.search(Query().identifiant == paire_joueurs[0])[0]
+        joueur_2 = db_joueurs.search(Query().identifiant == paire_joueurs[1])[0]
+        print(
+            f"Match: {joueur_1['prenom'].title()} {joueur_1['nom'].upper()} (joueur 1) vs {joueur_2['prenom'].title()} {joueur_2['nom'].upper()} (joueur 2)"
+        )
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
 
         if match_nul == "oui":
