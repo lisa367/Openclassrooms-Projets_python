@@ -93,7 +93,8 @@ class Tour:
             ordered_players = [player for player in self.rank()]
             sublists = []
             while len(ordered_players) > 0:
-                if set(self.paires) != set(
+                # if set(self.paires) != set([paire for paire in combinations(self.liste_joueurs, 2)])
+                if len(self.paires) != len(
                     [paire for paire in combinations(self.liste_joueurs, 2)]
                 ):
                     for j in range(1, len(ordered_players)):
@@ -116,10 +117,11 @@ class Tour:
 
     def resultat_match(self, paire_joueurs):
         match = []
-        joueur_1 = db_joueurs.search(Query().identifiant == paire_joueurs[0])[0]
-        joueur_2 = db_joueurs.search(Query().identifiant == paire_joueurs[1])[0]
+        joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
+        nom_1 = db_joueurs.search(Query().identifiant == joueur_1)[0]
+        nom_2 = db_joueurs.search(Query().identifiant == joueur_2)[0]
         print(
-            f"Match: {joueur_1['prenom'].title()} {joueur_1['nom'].upper()} (joueur 1) vs {joueur_2['prenom'].title()} {joueur_2['nom'].upper()} (joueur 2)"
+            f"Match: {nom_1['prenom'].title()} {nom_1['nom'].upper()} (joueur 1) vs {nom_2['prenom'].title()} {nom_2['nom'].upper()} (joueur 2)"
         )
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
 
