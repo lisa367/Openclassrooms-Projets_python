@@ -1,12 +1,8 @@
-### MENUS ###
-# from modele import JoueurModel
-from .base import BaseView2, CHOIX_MENU, MENU_JOUEUR, MENU_TOURNOI, MENU_RAPPORT, menus
+from .base import BaseView2, CHOIX_MENU
 
 
 class MainView:
-    # menus = {"A": MENU_JOUEUR, "B": MENU_TOURNOI, "C": MENU_RAPPORT, "D": "Quitter"}
     cles = {"A": "joueur", "B": "tournoi", "C": "rapport", "D": "quitter"}
-    # options = {1: "ajouter", 2: "modifier", 3:"supprimer"}
 
     def __init__(self) -> None:
         self.menu_choisi = ""
@@ -50,9 +46,6 @@ class TournoiView(BaseView2):
         pass
 
 
-# instance_vue = JoueurView(labels=JoueurModel.headers, menu_choisi="joueur")
-
-
 class RapportView:
     def __init__(self) -> None:
         self.options = {
@@ -69,5 +62,5 @@ class RapportView:
         return BaseView2.choix_option(self)
 
     def get_id(self):
-        object_id = input(f"Veuillez renseigner le nom du tournoi : ")
+        object_id = input("Veuillez renseigner le nom du tournoi : ")
         return object_id

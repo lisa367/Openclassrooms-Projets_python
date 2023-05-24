@@ -58,7 +58,7 @@ class TournoiManager(BaseManager):
         tournoi_all_data = self.instance_modele.retreive_entry_db(id_tournoi)[0]
         # if tournoi_all_data
         tournoi_tours = tournoi_all_data.get("tours")
-        print("tours : ", tournoi_tours)
+        # print("tours : ", tournoi_tours)
         tournoi_joueurs = tournoi_all_data.get("joueurs")
         liste_paires = tournoi_all_data.get("liste_paires")
         tournoi_paires = [set(paire) for paire in liste_paires]

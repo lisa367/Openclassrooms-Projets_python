@@ -55,7 +55,7 @@ class BaseView2:
         menu = menus[self.menu_choisi]
 
         print("Choisissez une des options suivantes : ", menu, "\n")
-        reponse = input(f"Entrez le chiffre de l'option choisie : ")
+        reponse = input("Entrez le chiffre de l'option choisie : ")
         print("*" * 15)
         option_choisie = self.options.get(int(reponse), 0)
 
