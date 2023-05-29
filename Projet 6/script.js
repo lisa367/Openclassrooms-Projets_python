@@ -23,22 +23,27 @@ function revertBackgroundColor() {
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
-function moveRight() { 
-    cadreImg.style.transition = "1s";
-    cadreImg.style.transform = "translateX(50px)";
+function moveRight() {
+    cadreImg[0].style.transition = "1s";
+    cadreImg[0].style.transform = "translateX(20px)";
 }
-function moveLeft() { }
+function moveLeft() {
+    cadreImg[0].style.transition = "1s";
+    cadreImg[0].style.transform = "translateX(-10px)";
+}
 
 arrowsRight[0].onclick = moveRight;
 arrowsLeft[0].onclick = moveLeft;
-// arrowLeft.style.color = "red";
+
+
+/*
+arrowLeft.style.color = "red";
 
 btn.addEventListener("click", () => {
     const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     bdy.style.backgroundColor = rndCol;
 });
-
-/*function left(value, index, array) {
+function left(value, index, array) {
     arrowsLeft[index].onclick = revertBackgroundColor;
 }
 function right(value, index, array) {
@@ -48,8 +53,10 @@ arrowsLeft.forEach(element => {
     // element.onclick = revertBackgroundColor;
     console.log(element.innerHTML)
 });*/
+
 // arrowsRight.forEach(right);
 //console.log(arrowsLeft)
+/*
 arrowsLeft.forEach(element => {
     element.onclick = revertBackgroundColor;
 });
@@ -57,4 +64,4 @@ arrowsRight.forEach(element => {
     element.onclick = changeBackgroundColor;
 });
 
-
+*/
