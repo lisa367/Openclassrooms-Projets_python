@@ -10,7 +10,9 @@ const btn = document.getElementsByTagName("button")[0];
 // btn.style.backgroundColor = "pink";
 
 
-const cadreImg = document.getElementsByClassName("cadre-img");
+// const cadreImg = document.getElementsByClassName("cadre-img");
+const cadreImg = document.querySelectorAll(".cadre-img");
+
 
 function changeBackgroundColor() {
     bdy.style.backgroundColor = "pink";
@@ -21,7 +23,10 @@ function revertBackgroundColor() {
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
-function moveRight() { }
+function moveRight() { 
+    cadreImg.style.transition = "1s";
+    cadreImg.style.transform = "translateX(50px)";
+}
 function moveLeft() { }
 
 arrowsRight[0].onclick = moveRight;
