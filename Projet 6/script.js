@@ -21,9 +21,11 @@ function revertBackgroundColor() {
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
+function moveRight() { }
+function moveLeft() { }
 
-arrowsRight[0].onclick = changeBackgroundColor;
-arrowsLeft[0].onclick = revertBackgroundColor;
+arrowsRight[0].onclick = moveRight;
+arrowsLeft[0].onclick = moveLeft;
 // arrowLeft.style.color = "red";
 
 btn.addEventListener("click", () => {
