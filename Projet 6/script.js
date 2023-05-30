@@ -12,6 +12,7 @@ const btn = document.getElementsByTagName("button")[0];
 
 // const cadreImg = document.getElementsByClassName("cadre-img");
 const cadreImg = document.querySelectorAll(".cadre-img");
+const vignettes = document.querySelectorAll(".vignette");
 
 
 function changeBackgroundColor() {
@@ -25,15 +26,17 @@ function random(number) {
 }
 function moveRight() {
     cadreImg[0].style.transition = "1s";
-    cadreImg[0].style.transform = "translateX(20px)";
+    cadreImg[0].style.transform = "translateX(10%)";
 }
 function moveLeft() {
     cadreImg[0].style.transition = "1s";
-    cadreImg[0].style.transform = "translateX(-10px)";
+    cadreImg[0].style.transform = "translateX(-5%)";
 }
 
 arrowsRight[0].onclick = moveRight;
-arrowsLeft[0].onclick = moveLeft;
+arrowsLeft[0].onclick = function () { vignettes.forEach(element => {
+    element.onclick = revertBackgroundColor;
+}) };
 
 
 /*
