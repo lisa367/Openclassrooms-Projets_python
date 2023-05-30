@@ -30,13 +30,26 @@ function moveRight() {
 }
 function moveLeft() {
     cadreImg[0].style.transition = "1s";
-    cadreImg[0].style.transform = "translateX(-5%)";
+    cadreImg[0].style.transform = "translateX(-4%)";
 }
 
-arrowsRight[0].onclick = moveRight;
-arrowsLeft[0].onclick = function () { vignettes.forEach(element => {
-    element.onclick = revertBackgroundColor;
-}) };
+// arrowsRight[0].onclick = moveRight;
+// arrowsLeft[0].onclick = moveLeft;
+
+
+arrowsRight[0].onclick = function () {
+    let arr = new Array(vignettes.slice(0, 6))
+    arr.forEach(element => {
+        element.style.transition = "1s";
+        element.style.transform = "translateX(20%)";
+    })
+};
+arrowsLeft[0].onclick = function () {
+    vignettes.forEach(element => {
+        element.style.transition = "1s";
+        element.style.transform = "translateX(-5rem)";
+    })
+};
 
 
 /*
