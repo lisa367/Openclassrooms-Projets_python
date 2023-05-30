@@ -121,6 +121,7 @@ nav {
     width: 60%;
     height: 7rem;
     margin: 0 2rem;
+    overflow: hidden;
 }
 
 .cadre-img {
