@@ -51,6 +51,11 @@ arrowsLeft[0].onclick = function () {
     })
 };
 
+function scrollLeft(arrow) {
+    const i = document.id;
+    const index = parseInt(i);
+
+}
 
 /*
 arrowLeft.style.color = "red";
