@@ -35,15 +35,16 @@ h1 {
 }
 
 #nav-right {
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
     margin-right: 0.5rem;
     display: flex;
     justify-content: space-around;
 }
 
 #nav-right p {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     color: white;
+    margin-right: 5px;
 }
 
 /* --------------------------------------------- */
