@@ -3,8 +3,8 @@ const apiTest = "https://jsonplaceholder.typicode.com/users"
 
 console.log("Hello");
 
-async function get_info(url) {
-    const responseRaw = await fetch(url);
+async function get_info(parameter, value) {
+    const responseRaw = await fetch(`${apiUrl}/?${parameter}=${value}`);
     if (responseRaw.ok === true) {
         return responseRaw.json();
     }
@@ -13,7 +13,7 @@ async function get_info(url) {
 
 }
 
-const test = get_info(apiUrl);
+const test = get_info("sort_by", "imdb_score");
 console.log(test);
 
 
