@@ -1,20 +1,55 @@
-const apiUrl = "http://localhost:8000/api/v1/titles";
-const apiTest = "https://jsonplaceholder.typicode.com/users"
+async function main() {
 
-console.log("Hello");
+    const apiUrl = "http://localhost:8000/api/v1/titles";
 
-async function get_info(parameter, value) {
-    const responseRaw = await fetch(`${apiUrl}/?${parameter}=${value}`);
-    if (responseRaw.ok === true) {
-        return responseRaw.json();
+    console.log("Hello");
+
+    async function get_info(parameter, value) {
+        const responseRaw = await fetch(`${apiUrl}/?${parameter}=${value}`);
+        if (responseRaw.ok === true) {
+            const responseJson = await responseRaw.json();
+            return responseJson;
+        }
+        throw new Error("Oops !")
+
     }
-    // else { const response404 = "Oops !"; return response404 }
-    throw new Error("Oops !")
+    const bestMovie = await get_info("sort_by", "-imdb_score")
+    console.log(bestMovie.results[0]["image_url"])
 
+    const cat1 = await get_info("genre", "Comedie");
+    console.log(cat1);
+
+    const cat2 = await get_info("genre", "Romance");
+    console.log(cat2);
+
+    const cat3 = await get_info("genre", "Action");
+    console.log(cat3);
 }
 
-const test = get_info("sort_by", "imdb_score");
-console.log(test);
+main()
+/*
+let bestMovie2 = get_info("sort_by", "-imdb_score")
+    .then(r => r.results[0]);
+console.log();
+
+const cat1 = get_info("genre", "Comedie");
+console.log(cat1);
+
+const cat2 = get_info("genre", "Romance");
+console.log(cat2);
+
+const cat3 = get_info("genre", "Action");
+console.log(cat3);
+
+const r = fetch(apiUrl)
+    .then(r => r.json())
+    .then(body => console.log(body.results[0]["image_url"]))
+*/
+// const data = bestMovie.get("response");
+// console.log(data);
+
+// const bestMovieDiv = document.getElementById("best-movie");
+// bestMovieDiv.style.backgroundImage = 'url("")';
 
 
 /*
@@ -50,8 +85,12 @@ async function get_info(parameter, value) {
     throw new Error("Oops !")
 
 }
-const best_movie = get_info("genre", "Romance");
+const romance = get_info("genre", "Romance");
 console.log(best_movie);
+
+const best_movie = get_info("sort_by", "-imdb_score");
+const data = best_movie[0];
+console.log(data);
 */
 
 // const imageFrame = document.getElementById("img1.1");
