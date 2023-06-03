@@ -13,17 +13,22 @@ async function main() {
         throw new Error("Oops !")
 
     }
-    const bestMovie = await get_info("sort_by", "-imdb_score")
-    console.log(bestMovie.results[0]["image_url"])
+    const bestMovie = await get_info("sort_by", "-imdb_score");
+    const img = bestMovie.results[0]["image_url"];
+    console.log(img)
 
     const cat1 = await get_info("genre", "Comedie");
-    console.log(cat1);
+    console.log(cat1.results);
 
     const cat2 = await get_info("genre", "Romance");
-    console.log(cat2);
+    console.log(cat2.results);
 
     const cat3 = await get_info("genre", "Action");
-    console.log(cat3);
+    console.log(cat3.results);
+
+    const bestMovieDiv = document.getElementById("best-movie");
+    bestMovieDiv.style.backgroundImage = "url(img)";
+    console.log(bestMovieDiv.style.backgroundImage)
 }
 
 main()
