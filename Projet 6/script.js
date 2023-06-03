@@ -39,10 +39,13 @@ function moveLeft() {
 
 arrowsRight[0].onclick = function () {
     let arr = new Array(vignettes.slice(0, 6))
+    /*
     arr.forEach(element => {
         element.style.transition = "1s";
         element.style.transform = "translateX(20%)";
+        
     })
+    */
 };
 arrowsLeft[0].onclick = function () {
     vignettes.forEach(element => {
