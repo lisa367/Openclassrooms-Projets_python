@@ -91,20 +91,29 @@ class Tour:
 
         else:
             ordered_players = [player for player in self.rank()]
+            print(f"Paires: {self.paires}")
+            print(f"Ordered players: {ordered_players}", "\n")
+            combinations_tuples = [
+                paire for paire in combinations(self.liste_joueurs, 2)
+            ]
+            all_possible_paires = [set(paire) for paire in combinations_tuples]
+            print(f"All possible pairs : {all_possible_paires}")
             sublists = []
-            while len(ordered_players) > 0:
+            while len(all_possible_paires) > 0:
+                # while len(ordered_players) > 0:
                 # if set(self.paires) != set([paire for paire in combinations(self.liste_joueurs, 2)])
-                if len(self.paires) != len(
-                    [paire for paire in combinations(self.liste_joueurs, 2)]
-                ):
+                # if len(self.paires) != len([paire for paire in combinations(self.liste_joueurs, 2)]):
+                if len(self.paires) != len(all_possible_paires):
                     for j in range(1, len(ordered_players)):
                         new_paire = {ordered_players[0], ordered_players[0 + j]}
+                        print(f"{new_paire}: {new_paire in self.paires}")
                         if new_paire in self.paires:
                             continue
                         else:
                             sublists.append(new_paire)
-                            ordered_players.pop(0 + j)
-                            ordered_players.pop(0)
+                            all_possible_paires.remove(new_paire)
+                            # ordered_players.pop(0 + j)
+                            # ordered_players.pop(0)
                             break
                 else:
                     ordered_players = []
