@@ -91,32 +91,39 @@ class Tour:
 
         else:
             ordered_players = [player for player in self.rank()]
-            print(f"Paires: {self.paires}")
+            print(f"Paires : {len(self.paires)}")
             print(f"Ordered players: {ordered_players}", "\n")
             combinations_tuples = [
                 paire for paire in combinations(self.liste_joueurs, 2)
             ]
             all_possible_paires = [set(paire) for paire in combinations_tuples]
-            print(f"All possible pairs : {all_possible_paires}")
+            print(f"All possible pairs : {len(all_possible_paires)}")
             sublists = []
-            while len(all_possible_paires) > 0:
+            while len(ordered_players) > 0:
                 # while len(ordered_players) > 0:
+                # len(self.paires) != len(all_possible_paires)
                 # if set(self.paires) != set([paire for paire in combinations(self.liste_joueurs, 2)])
                 # if len(self.paires) != len([paire for paire in combinations(self.liste_joueurs, 2)]):
                 if len(self.paires) != len(all_possible_paires):
                     for j in range(1, len(ordered_players)):
-                        new_paire = {ordered_players[0], ordered_players[0 + j]}
-                        print(f"{new_paire}: {new_paire in self.paires}")
-                        if new_paire in self.paires:
-                            continue
-                        else:
-                            sublists.append(new_paire)
-                            all_possible_paires.remove(new_paire)
-                            # ordered_players.pop(0 + j)
-                            # ordered_players.pop(0)
-                            break
+                        if j != (len(ordered_players) - 1):
+                            new_paire = {ordered_players[0], ordered_players[0 + j]}
+                            print(f"{new_paire}: {new_paire in self.paires}")
+                            if new_paire in self.paires:
+                                continue
+                            else:
+                                sublists.append(new_paire)
+                                # all_possible_paires.remove(new_paire)
+                                ordered_players.pop(0 + j)
+                                ordered_players.pop(0)
+                                break
+                    else:
+                        ordered_players = []
+                        print("all possible pairs reached")
                 else:
-                    ordered_players = []
+                    sublists.append(new_paire)
+                    ordered_players.pop(0 + j)
+                    ordered_players.pop(0)
 
         self.paires.extend(sublists)
         print(
