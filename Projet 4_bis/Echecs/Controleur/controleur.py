@@ -65,35 +65,46 @@ class TournoiManager(BaseManager):
         tournoi_scores = tournoi_all_data.get("scores")
         num = tournoi_all_data.get("tour_actuel") + 1
 
-        # 2. Récupérer les informations du tour
-        tour = Tour(num, tournoi_joueurs, tournoi_paires, tournoi_scores)
-        tour.resultat_tour()
-        tour_info = tour.get_tour_info()
+        if num > tournoi_all_data["nombre_tours"]:
+            print(
+                """Le nombre maximal de tours a été atteint.
+Si vous souhaiter ajouter un tour supplémentaire, commencez par modifier le nombre de tours du tournoi."""
+            )
 
-        # 3. Ajouter les info du tour aux données du tournoi
-        tournoi_tours[int(num)] = tour_info
+        else:
+            # 2. Récupérer les informations du tour
+            tour = Tour(num, tournoi_joueurs, tournoi_paires, tournoi_scores)
+            tour.resultat_tour()
+            tour_info = tour.get_tour_info()
 
-        # 4. Date de fin du tournoi
-        if num == tournoi_all_data["nombre_tours"]:
-            tournoi_all_data["date_fin"] = tour_info["fin"]
+            # 3. Ajouter les info du tour aux données du tournoi
+            tournoi_tours[int(num)] = tour_info
 
-        # 5. Enregistrer les modifications
-        self.instance_modele.modifier_db(
-            data_dict={"tour_actuel": num}, id_value=id_tournoi
-        )
-        self.instance_modele.modifier_db(
-            data_dict={"tours": tournoi_tours}, id_value=id_tournoi
-        )
-        self.instance_modele.modifier_db(
-            data_dict={"scores": tour.scores}, id_value=id_tournoi
-        )
-        # print([list(paire) for paire in tour.paires])
-        self.instance_modele.modifier_db(
-            data_dict={"liste_paires": [list(paire) for paire in tour.paires]},
-            id_value=id_tournoi,
-        )
+            # 4. Date de fin du tournoi
+            if num == tournoi_all_data["nombre_tours"]:
+                # tournoi_all_data["date_fin"] = tour_info["fin"]
+                fin_tournoi = tour_info["fin"].split("_")[0]
+                self.instance_modele.modifier_db(
+                    data_dict={"date_fin": fin_tournoi}, id_value=id_tournoi
+                )
 
-        return tour_info
+            # 5. Enregistrer les modifications
+            self.instance_modele.modifier_db(
+                data_dict={"tour_actuel": num}, id_value=id_tournoi
+            )
+            self.instance_modele.modifier_db(
+                data_dict={"tours": tournoi_tours}, id_value=id_tournoi
+            )
+            self.instance_modele.modifier_db(
+                data_dict={"scores": tour.scores}, id_value=id_tournoi
+            )
+            # print([list(paire) for paire in tour.paires])
+            self.instance_modele.modifier_db(
+                data_dict={"liste_paires": [list(paire) for paire in tour.paires]},
+                id_value=id_tournoi,
+            )
+
+            return tour_info
 
     def set_num_tours(self):
         if self.instance_vue.changer_num_tours() == "oui":

@@ -106,29 +106,28 @@ class Tour:
                 # if len(self.paires) != len([paire for paire in combinations(self.liste_joueurs, 2)]):
                 if len(self.paires) != len(all_possible_paires):
                     for j in range(1, len(ordered_players)):
-                        if j != (len(ordered_players) - 1):
-                            new_paire = {ordered_players[0], ordered_players[0 + j]}
-                            print(f"{new_paire}: {new_paire in self.paires}")
-                            if new_paire in self.paires:
-                                continue
-                            else:
-                                sublists.append(new_paire)
-                                # all_possible_paires.remove(new_paire)
-                                ordered_players.pop(0 + j)
-                                ordered_players.pop(0)
-                                break
+                        # if j != (len(ordered_players) - 1):
+                        new_paire = {ordered_players[0], ordered_players[0 + j]}
+                        print(f"{new_paire}: {new_paire in self.paires}")
+                        if new_paire in self.paires:
+                            continue
+                        else:
+                            sublists.append(new_paire)
+                            ordered_players.pop(0 + j)
+                            ordered_players.pop(0)
+                            break
                     else:
                         ordered_players = []
-                        print("all possible pairs reached")
+                        # print("all possible pairs reached")
                 else:
-                    sublists.append(new_paire)
-                    ordered_players.pop(0 + j)
-                    ordered_players.pop(0)
+                    for j in range(1, len(ordered_players)):
+                        new_paire = {ordered_players[0], ordered_players[0 + 1]}
+                        sublists.append(new_paire)
+                        ordered_players.pop(0 + 1)
+                        ordered_players.pop(0)
 
         self.paires.extend(sublists)
-        print(
-            f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}"
-        )
+        # print(f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}")
         return sublists
 
     def resultat_match(self, paire_joueurs):

@@ -1,4 +1,5 @@
 .env/*
 Databases/
+flake-report/
 
 __pycache__
