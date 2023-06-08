@@ -42,14 +42,16 @@ class TournoiView(BaseView2):
             num_tour = input("Veuillez entrer un nombre entier : ").strip()
         return int(num_tour)
 
-    def match(self):
+    @staticmethod
+    def match():
         match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
         return match_nul
 
-    def gagner(self, joueur1, joueur2):
+    @staticmethod
+    def gagner(joueur1, joueur2):
         gagnant = input(
-                    f"Quel joueur a remporté le match ? Rentrez 1 pour {joueur1} ou 2 pour {joueur2}: "
-                ).strip()
+            f"Quel joueur a remporté le match ? Rentrez 1 pour {joueur1} ou 2 pour {joueur2}: "
+        ).strip()
         return gagnant
 
 

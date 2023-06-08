@@ -1,13 +1,10 @@
 from tinydb import Query
+from datetime import timedelta, datetime as dt
+from itertools import combinations
+import random
 import sys
 
-from Modele.modele import (
-    JoueurModel,
-    TournoiModel,
-    db_joueurs,
-    db_tournois,
-    Tour,
-)
+from Modele.modele import JoueurModel, TournoiModel, db_joueurs, db_tournois
 from Vue.vue import MainView, JoueurView, TournoiView, RapportView
 from .base import BaseManager
 
@@ -15,6 +12,123 @@ from .base import BaseManager
 class JoueurManager(BaseManager):
     def __init__(self, modele_objet, vue_objet) -> None:
         super().__init__(modele_objet, vue_objet)
+
+
+class Tour:
+    def __init__(self, round_num, liste_joueurs, paires_list, scores_dict):
+        self.round = round_num
+        self.nom = f"Round {self.round}"
+        self.liste_joueurs = liste_joueurs
+        self.debut = dt.now().strftime("%d/%m/%Y_%H:%M")
+        self.fin = ""
+        self.matchs = []
+        self.paires = paires_list
+        self.scores = scores_dict
+        # self.scores = {joueur: 0 for joueur in self.liste_joueurs}
+        self.ranking = []
+        self.tour_info = {}
+
+    def set_fin_tour(self):
+        self.fin = (dt.now() + timedelta(hours=1)).strftime("%d/%m/%Y_%H:%M")
+        return self.fin
+
+    def rank(self):
+        self.ranking = sorted(self.scores, key=lambda joueur: self.scores[joueur])
+        return self.ranking
+
+    def generation_paires(self):
+        liste_joueurs = self.liste_joueurs
+        if self.round == 1:
+            random.shuffle(liste_joueurs)
+            sublists = [
+                set(liste_joueurs[i : i + 2]) for i in range(0, len(liste_joueurs), 2)
+            ]
+
+        else:
+            ordered_players = [player for player in self.rank()]
+            # print(f"Paires : {len(self.paires)}")
+            # print(f"Ordered players: {ordered_players}", "\n")
+            combinations_tuples = [
+                paire for paire in combinations(self.liste_joueurs, 2)
+            ]
+            all_possible_paires = [set(paire) for paire in combinations_tuples]
+            # print(f"All possible pairs : {len(all_possible_paires)}")
+            sublists = []
+            while len(ordered_players) > 0:
+                if len(self.paires) != len(all_possible_paires):
+                    for j in range(1, len(ordered_players)):
+                        # if j != (len(ordered_players) - 1):
+                        new_paire = {ordered_players[0], ordered_players[0 + j]}
+                        # print(f"{new_paire}: {new_paire in self.paires}")
+                        if new_paire in self.paires:
+                            continue
+                        else:
+                            sublists.append(new_paire)
+                            ordered_players.pop(0 + j)
+                            ordered_players.pop(0)
+                            break
+                    else:
+                        ordered_players = []
+                        # print("all possible pairs reached")
+                else:
+                    for j in range(1, len(ordered_players)):
+                        new_paire = {ordered_players[0], ordered_players[0 + 1]}
+                        sublists.append(new_paire)
+                        ordered_players.pop(0 + 1)
+                        ordered_players.pop(0)
+
+        self.paires.extend(sublists)
+        # print(f"Les paires de joueurs pour les matchs du tour sont les suivantes : {sublists}")
+        return sublists
+
+    def resultat_match(self, paire_joueurs):
+        match = []
+        joueur_1, joueur_2 = paire_joueurs[0], paire_joueurs[1]
+        nom_1 = db_joueurs.search(Query().identifiant == joueur_1)[0]
+        nom_2 = db_joueurs.search(Query().identifiant == joueur_2)[0]
+        print(
+            f"Match: {nom_1['prenom'].title()} {nom_1['nom'].upper()} (joueur 1) vs {nom_2['prenom'].title()} {nom_2['nom'].upper()} (joueur 2)"
+        )
+        # match_nul = input("Match nul ? Répondez par oui ou par non :").lower().strip()
+        match_nul = TournoiView.match()
+
+        if match_nul == "oui":
+            match.append((joueur_1, 0.5))
+            match.append((joueur_2, 0.5))
+            self.scores[joueur_1] += 0.5
+            self.scores[joueur_2] += 0.5
+
+        else:
+            # gagnant = input("Quel joueur a remporté le match ? Rentrez 1 pour le joueur 1 ou 2 pour le joueur 2 : ").strip()
+            gagnant = TournoiView.gagner(joueur_1, joueur_2)
+            while not gagnant.isdigit() and (gagnant == "1" or gagnant == "2"):
+                print("Ceci n'est pas une entrée valide.")
+                gagnant = TournoiView.gagner()
+            score_1 = 1 if int(gagnant) == 1 else 0
+            score_2 = 1 if int(gagnant) == 2 else 0
+            match.append((joueur_1, score_1))
+            match.append((joueur_2, score_2))
+            self.scores[joueur_1] += score_1
+            self.scores[joueur_2] += score_2
+
+        self.matchs.append(match)
+        # print(match)
+        return match
+
+    def get_tour_info(self):
+        self.tour_info["nom"] = self.nom
+        self.tour_info["debut"] = self.debut
+        self.tour_info["fin"] = self.fin
+        self.tour_info["matchs"] = self.matchs
+
+        return self.tour_info
+
+    def resultat_tour(self):
+        set_paires = self.generation_paires()
+        for paire in set_paires:
+            self.resultat_match(list(paire))
+
+        self.set_fin_tour()
 
 
 class TournoiManager(BaseManager):
