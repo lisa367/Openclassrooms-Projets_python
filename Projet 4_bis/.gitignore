@@ -1,6 +1,5 @@
 .env/*
 Databases/
-flake-report/
 Livrables/
 
 __pycache__
