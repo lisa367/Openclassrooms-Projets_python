@@ -27,7 +27,8 @@ async function main() {
     console.log(cat3.results);
 
     const bestMovieDiv = document.getElementById("best-movie");
-    bestMovieDiv.style.backgroundImage = "url(img)";
+    // bestMovieDiv.style.backgroundImage = "url(img)";
+    bestMovieDiv.style.backgroundImage = `url(${img})`;
     console.log(bestMovieDiv.style.backgroundImage)
 }
 
