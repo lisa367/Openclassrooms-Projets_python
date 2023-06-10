@@ -13,6 +13,7 @@ const btn = document.getElementsByTagName("button")[0];
 // const cadreImg = document.getElementsByClassName("cadre-img");
 const cadreImg = document.querySelectorAll(".cadre-img");
 const vignettes = document.querySelectorAll(".vignette");
+const div = document.querySelector(".movies-images");
 
 
 function changeBackgroundColor() {
@@ -38,20 +39,20 @@ function moveLeft() {
 
 
 arrowsRight[0].onclick = function () {
-    let arr = new Array(vignettes.slice(0, 6))
-    /*
-    arr.forEach(element => {
+    /*.forEach(element => {
         element.style.transition = "1s";
-        element.style.transform = "translateX(20%)";
-        
-    })
-    */
+        element.style.transform = "translateX(-5rem)";})*/
+    div.style.transition = "1s";
+    div.style.transform = "translateX(5rem)";
+
 };
 arrowsLeft[0].onclick = function () {
-    vignettes.forEach(element => {
+    /*vignettes.forEach(element => {
         element.style.transition = "1s";
         element.style.transform = "translateX(-5rem)";
-    })
+    })*/
+    div.style.transition = "1s";
+    div.style.transform = "translateX(-5rem)";
 };
 
 function scrollLeft(arrow) {
