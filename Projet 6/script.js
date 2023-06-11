@@ -25,35 +25,28 @@ function revertBackgroundColor() {
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
-function moveRight() {
-    cadreImg[0].style.transition = "1s";
-    cadreImg[0].style.transform = "translateX(10%)";
+function moveRight(i) {
+    cadreImg[i].style.transition = "1s";
+    cadreImg[i].style.transform = "translateX(5rem)";
 }
-function moveLeft() {
-    cadreImg[0].style.transition = "1s";
-    cadreImg[0].style.transform = "translateX(-4%)";
+function moveLeft(i) {
+    cadreImg[i].style.transition = "1s";
+    cadreImg[i].style.transform = "translateX(-5rem)";
 }
 
 // arrowsRight[0].onclick = moveRight;
 // arrowsLeft[0].onclick = moveLeft;
+for (let i of [0, 1, 2, 3]) {
+    arrowsRight[i].onclick = function () {
+        moveRight(i);
+
+    };
+    arrowsLeft[i].onclick = function () {
+        moveLeft(i);
+    };
+}
 
 
-arrowsRight[0].onclick = function () {
-    /*.forEach(element => {
-        element.style.transition = "1s";
-        element.style.transform = "translateX(-5rem)";})*/
-    div.style.transition = "1s";
-    div.style.transform = "translateX(5rem)";
-
-};
-arrowsLeft[0].onclick = function () {
-    /*vignettes.forEach(element => {
-        element.style.transition = "1s";
-        element.style.transform = "translateX(-5rem)";
-    })*/
-    div.style.transition = "1s";
-    div.style.transform = "translateX(-5rem)";
-};
 
 function scrollLeft(arrow) {
     const i = document.id;
@@ -88,5 +81,23 @@ arrowsLeft.forEach(element => {
 arrowsRight.forEach(element => {
     element.onclick = changeBackgroundColor;
 });
+
+arrowsRight[0].onclick = function () {
+        //.forEach(element => {
+            element.style.transition = "1s";
+            element.style.transform = "translateX(-5rem)";})//
+            div.style.transition = "1s";
+            div.style.transform = "translateX(5rem)";
+    
+        };
+arrowsLeft[0].onclick = function () {
+        //vignettes.forEach(element => {
+            element.style.transition = "1s";
+            element.style.transform = "translateX(-5rem)";
+            })//
+            div.style.transition = "1s";
+            div.style.transform = "translateX(-5rem)";
+        };
+    }
 
 */
