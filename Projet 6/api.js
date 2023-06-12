@@ -15,9 +15,11 @@ async function main() {
     }
     const bestMovie = await get_info("sort_by", "-imdb_score");
     const img = bestMovie.results[0]["image_url"];
-    console.log(img)
+    const title = bestMovie.results[0]["title"];
+    const description = bestMovie.results[0]["image_url"];
+    //console.log(img)
 
-    const cat1 = await get_info("genre", "Comedie");
+    const cat1 = await get_info("genre", "Drama");
     console.log(cat1.results);
 
     const cat2 = await get_info("genre", "Romance");
@@ -28,8 +30,12 @@ async function main() {
 
     const bestMovieDiv = document.getElementById("best-movie");
     // bestMovieDiv.style.backgroundImage = "url(img)";
-    bestMovieDiv.style.backgroundImage = `url(${img})`;
-    console.log(bestMovieDiv.style.backgroundImage)
+    bestMovieDiv.style.background = `url(${img}) no-repeat`;
+    bestMovieDiv.style.backgroundSize = `cover`;
+    //bestMovieDiv.style.backgroundSize = `${bestMovieDiv.getBoundingClientRect()['width']}px ${bestMovieDiv.getBoundingClientRect()['height']}px `;
+    //console.log(bestMovieDiv.getBoundingClientRect())
+    //console.log(bestMovieDiv.getBoundingClientRect()['width'])
+    //console.log(bestMovieDiv.getBoundingClientRect()['height'])
 }
 
 main()
