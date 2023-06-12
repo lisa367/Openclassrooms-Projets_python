@@ -1,3 +1,12 @@
+const category1 = "Comedy";
+const category2 = "Romance";
+const category3 = "Action";
+const vignettes_num = [0, 1, 2, 3, 4, 5, 6];
+
+document.getElementById("title-cat1").innerHTML = category1
+document.getElementById("title-cat2").innerHTML = category2
+document.getElementById("title-cat3").innerHTML = category3
+
 async function main() {
 
     const apiUrl = "http://localhost:8000/api/v1/titles";
@@ -19,19 +28,11 @@ async function main() {
     const description = bestMovie.results[0]["genres"] + ", " + bestMovie.results[0]["year"];
     //console.log(img)
 
-    const cat1 = await get_info("genre", "Drama");
-    console.log(cat1.results);
-
-    const cat2 = await get_info("genre", "Romance");
-    console.log(cat2.results);
-
-    const cat3 = await get_info("genre", "Action");
-    console.log(cat3.results);
 
     const bestMovieDiv = document.getElementById("best-movie");
     const bestMovieTitle = document.getElementById("best-title");
     const bestMovieDescription = document.getElementById("best-description");
-    // bestMovieDiv.style.backgroundImage = "url(img)";
+
     bestMovieDiv.style.background = `url(${img}) no-repeat`;
     bestMovieDiv.style.backgroundSize = `cover`;
     bestMovieTitle.innerHTML = title
@@ -40,6 +41,16 @@ async function main() {
     //console.log(bestMovieDiv.getBoundingClientRect())
     //console.log(bestMovieDiv.getBoundingClientRect()['width'])
     //console.log(bestMovieDiv.getBoundingClientRect()['height'])
+
+
+    const cat1 = await get_info("genre", `${category1}`);
+    console.log(cat1.results);
+
+    const cat2 = await get_info("genre", `${category2}`);
+    console.log(cat2.results);
+
+    const cat3 = await get_info("genre", `${category3}`);
+    console.log(cat3.results);
 }
 
 main()
