@@ -59,7 +59,7 @@ nav {
 }
 
 #best-movie {
-    border: 1px solid grey;
+    /*border: 1px solid grey;*/
     margin: auto;
     height: 17rem;
     width: 75%;
@@ -86,7 +86,8 @@ nav {
 }
 
 .categories {
-    border: 1px solid black;
+    /* border: 1px solid white;*/
+    margin-top: 1rem;
     height: 8.5rem;
     width: 100%;
 }
