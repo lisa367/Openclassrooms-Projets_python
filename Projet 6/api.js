@@ -16,7 +16,7 @@ async function main() {
     const bestMovie = await get_info("sort_by", "-imdb_score");
     const img = bestMovie.results[0]["image_url"];
     const title = bestMovie.results[0]["title"];
-    const description = bestMovie.results[0]["image_url"];
+    const description = bestMovie.results[0]["genres"] + ", " + bestMovie.results[0]["year"];
     //console.log(img)
 
     const cat1 = await get_info("genre", "Drama");
@@ -29,9 +29,13 @@ async function main() {
     console.log(cat3.results);
 
     const bestMovieDiv = document.getElementById("best-movie");
+    const bestMovieTitle = document.getElementById("best-title");
+    const bestMovieDescription = document.getElementById("best-description");
     // bestMovieDiv.style.backgroundImage = "url(img)";
     bestMovieDiv.style.background = `url(${img}) no-repeat`;
     bestMovieDiv.style.backgroundSize = `cover`;
+    bestMovieTitle.innerHTML = title
+    bestMovieDescription.innerHTML = description
     //bestMovieDiv.style.backgroundSize = `${bestMovieDiv.getBoundingClientRect()['width']}px ${bestMovieDiv.getBoundingClientRect()['height']}px `;
     //console.log(bestMovieDiv.getBoundingClientRect())
     //console.log(bestMovieDiv.getBoundingClientRect()['width'])
