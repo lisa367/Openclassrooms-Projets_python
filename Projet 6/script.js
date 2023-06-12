@@ -13,7 +13,7 @@ const btn = document.getElementsByTagName("button")[0];
 // const cadreImg = document.getElementsByClassName("cadre-img");
 const cadreImg = document.querySelectorAll(".cadre-img");
 const vignettes = document.querySelectorAll(".vignette");
-const div = document.querySelector(".movies-images");
+// const div = document.querySelector(".movies-images");
 
 
 function changeBackgroundColor() {
@@ -26,19 +26,33 @@ function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
 function moveRight(i) {
-    cadreImg[i].style.transition = "1s";
-    cadreImg[i].style.transform = "translateX(5rem)";
+    const originalX = cadreImg[i].getBoundingClientRect()["x"];
+    let newX = originalX;
+    // console.log(cadreImg[i].getBoundingClientRect())
+    cadreImg[i].style.transition = "1.5s";
+    cadreImg[i].style.transform = `translateX(${newX + (5 * 12)}px)`;
+    newX += (5 * 16);
+    // console.log(originalX);
+    //console.log(newX);
+    // console.log(cadreImg[i].getBoundingClientRect())
 }
 function moveLeft(i) {
-    cadreImg[i].style.transition = "1s";
-    cadreImg[i].style.transform = "translateX(-5rem)";
+    // console.log(cadreImg[i].getBoundingClientRect())
+    const originalX = cadreImg[i].getBoundingClientRect()["x"];
+    let newX = originalX;
+    // console.log(cadreImg[i].getBoundingClientRect())
+    cadreImg[i].style.transition = "1.5s";
+    cadreImg[i].style.transform = `translateX(-${newX + (5 * 12)}px)`;
+    newX -= (5 * 16);
+    // console.log(ori
+    // console.log(cadreImg[i].getBoundingClientRect())
 }
 
 // arrowsRight[0].onclick = moveRight;
 // arrowsLeft[0].onclick = moveLeft;
 for (let i of [0, 1, 2, 3]) {
     arrowsRight[i].onclick = function () {
-        moveRight(i);
+        moveRight(i)
 
     };
     arrowsLeft[i].onclick = function () {
