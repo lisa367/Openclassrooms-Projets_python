@@ -13,7 +13,16 @@ const btn = document.getElementsByTagName("button")[0];
 // const cadreImg = document.getElementsByClassName("cadre-img");
 const cadreImg = document.querySelectorAll(".cadre-img");
 const vignettes = document.querySelectorAll(".vignette");
+const modalWindow = document.getElementById("#modal-window");
 // const div = document.querySelector(".movies-images");
+
+function displayModalWindow() {
+    modalWindow.setAttribute("class", "modal-visible");
+}
+
+vignettes.forEach(element => {
+    element.onclick = displayModalWindow;
+})
 
 
 function changeBackgroundColor() {
