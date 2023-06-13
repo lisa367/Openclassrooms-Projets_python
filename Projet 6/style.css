@@ -148,13 +148,16 @@ nav {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.modal-background {
+.modal-hidden {
     visibility: hidden;
-    width: 12rem;
-    height: 7rem;
+    /*width: 12rem;
+    height: 7rem;*/
+}
+.modal-visible {
+    visibility: visible;
 }
 
-.modal-window {
+#modal-window {
     transition: 2s;
     display: block;
     width: 15rem;
