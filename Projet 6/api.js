@@ -45,15 +45,15 @@ async function main() {
 
 
     const cat1 = await get_info("genre", `${category1}`);
-    const cat1Movies = cat1.results.slice(0,7);
+    const cat1Movies = cat1.results.slice(0, 7);
     // console.log(cat1.results);
 
     const cat2 = await get_info("genre", `${category2}`);
-    const cat2Movies = cat2.results.slice(0,7);
+    const cat2Movies = cat2.results.slice(0, 7);
     // console.log(cat2.results);
 
     const cat3 = await get_info("genre", `${category3}`);
-    const cat3Movies = cat3.results.slice(0,7);
+    const cat3Movies = cat3.results.slice(0, 7);
     // console.log(cat3.results);
 
     return [bestMovies, cat1Movies, cat2Movies, cat3Movies];
@@ -71,5 +71,7 @@ const cat3Movies = apiCall[3];
 for (let i of vignettes_num) {
     const vignette = document.getElementById(`img1.${i}`);
     const imgUrl = bestMovies[i]["image_url"];
-    
+    const title = bestMovies[i]["title"];
+    vignette.setAttribute("src", imgUrl);
+    vignette.setAttribute("alt", title);
 }
