@@ -26,7 +26,7 @@ async function main() {
     const bestMovies = bestImdb.results
     const imgBest = bestMovies.results[0]["image_url"];
     const titleBest = bestMovies.results[0]["title"];
-    const descriptionBest = bestMovies.results[0]["genres"] + ", " + bestMovie.results[0]["year"];
+    const descriptionBest = bestMovies.results[0]["genres"] + ", " + bestMovies.results[0]["year"];
     //console.log(img)
 
 
@@ -45,15 +45,15 @@ async function main() {
 
 
     const cat1 = await get_info("genre", `${category1}`);
-    const cat1Movies = cat1.results;
+    const cat1Movies = cat1.results.slice(0,7);
     // console.log(cat1.results);
 
     const cat2 = await get_info("genre", `${category2}`);
-    const cat2Movies = cat2.results;
+    const cat2Movies = cat2.results.slice(0,7);
     // console.log(cat2.results);
 
     const cat3 = await get_info("genre", `${category3}`);
-    const cat3Movies = cat3.results;
+    const cat3Movies = cat3.results.slice(0,7);
     // console.log(cat3.results);
 
     return [bestMovies, cat1Movies, cat2Movies, cat3Movies];
@@ -63,7 +63,13 @@ const apiCall = main();
 
 
 
-const bestArray = apiCall[0];
+const bestMovies = apiCall[0];
 const cat1Movies = apiCall[1];
 const cat2Movies = apiCall[2];
 const cat3Movies = apiCall[3];
+
+for (let i of vignettes_num) {
+    const vignette = document.getElementById(`img1.${i}`);
+    const imgUrl = bestMovies[i]["image_url"];
+    
+}
