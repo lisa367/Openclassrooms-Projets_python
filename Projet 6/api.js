@@ -1,7 +1,7 @@
 const category1 = "Comedy";
 const category2 = "Romance";
 const category3 = "Action";
-const vignettes_num = [0, 1, 2, 3, 4, 5, 6];
+const vignettes_num = [1, 2, 3, 4, 5, 6, 7];
 
 document.getElementById("title-cat1").innerHTML = category1;
 document.getElementById("title-cat2").innerHTML = category2;
@@ -24,9 +24,9 @@ async function main() {
     }
     const bestImdb = await get_info("sort_by", "-imdb_score");
     const bestMovies = bestImdb.results
-    const imgBest = bestMovies.results[0]["image_url"];
-    const titleBest = bestMovies.results[0]["title"];
-    const descriptionBest = bestMovies.results[0]["genres"] + ", " + bestMovies.results[0]["year"];
+    const imgBest = bestMovies[0]["image_url"];
+    const titleBest = bestMovies[0]["title"];
+    const descriptionBest = bestMovies[0]["genres"] + ", " + bestMovies[0]["year"];
     //console.log(img)
 
 
@@ -46,27 +46,37 @@ async function main() {
 
     const cat1 = await get_info("genre", `${category1}`);
     const cat1Movies = cat1.results.slice(0, 7);
-    // console.log(cat1.results);
+    console.log(cat1Movies);
 
     const cat2 = await get_info("genre", `${category2}`);
     const cat2Movies = cat2.results.slice(0, 7);
-    // console.log(cat2.results);
+    console.log(cat2Movies);
 
     const cat3 = await get_info("genre", `${category3}`);
     const cat3Movies = cat3.results.slice(0, 7);
-    // console.log(cat3.results);
+    console.log(cat3Movies);
 
-    return [bestMovies, cat1Movies, cat2Movies, cat3Movies];
+    for (let i of [1, 2, 3, 4]) {
+        for (let j of vignettes_num) {
+            const vignette = document.getElementById(`img${i}.${j}`);
+            const imgUrl = bestMovies[i]["image_url"];
+            const title = bestMovies[i]["title"];
+            vignette.setAttribute("src", imgUrl);
+            vignette.setAttribute("alt", title);
+        }
+    }
+    
 }
 
-const apiCall = main();
+main();
 
 
-
+/*
 const bestMovies = apiCall[0];
 const cat1Movies = apiCall[1];
 const cat2Movies = apiCall[2];
 const cat3Movies = apiCall[3];
+
 
 for (let i of vignettes_num) {
     const vignette = document.getElementById(`img1.${i}`);
@@ -75,3 +85,6 @@ for (let i of vignettes_num) {
     vignette.setAttribute("src", imgUrl);
     vignette.setAttribute("alt", title);
 }
+console.log(apiCall);
+*/
+
