@@ -13,20 +13,9 @@ const btn = document.getElementsByTagName("button")[0];
 // const cadreImg = document.getElementsByClassName("cadre-img");
 const cadreImg = document.querySelectorAll(".cadre-img");
 const vignettes = document.querySelectorAll(".vignette");
-const modalWindow = document.getElementById("#modal-window");
-const closeButton = document.getElementById("#close-button");
+const modalWindow = document.getElementById("modal-window");
+const closeButton = document.getElementById("close-button");
 // const div = document.querySelector(".movies-images");
-
-function displayModalWindow() {
-    modalWindow.setAttribute("class", "modal-visible");
-}
-function closeModalWindow() {
-    modalWindow.setAttribute("class", "modal-hidden");
-}
-closeButton.onclick = closeModalWindow;
-vignettes.forEach(element => {
-    element.onclick = displayModalWindow;
-})
 
 
 function changeBackgroundColor() {
@@ -80,6 +69,18 @@ function scrollLeft(arrow) {
     const index = parseInt(i);
 
 }
+
+// Toggle modal window visibility
+function displayModalWindow() {
+    modalWindow.setAttribute("class", "modal-visible");
+}
+function closeModalWindow() {
+    modalWindow.setAttribute("class", "modal-hidden");
+}
+closeButton.onclick = closeModalWindow;
+vignettes.forEach(element => {
+    element.onclick = displayModalWindow;
+})
 
 /*
 arrowLeft.style.color = "red";
