@@ -60,28 +60,35 @@ function closeModalWindow() {
     modalWindow.setAttribute("class", "modal-hidden");
 }
 
-function getVignetteData(vignette){
+function getVignetteData(vignette) {
     title = vignette.getAttribute("alt");
     img = vignette.getAttribute("src");
     titleUrl = title.replace(" ", "+");
     let vignetteMovie = fetch(`http://localhost:8000/api/v1/titles/?title=${titleUrl}`)
+        .then(
+            function (value) { console.log(value); },
+            function (error) { console.log("Not found"); }
+        )
+    /*
     const vignetteData = vignetteData["results"][0];
     if (vignetteMovie) {
+        console.log(vignetteData)
         modalImg.setAttribute("src", img);
         modalTitle.innerHTML = title;
-        modalGenre.innerHTML = vignetteData
+        modalGenre.innerHTML = vignetteData["genre"];
         modalYear.innerHTML = vignetteData["year"];
         modalDirector.innerHTML = vignetteData["director"];
-        modalActors.innerHTML = '';
-        modalImbd.innerHTML = '';
-        modalResume.innerHTML = '';
-    }
+        modalActors.innerHTML = vignetteData["actors"];
+        modalImbd.innerHTML = vignetteData["imbd"];
+        modalResume.innerHTML = "Resume du film";
+    }*/
 }
 closeButton.onclick = closeModalWindow;
 vignettes.forEach(element => {
-    element.onclick = function(){
+    element.onclick = function () {
+        //getVignetteData(element);
+        displayModalWindow();
         getVignetteData(element);
-        displayModalWindow;
     }
 })
 
