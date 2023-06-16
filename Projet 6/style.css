@@ -21,7 +21,7 @@ body {
 /* --------------------------------------------- */
 nav {
     /*border: 1px solid blue;*/
-    position: static;
+    /*position: static;*/
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -50,14 +50,14 @@ h1 {
 /* --------------------------------------------- */
 main {
     height: 90%;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     justify-content: center;
     z-index: 2;
 }
 
 nav {
     border-bottom: 1px solid grey;
-    position: fixed;
+    /*position: fixed;*/
 }
 
 #best-movie {
