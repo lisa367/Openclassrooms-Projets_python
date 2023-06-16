@@ -49,6 +49,16 @@ function displayModalWindow() {
 function closeModalWindow() {
     modalWindow.setAttribute("class", "modal-hidden");
 }
+
+function getVignetteData(vignette){
+    title = vignette.getAttribute("alt");
+    img = vignette.getAttribute("src");
+    titleUrl = title.replace(" ", "+");
+    let vignetteData = fetch(`http://localhost:8000/api/v1/titles/?title=${titleUrl}`)
+    if (vignetteData) {
+
+    }
+}
 closeButton.onclick = closeModalWindow;
 vignettes.forEach(element => {
     element.onclick = displayModalWindow;
