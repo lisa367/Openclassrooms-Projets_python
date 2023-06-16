@@ -43,6 +43,16 @@ for (let i of [0, 1, 2, 3]) {
 
 
 // Toggle modal window visibility
+const modalImg = document.getElementById("#modal-img");
+const modalTitle = document.getElementById("#modal-title");
+const modalGenre = document.getElementById("#modal-genre");
+const modalYear = document.getElementById("#modal-year");
+const modalDirector = document.getElementById("#modal-director");
+const modalActors = document.getElementById("#modal-actors");
+const modalImbd = document.getElementById("#modal-imbd");
+const modalResume = document.getElementById("#modal-resume");
+
+
 function displayModalWindow() {
     modalWindow.setAttribute("class", "modal-visible");
 }
@@ -54,14 +64,25 @@ function getVignetteData(vignette){
     title = vignette.getAttribute("alt");
     img = vignette.getAttribute("src");
     titleUrl = title.replace(" ", "+");
-    let vignetteData = fetch(`http://localhost:8000/api/v1/titles/?title=${titleUrl}`)
-    if (vignetteData) {
-
+    let vignetteMovie = fetch(`http://localhost:8000/api/v1/titles/?title=${titleUrl}`)
+    const vignetteData = vignetteData["results"][0];
+    if (vignetteMovie) {
+        modalImg.setAttribute("src", img);
+        modalTitle.innerHTML = title;
+        modalGenre.innerHTML = vignetteData
+        modalYear.innerHTML = vignetteData["year"];
+        modalDirector.innerHTML = vignetteData["director"];
+        modalActors.innerHTML = '';
+        modalImbd.innerHTML = '';
+        modalResume.innerHTML = '';
     }
 }
 closeButton.onclick = closeModalWindow;
 vignettes.forEach(element => {
-    element.onclick = displayModalWindow;
+    element.onclick = function(){
+        getVignetteData(element);
+        displayModalWindow;
+    }
 })
 
 /*

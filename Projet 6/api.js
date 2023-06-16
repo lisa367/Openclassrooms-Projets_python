@@ -3,6 +3,7 @@ const category2 = "Romance";
 const category3 = "Action";
 const vignettes_num = [1, 2, 3, 4,];
 
+
 document.getElementById("title-cat1").innerHTML = category1;
 document.getElementById("title-cat2").innerHTML = category2;
 document.getElementById("title-cat3").innerHTML = category3;
@@ -60,32 +61,19 @@ async function main() {
         const labels = [bestMovies, cat1Movies, cat2Movies, cat3Movies]
         for (let j of vignettes_num) {
             const vignette = document.getElementById(`img${i}.${j}`);
-            const imgUrl = labels[i-1][j]["image_url"];
-            const title = labels[i-1][j]["title"];
+            const imgUrl = labels[i - 1][j]["image_url"];
+            const title = labels[i - 1][j]["title"];
             vignette.setAttribute("src", imgUrl);
             vignette.setAttribute("alt", title);
         }
     }
-    
+
+    // Fenêtre modale - contenu
+
 }
 
 main();
+//const modalWindow = document.querySelector("#modal-window");
 
 
-/*
-const bestMovies = apiCall[0];
-const cat1Movies = apiCall[1];
-const cat2Movies = apiCall[2];
-const cat3Movies = apiCall[3];
-
-
-for (let i of vignettes_num) {
-    const vignette = document.getElementById(`img1.${i}`);
-    const imgUrl = bestMovies[i]["image_url"];
-    const title = bestMovies[i]["title"];
-    vignette.setAttribute("src", imgUrl);
-    vignette.setAttribute("alt", title);
-}
-console.log(apiCall);
-*/
 
