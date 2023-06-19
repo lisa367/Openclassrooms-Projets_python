@@ -23,21 +23,35 @@ async function main() {
         throw new Error("Oops !")
 
     }
+    async function get_details(id) {
+        const responseRaw = await fetch(`${apiUrl}/${id}`);
+        if (responseRaw.ok === true) {
+            const responseJson = await responseRaw.json();
+            return responseJson;
+        }
+        throw new Error("Oops !")
+
+    }
+
     const bestImdb = await get_info("sort_by", "-imdb_score");
     const bestMovies = bestImdb.results
     const imgBest = bestMovies[0]["image_url"];
     const titleBest = bestMovies[0]["title"];
-    const descriptionBest = bestMovies[0]["genres"] + ", " + bestMovies[0]["year"];
+    const genreBest = bestMovies[0]["genres"] + ", " + bestMovies[0]["year"];
+    const bestDetails = await get_details(bestMovies[0]["id"]);
+    const descriptionBest = bestDetails["description"];
     //console.log(img)
 
 
     const bestMovieDiv = document.getElementById("best-movie");
     const bestMovieTitle = document.getElementById("best-title");
+    const bestMovieGenre = document.getElementById("best-genre");
     const bestMovieDescription = document.getElementById("best-description");
 
     bestMovieDiv.style.background = `url(${imgBest}) no-repeat`;
     bestMovieDiv.style.backgroundSize = `cover`;
     bestMovieTitle.innerHTML = titleBest;
+    bestMovieGenre.innerHTML = genreBest;
     bestMovieDescription.innerHTML = descriptionBest;
     //bestMovieDiv.style.backgroundSize = `${bestMovieDiv.getBoundingClientRect()['width']}px ${bestMovieDiv.getBoundingClientRect()['height']}px `;
     //console.log(bestMovieDiv.getBoundingClientRect())
