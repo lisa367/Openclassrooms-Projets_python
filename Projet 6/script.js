@@ -46,10 +46,13 @@ for (let i of [0, 1, 2, 3]) {
 const modalImg = document.getElementById("modal-img");
 const modalTitle = document.getElementById("modal-title");
 const modalGenre = document.getElementById("modal-genre");
+const modalCountries = document.getElementById("modal-countries");
 const modalYear = document.getElementById("modal-year");
-const modalDirector = document.getElementById("modal-director");
+const modalDuration = document.getElementById("modal-duration");
+const modalDirector = document.getElementById("modal-directors");
 const modalActors = document.getElementById("modal-actors");
-const modalImbd = document.getElementById("modal-imbd");
+const modalRated = document.getElementById("modal-rated");
+const modalImdb = document.getElementById("modal-imdb");
 const modalResume = document.getElementById("modal-resume");
 
 
@@ -72,11 +75,14 @@ async function getVignetteData(vignette) {
 
         modalImg.setAttribute("src", img);
         modalTitle.innerHTML = vignetteData["title"];;
-        modalGenre.innerHTML = vignetteData["genre"];
+        modalGenre.innerHTML = vignetteData["genres"];
+        modalCountries.innerHTML = vignetteData["countries"];
         modalYear.innerHTML = vignetteData["year"];
-        modalDirector.innerHTML = vignetteData["director"];
-        modalActors.innerHTML = vignetteData["actors"];
-        modalImbd.innerHTML = vignetteData["avg_vote"];
+        modalDuration.innerHTML = `${vignetteData["duration"]}min`;
+        modalDirector.innerHTML = vignetteData["directors"];
+        modalActors.innerHTML = vignetteData["actors"].slice(0, 6);
+        modalRated.innerHTML = vignetteData["rated"];
+        modalImdb.innerHTML = vignetteData["imdb_score"];
         modalResume.innerHTML = vignetteData["long_description"];
 
         return vignetteData
