@@ -127,7 +127,7 @@ nav {
 }
 
 .movies-images {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     width: 60%;
     height: 7rem;
     margin: 0 2rem;
@@ -135,7 +135,7 @@ nav {
 }
 
 .cadre-img {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     min-width: 100%;
     height: 100%;
     display: flex;
@@ -181,10 +181,10 @@ nav {
 #modal-window {
     transition: 2s;
     display: block;
-    width: 30rem;
-    height: 35rem;
+    width: 38rem;
+    height: 45rem;
     background-color: whitesmoke;
-    opacity: 0.8;
+
     border-radius: 8px;
     /*justify-content: center;
     margin-left: 20%;
@@ -213,7 +213,6 @@ nav {
     min-height: 50%;
     max-width: 100%;
     max-height: 50%;
-    z-index: -1;
     border-radius: 8px 8px 0 0;
     position: relative;
     top: 0;
@@ -228,7 +227,6 @@ nav {
     min-width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     font-size: 0.8rem;
 
 }
@@ -238,4 +236,8 @@ nav {
     margin-bottom: 5px;
     margin-top: 5px;
 
+}
+
+#modal-resume {
+    text-overflow: ellipsis;
 }
