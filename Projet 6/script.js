@@ -43,14 +43,14 @@ for (let i of [0, 1, 2, 3]) {
 
 
 // Toggle modal window visibility
-const modalImg = document.getElementById("#modal-img");
-const modalTitle = document.getElementById("#modal-title");
-const modalGenre = document.getElementById("#modal-genre");
-const modalYear = document.getElementById("#modal-year");
-const modalDirector = document.getElementById("#modal-director");
-const modalActors = document.getElementById("#modal-actors");
-const modalImbd = document.getElementById("#modal-imbd");
-const modalResume = document.getElementById("#modal-resume");
+const modalImg = document.getElementById("modal-img");
+const modalTitle = document.getElementById("modal-title");
+const modalGenre = document.getElementById("modal-genre");
+const modalYear = document.getElementById("modal-year");
+const modalDirector = document.getElementById("modal-director");
+const modalActors = document.getElementById("modal-actors");
+const modalImbd = document.getElementById("modal-imbd");
+const modalResume = document.getElementById("modal-resume");
 
 
 function displayModalWindow() {
@@ -60,35 +60,50 @@ function closeModalWindow() {
     modalWindow.setAttribute("class", "modal-hidden");
 }
 
-function getVignetteData(vignette) {
-    title = vignette.getAttribute("alt");
-    img = vignette.getAttribute("src");
-    titleUrl = title.replace(" ", "+");
-    let vignetteMovie = fetch(`http://localhost:8000/api/v1/titles/?title=${titleUrl}`)
-        .then(
-            function (value) { console.log(value); },
-            function (error) { console.log("Not found"); }
-        )
-    /*
-    const vignetteData = vignetteData["results"][0];
-    if (vignetteMovie) {
-        console.log(vignetteData)
+async function getVignetteData(vignette) {
+    const id = vignette.getAttribute("alt");
+    const img = vignette.getAttribute("src");
+    const vignetteMovie = await fetch(`http://localhost:8000/api/v1/titles/${id}`)
+
+    if (vignetteMovie.ok === true) {
+        console.log(vignetteMovie.status);
+        const vignetteData = await vignetteMovie.json();
+        console.log(vignetteData);
+
         modalImg.setAttribute("src", img);
-        modalTitle.innerHTML = title;
+        modalTitle.innerHTML = vignetteData["title"];;
         modalGenre.innerHTML = vignetteData["genre"];
         modalYear.innerHTML = vignetteData["year"];
         modalDirector.innerHTML = vignetteData["director"];
         modalActors.innerHTML = vignetteData["actors"];
-        modalImbd.innerHTML = vignetteData["imbd"];
-        modalResume.innerHTML = "Resume du film";
-    }*/
+        modalImbd.innerHTML = vignetteData["avg_vote"];
+        modalResume.innerHTML = vignetteData["long_description"];
+
+        return vignetteData
+    } else {
+        throw new Error("Oops ! Invalid id");
+    }
 }
+/*
+const vignetteData = vignetteData["results"];
+if (vignetteMovie) {
+    console.log(vignetteData)
+    modalImg.setAttribute("src", img);
+    modalTitle.innerHTML = title;
+    modalGenre.innerHTML = vignetteData["genre"];
+    modalYear.innerHTML = vignetteData["year"];
+    modalDirector.innerHTML = vignetteData["director"];
+    modalActors.innerHTML = vignetteData["actors"];
+    modalImbd.innerHTML = vignetteData["avg_score"];
+    modalResume.innerHTML = vignetteData["long_description"];
+}*/
+
 closeButton.onclick = closeModalWindow;
 vignettes.forEach(element => {
     element.onclick = function () {
-        //getVignetteData(element);
-        displayModalWindow();
         getVignetteData(element);
+        displayModalWindow();
+        // getVignetteData(element);
     }
 })
 
