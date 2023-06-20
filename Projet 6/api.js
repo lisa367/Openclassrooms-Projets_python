@@ -101,9 +101,9 @@ async function main() {
         for (let j of vignettes_num) {
             const vignette = document.getElementById(`img${i}.${j}`);
             const imgUrl = labels[i - 1][j]["image_url"];
-            const title = labels[i - 1][j]["title"];
+            const id = labels[i - 1][j]["id"];
             vignette.setAttribute("src", imgUrl);
-            vignette.setAttribute("alt", title);
+            vignette.setAttribute("alt", id);
         }
     }
     for (let i of [1, 2, 3, 4]) {
@@ -111,9 +111,9 @@ async function main() {
         for (let j of [5, 6, 7]) {
             const vignette = document.getElementById(`img${i}.${j}`);
             const imgUrl = labels[i - 1][j - 4]["image_url"];
-            const title = labels[i - 1][j - 4]["title"];
+            const id = labels[i - 1][j - 4]["id"];
             vignette.setAttribute("src", imgUrl);
-            vignette.setAttribute("alt", title);
+            vignette.setAttribute("alt", id);
         }
     }
 
@@ -123,6 +123,6 @@ async function main() {
 
 main();
 //const modalWindow = document.querySelector("#modal-window");
-
+console.log("Goodbye");
 
 
