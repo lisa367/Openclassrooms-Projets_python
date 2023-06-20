@@ -71,6 +71,10 @@ nav {
     align-items: flex-start;
 }
 
+#best-movie * {
+    border: 1px solid blue;
+}
+
 #play-button {
     margin-left: 1rem;
     padding: 0.2rem 1rem;
