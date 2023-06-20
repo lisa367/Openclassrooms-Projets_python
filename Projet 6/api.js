@@ -23,6 +23,15 @@ async function main() {
         throw new Error("Oops !")
 
     }
+    async function get_info_page2(parameter, value) {
+        const responseRaw = await fetch(`${apiUrl}/?${parameter}=${value}&page=2`);
+        if (responseRaw.ok === true) {
+            const responseJson = await responseRaw.json();
+            return responseJson;
+        }
+        throw new Error("Oops !")
+
+    }
     async function get_details(id) {
         const responseRaw = await fetch(`${apiUrl}/${id}`);
         if (responseRaw.ok === true) {
@@ -60,18 +69,28 @@ async function main() {
 
 
     const cat1 = await get_info("genre", `${category1}`);
-    const cat1Movies = cat1.results.slice(0, 7);
-    console.log(cat1Movies);
+    const cat1Movies = cat1.results;
+    // console.log(cat1Movies);
 
     const cat2 = await get_info("genre", `${category2}`);
-    const cat2Movies = cat2.results.slice(0, 7);
-    console.log(cat2Movies);
+    const cat2Movies = cat2.results;
+    // console.log(cat2Movies);
 
     const cat3 = await get_info("genre", `${category3}`);
-    const cat3Movies = cat3.results.slice(0, 7);
-    console.log(cat3Movies);
+    const cat3Movies = cat3.results;
+    // console.log(cat3Movies);
 
     for (let i of [1, 2, 3, 4]) {
+        const labels = [bestMovies, cat1Movies, cat2Movies, cat3Movies]
+        for (let j of vignettes_num) {
+            const vignette = document.getElementById(`img${i}.${j}`);
+            const imgUrl = labels[i - 1][j]["image_url"];
+            const title = labels[i - 1][j]["title"];
+            vignette.setAttribute("src", imgUrl);
+            vignette.setAttribute("alt", title);
+        }
+    }
+    for (let i of [5, 6, 7]) {
         const labels = [bestMovies, cat1Movies, cat2Movies, cat3Movies]
         for (let j of vignettes_num) {
             const vignette = document.getElementById(`img${i}.${j}`);
