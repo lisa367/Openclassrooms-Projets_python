@@ -80,6 +80,19 @@ async function main() {
     const cat3Movies = cat3.results;
     // console.log(cat3Movies);
 
+    const cat1_p2 = await get_info_page2("genre", `${category1}`);
+    const cat1Movies_p2 = cat1_p2.results;
+    // console.log(cat1Movies_p2);
+
+    const cat2_p2 = await get_info_page2("genre", `${category2}`);
+    const cat2Movies_p2 = cat2_p2.results;
+    // console.log(cat1Movies_p2);
+
+    const cat3_p2 = await get_info_page2("genre", `${category3}`);
+    const cat3Movies_p2 = cat3_p2.results;
+    // console.log(cat1Movies_p2);
+
+
     for (let i of [1, 2, 3, 4]) {
         const labels = [bestMovies, cat1Movies, cat2Movies, cat3Movies]
         for (let j of vignettes_num) {
