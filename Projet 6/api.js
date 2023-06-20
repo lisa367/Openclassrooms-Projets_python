@@ -86,11 +86,11 @@ async function main() {
 
     const cat2_p2 = await get_info_page2("genre", `${category2}`);
     const cat2Movies_p2 = cat2_p2.results;
-    // console.log(cat1Movies_p2);
+    // console.log(cat2Movies_p2);
 
     const cat3_p2 = await get_info_page2("genre", `${category3}`);
     const cat3Movies_p2 = cat3_p2.results;
-    // console.log(cat1Movies_p2);
+    // console.log(cat3Movies_p2);
 
 
     for (let i of [1, 2, 3, 4]) {
@@ -103,12 +103,12 @@ async function main() {
             vignette.setAttribute("alt", title);
         }
     }
-    for (let i of [5, 6, 7]) {
-        const labels = [bestMovies, cat1Movies, cat2Movies, cat3Movies]
-        for (let j of vignettes_num) {
+    for (let i of [1, 2, 3, 4]) {
+        const labels = [bestMovies, cat1Movies_p2, cat2Movies_p2, cat3Movies_p2]
+        for (let j of [5, 6, 7]) {
             const vignette = document.getElementById(`img${i}.${j}`);
-            const imgUrl = labels[i - 1][j]["image_url"];
-            const title = labels[i - 1][j]["title"];
+            const imgUrl = labels[i - 1][i - 1]["image_url"];
+            const title = labels[i - 1][i - 1]["title"];
             vignette.setAttribute("src", imgUrl);
             vignette.setAttribute("alt", title);
         }
