@@ -245,3 +245,7 @@ nav {
 #data {
     display: flex;
 }
+
+.cast {
+    display: flex;
+}
