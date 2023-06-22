@@ -241,3 +241,7 @@ nav {
 #modal-resume {
     text-overflow: ellipsis;
 }
+
+#data {
+    display: flex;
+}
